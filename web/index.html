@@ -526,38 +526,64 @@
   function renderPortfolio() {
     const el = document.getElementById('port-content');
     const p = data.portfolio;
-    const unrealized = (data.positions || []).filter(p => p.status === 'open').reduce((s, p) => s + p.pnl, 0);
+    const unrealized = (data.positions || []).filter(pos => pos.status === 'open').reduce((s, pos) => s + pos.pnl, 0);
     const totalValue = p.current_balance + unrealized;
-    const progress = Math.min(100, ((totalValue - p.starting_balance) / (p.goal - p.starting_balance)) * 100);
-    const pctToGoal = ((totalValue / p.goal) * 100).toFixed(1);
+
+    // Phase progress
+    const currentPhase = p.phases.find(ph => ph.status === 'active') || p.phases[0];
+    const phaseProgress = Math.min(100, Math.max(2, ((totalValue - currentPhase.from) / (currentPhase.to - currentPhase.from)) * 100));
+
+    // Ultimate goal progress
+    const ultimateProgress = Math.min(100, Math.max(2, (totalValue / p.ultimate_goal) * 100));
 
     el.innerHTML = `
+      <!-- Total Value -->
       <div class="card">
-        <div class="card-header">
-          <div>
-            <div style="font-size:13px;color:var(--muted)">Total Value (incl. open)</div>
-            <div style="font-size:36px;font-weight:800;letter-spacing:-1px;margin-top:4px">$${totalValue.toFixed(2)}</div>
-          </div>
-          <div style="text-align:right">
-            <div style="font-size:11px;color:var(--muted)">Goal</div>
-            <div style="font-size:22px;font-weight:700;color:var(--green)">$${p.goal}</div>
-          </div>
-        </div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:4px">Total Portfolio Value</div>
+        <div style="font-size:42px;font-weight:800;letter-spacing:-2px;line-height:1">${'$' + totalValue.toFixed(2)}</div>
+        <div style="font-size:13px;color:var(--green);margin-top:4px;font-weight:600">Ultimate Goal: $${p.ultimate_goal.toLocaleString()}</div>
 
-        <div style="font-size:11px;color:var(--muted);margin-bottom:6px">${pctToGoal}% of goal reached · Target: ${p.goal_date}</div>
-        <div class="progress-wrap">
-          <div class="progress-label"><span>$${p.starting_balance}</span><span>$${p.goal}</span></div>
-          <div class="progress-bar"><div class="progress-fill" style="width:${Math.max(2, progress)}%"></div></div>
+        <div style="margin-top:14px">
+          <div class="progress-label"><span style="color:var(--muted);font-size:11px">$0</span><span style="color:var(--muted);font-size:11px">$${p.ultimate_goal.toLocaleString()}</span></div>
+          <div class="progress-bar" style="height:6px"><div class="progress-fill" style="width:${ultimateProgress}%"></div></div>
+          <div style="font-size:11px;color:var(--muted);margin-top:4px">${ultimateProgress.toFixed(1)}% of $10K goal</div>
         </div>
       </div>
 
+      <!-- Phase tracker -->
+      <div class="section-title">Roadmap</div>
+      ${p.phases.map(ph => {
+        const isActive = ph.status === 'active';
+        const isDone = ph.status === 'done';
+        const prog = isActive ? Math.min(100, Math.max(2, ((totalValue - ph.from) / (ph.to - ph.from)) * 100)) : (isDone ? 100 : 0);
+        const color = isDone ? 'var(--green)' : isActive ? 'var(--yellow)' : 'var(--muted)';
+        return `
+        <div class="card" style="border-color:${isActive ? 'var(--yellow)' : 'var(--border)'}">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+            <div>
+              <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px">Phase ${ph.phase}</div>
+              <div style="font-size:16px;font-weight:700;margin-top:2px">${ph.label}</div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-size:20px;font-weight:800;color:${color}">$${ph.to.toLocaleString()}</div>
+              <div style="font-size:10px;color:var(--muted)">${ph.target_date}</div>
+            </div>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width:${prog}%;background:${color}"></div></div>
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:4px">
+            <span>$${ph.from.toLocaleString()}</span><span>$${ph.to.toLocaleString()}</span>
+          </div>
+        </div>`;
+      }).join('')}
+
+      <!-- Capital breakdown -->
       <div class="grid2" style="margin-bottom:12px">
         <div class="stat">
           <div class="label">Cash Available</div>
           <div class="value">${fmt(p.available)}</div>
         </div>
         <div class="stat">
-          <div class="label">Committed</div>
+          <div class="label">In Trades</div>
           <div class="value yellow">${fmt(p.committed)}</div>
         </div>
         <div class="stat">
@@ -570,7 +596,8 @@
         </div>
       </div>
 
-      <div class="section-title" style="margin-top:8px">Weekly Snapshots</div>
+      <!-- Weekly snapshots -->
+      <div class="section-title">Weekly Snapshots</div>
       ${p.weekly_snapshots.map(w => `
         <div class="retro-week">
           <div>

@@ -61,6 +61,13 @@
     "current_balance": 500,
     "committed": 178.08,
     "available": 321.92,
+    "ultimate_goal": 10000,
+    "phase": 1,
+    "phases": [
+      { "phase": 1, "label": "Build Base", "from": 500, "to": 1500, "target_date": "2026-06-20", "status": "active" },
+      { "phase": 2, "label": "Compound & Grow", "from": 1500, "to": 3000, "target_date": "2026-09-01", "status": "pending" },
+      { "phase": 3, "label": "Stock Portfolio", "from": 3000, "to": 10000, "target_date": "2027-03-01", "status": "pending" }
+    ],
     "goal": 1500,
     "goal_date": "2026-06-20",
     "total_realized_pnl": 0,
@@ -68,7 +75,7 @@
       { "week": 1, "label": "Jun 2", "balance": 500, "note": "First trade: SLB" },
       { "week": 2, "label": "Jun 9", "balance": null, "note": "" },
       { "week": 3, "label": "Jun 16", "balance": null, "note": "" },
-      { "week": 4, "label": "Jun 20", "balance": null, "note": "Goal: $1,500" }
+      { "week": 4, "label": "Jun 20", "balance": null, "note": "Phase 1 Goal: $1,500" }
     ]
   }
 }
