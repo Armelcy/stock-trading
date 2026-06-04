@@ -1,0 +1,74 @@
+{
+  "last_updated": "2026-06-03T09:45:00",
+  "oil_price": 94.96,
+  "oil_status": "ok",
+  "opportunities": [
+    {
+      "ticker": "HAL",
+      "stock_price": 41.21,
+      "high_52w": 43.59,
+      "dist_pct": 7.64,
+      "expiry": "2026-06-18",
+      "strike": 43,
+      "premium": 0.69,
+      "contracts": 3,
+      "total_cost": 207,
+      "breakeven": 43.69,
+      "target_premium": 1.31,
+      "stop_premium": 0.41,
+      "action": "BUY"
+    }
+  ],
+  "positions": [
+    {
+      "ticker": "SLB",
+      "direction": "CALL",
+      "strike": 57,
+      "expiry": "2026-06-12",
+      "contracts": 2,
+      "entry_premium": 0.89,
+      "entry_cost": 178.08,
+      "current_premium": 1.40,
+      "current_value": 280.00,
+      "pnl": 101.92,
+      "pnl_pct": 57.2,
+      "target_premium": 1.50,
+      "stop_premium": 0.53,
+      "entry_date": "2026-06-02",
+      "exit_deadline": "2026-06-09",
+      "status": "open"
+    }
+  ],
+  "trade_history": [
+    {
+      "date": "2026-06-02",
+      "ticker": "SLB",
+      "direction": "CALL",
+      "strike": 57,
+      "expiry": "2026-06-12",
+      "contracts": 2,
+      "entry": 0.89,
+      "entry_cost": 178.08,
+      "exit": null,
+      "exit_value": null,
+      "pnl": null,
+      "pnl_pct": null,
+      "status": "open"
+    }
+  ],
+  "portfolio": {
+    "starting_balance": 500,
+    "current_balance": 500,
+    "committed": 178.08,
+    "available": 321.92,
+    "goal": 1500,
+    "goal_date": "2026-06-20",
+    "total_realized_pnl": 0,
+    "weekly_snapshots": [
+      { "week": 1, "label": "Jun 2", "balance": 500, "note": "First trade: SLB" },
+      { "week": 2, "label": "Jun 9", "balance": null, "note": "" },
+      { "week": 3, "label": "Jun 16", "balance": null, "note": "" },
+      { "week": 4, "label": "Jun 20", "balance": null, "note": "Goal: $1,500" }
+    ]
+  }
+}

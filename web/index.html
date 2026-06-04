@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trading Dashboard</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0d0d;
+      --surface: #1a1a1a;
+      --surface2: #242424;
+      --border: #2e2e2e;
+      --green: #00c853;
+      --green-dim: #00c85322;
+      --red: #ff4444;
+      --red-dim: #ff444422;
+      --yellow: #ffc107;
+      --yellow-dim: #ffc10722;
+      --text: #f0f0f0;
+      --muted: #888;
+      --radius: 12px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      padding-bottom: 80px;
+    }
+
+    /* Header */
+    .header {
+      padding: 20px 16px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+    .header h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.5px; }
+    .header .updated { font-size: 11px; color: var(--muted); }
+    .oil-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .oil-badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+    .oil-badge.warn .dot { background: var(--red); }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      overflow-x: auto;
+      gap: 4px;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      scrollbar-width: none;
+    }
+    .tabs::-webkit-scrollbar { display: none; }
+    .tab {
+      flex-shrink: 0;
+      padding: 7px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      background: var(--surface);
+      color: var(--muted);
+      border: 1px solid var(--border);
+      transition: all 0.15s;
+    }
+    .tab.active { background: var(--green); color: #000; border-color: var(--green); }
+
+    /* Sections */
+    .section { display: none; padding: 16px; }
+    .section.active { display: block; }
+    .section-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 12px;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .ticker {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .badge {
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .badge.buy { background: var(--green-dim); color: var(--green); border: 1px solid var(--green); }
+    .badge.skip { background: var(--surface2); color: var(--muted); border: 1px solid var(--border); }
+    .badge.open { background: var(--yellow-dim); color: var(--yellow); border: 1px solid var(--yellow); }
+    .badge.closed.win { background: var(--green-dim); color: var(--green); border: 1px solid var(--green); }
+    .badge.closed.loss { background: var(--red-dim); color: var(--red); border: 1px solid var(--red); }
+
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+
+    .stat { background: var(--surface2); border-radius: 8px; padding: 10px 12px; }
+    .stat .label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+    .stat .value { font-size: 16px; font-weight: 700; }
+    .stat .value.green { color: var(--green); }
+    .stat .value.red { color: var(--red); }
+    .stat .value.yellow { color: var(--yellow); }
+
+    .divider { border: none; border-top: 1px solid var(--border); margin: 12px 0; }
+
+    .action-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--green-dim);
+      border: 1px solid var(--green);
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-top: 12px;
+    }
+    .action-row .action-text { font-size: 13px; font-weight: 700; color: var(--green); }
+    .action-row .action-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+    /* Progress bar */
+    .progress-wrap { margin: 8px 0; }
+    .progress-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+    .progress-bar { height: 8px; background: var(--surface2); border-radius: 4px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--green); border-radius: 4px; transition: width 0.5s ease; }
+
+    /* Table */
+    .table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th {
+      background: var(--surface2);
+      color: var(--muted);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 10px 12px;
+      text-align: left;
+      white-space: nowrap;
+    }
+    td { padding: 12px; border-top: 1px solid var(--border); white-space: nowrap; }
+    td.win { color: var(--green); font-weight: 700; }
+    td.loss { color: var(--red); font-weight: 700; }
+    td.open-trade { color: var(--yellow); }
+
+    /* Empty state */
+    .empty { text-align: center; padding: 40px 20px; color: var(--muted); font-size: 14px; }
+    .empty .icon { font-size: 32px; margin-bottom: 8px; }
+
+    /* Bottom nav */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      display: flex;
+      padding: 8px 0 12px;
+    }
+    .nav-item {
+      flex: 1;
+      text-align: center;
+      cursor: pointer;
+      padding: 6px 0;
+      font-size: 10px;
+      color: var(--muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .nav-item .nav-icon { font-size: 20px; display: block; margin-bottom: 2px; }
+    .nav-item.active { color: var(--green); }
+
+    /* No trade banner */
+    .no-trade {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .no-trade .big { font-size: 28px; margin-bottom: 8px; }
+    .no-trade strong { display: block; font-size: 16px; color: var(--text); margin-bottom: 4px; }
+
+    /* Retrospective */
+    .retro-week {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .retro-week .week-label { font-size: 13px; font-weight: 700; }
+    .retro-week .week-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+    .retro-week .week-balance { font-size: 20px; font-weight: 800; }
+    .retro-week .week-balance.pending { color: var(--muted); font-size: 16px; }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>Trading Dashboard</h1>
+    <div class="updated" id="last-updated">Loading...</div>
+  </div>
+  <div class="oil-badge" id="oil-badge">
+    <div class="dot"></div>
+    <span id="oil-text">Oil</span>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="showTab('opportunities')">🎯 Today</div>
+  <div class="tab" onclick="showTab('positions')">📊 Positions</div>
+  <div class="tab" onclick="showTab('history')">📋 History</div>
+  <div class="tab" onclick="showTab('portfolio')">💰 Portfolio</div>
+</div>
+
+<!-- OPPORTUNITIES -->
+<div id="opportunities" class="section active">
+  <div class="section-title">Today's Plays</div>
+  <div id="opp-content"></div>
+</div>
+
+<!-- POSITIONS -->
+<div id="positions" class="section">
+  <div class="section-title">Open Positions</div>
+  <div id="pos-content"></div>
+</div>
+
+<!-- HISTORY -->
+<div id="history" class="section">
+  <div class="section-title">Trade History</div>
+  <div id="hist-content"></div>
+</div>
+
+<!-- PORTFOLIO -->
+<div id="portfolio" class="section">
+  <div class="section-title">Portfolio Progress</div>
+  <div id="port-content"></div>
+</div>
+
+<script>
+  let data = null;
+
+  async function loadData() {
+    try {
+      const res = await fetch('data.json?t=' + Date.now());
+      data = await res.json();
+      render();
+    } catch(e) {
+      document.body.innerHTML += '<div style="color:red;padding:20px">Error loading data.json</div>';
+    }
+  }
+
+  function showTab(name) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(name).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  function fmt(n, prefix='$') {
+    if (n == null) return '—';
+    return prefix + parseFloat(n).toFixed(2);
+  }
+
+  function fmtPct(n) {
+    if (n == null) return '—';
+    const sign = n >= 0 ? '+' : '';
+    return sign + parseFloat(n).toFixed(1) + '%';
+  }
+
+  function render() {
+    // Header
+    const d = new Date(data.last_updated);
+    document.getElementById('last-updated').textContent =
+      'Updated ' + d.toLocaleDateString('en-US', {month:'short', day:'numeric'}) + ' at ' +
+      d.toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit'});
+
+    // Oil badge
+    const oilBadge = document.getElementById('oil-badge');
+    const oilText = document.getElementById('oil-text');
+    oilText.textContent = 'WTI $' + data.oil_price;
+    if (data.oil_status !== 'ok') oilBadge.classList.add('warn');
+
+    renderOpportunities();
+    renderPositions();
+    renderHistory();
+    renderPortfolio();
+  }
+
+  function renderOpportunities() {
+    const el = document.getElementById('opp-content');
+    const opps = data.opportunities || [];
+
+    if (opps.length === 0) {
+      el.innerHTML = `
+        <div class="no-trade">
+          <div class="big">⏳</div>
+          <strong>No Trade Today</strong>
+          Screener found no affordable setups. Hold cash and wait.
+        </div>`;
+      return;
+    }
+
+    el.innerHTML = opps.map(o => `
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="ticker">${o.ticker}</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:2px">$${o.stock_price} stock · ${o.dist_pct}% from 52w high</div>
+          </div>
+          <div class="badge ${o.action === 'BUY' ? 'buy' : 'skip'}">${o.action}</div>
+        </div>
+
+        <div class="grid3">
+          <div class="stat">
+            <div class="label">Strike</div>
+            <div class="value">$${o.strike}</div>
+          </div>
+          <div class="stat">
+            <div class="label">Expiry</div>
+            <div class="value" style="font-size:13px">${o.expiry}</div>
+          </div>
+          <div class="stat">
+            <div class="label">Contracts</div>
+            <div class="value">${o.contracts}x</div>
+          </div>
+        </div>
+
+        <hr class="divider">
+
+        <div class="grid2">
+          <div class="stat">
+            <div class="label">Entry Premium</div>
+            <div class="value">${fmt(o.premium)}/sh</div>
+          </div>
+          <div class="stat">
+            <div class="label">Total Cost</div>
+            <div class="value yellow">${fmt(o.total_cost)}</div>
+          </div>
+          <div class="stat">
+            <div class="label">Target Exit</div>
+            <div class="value green">${fmt(o.target_premium)}/sh</div>
+          </div>
+          <div class="stat">
+            <div class="label">Stop Loss</div>
+            <div class="value red">${fmt(o.stop_premium)}/sh</div>
+          </div>
+        </div>
+
+        <div class="action-row">
+          <div>
+            <div class="action-text">Open Robinhood → ${o.ticker} → $${o.strike}C ${o.expiry}</div>
+            <div class="action-sub">Buy ${o.contracts} contract${o.contracts>1?'s':''} · Limit at $${o.premium}</div>
+          </div>
+          <div style="font-size:22px">→</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function renderPositions() {
+    const el = document.getElementById('pos-content');
+    const positions = (data.positions || []).filter(p => p.status === 'open');
+
+    if (positions.length === 0) {
+      el.innerHTML = '<div class="no-trade"><div class="big">📭</div><strong>No Open Positions</strong>All clear.</div>';
+      return;
+    }
+
+    el.innerHTML = positions.map(p => {
+      const pnlClass = p.pnl >= 0 ? 'green' : 'red';
+      const pnlSign = p.pnl >= 0 ? '+' : '';
+      const progress = Math.min(100, Math.max(0, ((p.current_premium - p.entry_premium) / (p.target_premium - p.entry_premium)) * 100));
+
+      return `
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="ticker">${p.ticker} <span style="font-size:14px;font-weight:500">$${p.strike}C</span></div>
+            <div style="font-size:12px;color:var(--muted);margin-top:2px">${p.contracts} contracts · Expires ${p.expiry}</div>
+          </div>
+          <div class="badge open">OPEN</div>
+        </div>
+
+        <div class="grid2">
+          <div class="stat">
+            <div class="label">Entry</div>
+            <div class="value">${fmt(p.entry_premium)}/sh</div>
+          </div>
+          <div class="stat">
+            <div class="label">Current</div>
+            <div class="value ${pnlClass}">${fmt(p.current_premium)}/sh</div>
+          </div>
+          <div class="stat">
+            <div class="label">P&L</div>
+            <div class="value ${pnlClass}">${pnlSign}${fmt(p.pnl)}</div>
+          </div>
+          <div class="stat">
+            <div class="label">Return</div>
+            <div class="value ${pnlClass}">${pnlSign}${p.pnl_pct?.toFixed(1)}%</div>
+          </div>
+        </div>
+
+        <hr class="divider">
+
+        <div style="font-size:11px;color:var(--muted);margin-bottom:6px">Progress to target (${fmt(p.target_premium)}/sh)</div>
+        <div class="progress-wrap">
+          <div class="progress-bar"><div class="progress-fill" style="width:${progress}%"></div></div>
+        </div>
+
+        <div class="grid2" style="margin-top:10px">
+          <div class="stat">
+            <div class="label">🎯 Sell at</div>
+            <div class="value green">${fmt(p.target_premium)}/sh</div>
+          </div>
+          <div class="stat">
+            <div class="label">🛑 Stop at</div>
+            <div class="value red">${fmt(p.stop_premium)}/sh</div>
+          </div>
+        </div>
+
+        <div style="margin-top:10px;font-size:11px;color:var(--muted);text-align:center">
+          Exit deadline: <strong style="color:var(--yellow)">${p.exit_deadline}</strong>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  function renderHistory() {
+    const el = document.getElementById('hist-content');
+    const history = data.trade_history || [];
+
+    if (history.length === 0) {
+      el.innerHTML = '<div class="empty"><div class="icon">📋</div>No closed trades yet.</div>';
+      return;
+    }
+
+    const closed = history.filter(t => t.status !== 'open');
+    const open = history.filter(t => t.status === 'open');
+
+    let totalPnl = closed.reduce((sum, t) => sum + (t.pnl || 0), 0);
+    let wins = closed.filter(t => t.pnl > 0).length;
+
+    let html = '';
+
+    if (closed.length > 0) {
+      html += `
+      <div class="card" style="margin-bottom:12px">
+        <div class="grid3">
+          <div class="stat">
+            <div class="label">Total P&L</div>
+            <div class="value ${totalPnl >= 0 ? 'green' : 'red'}">${totalPnl >= 0 ? '+' : ''}$${totalPnl.toFixed(2)}</div>
+          </div>
+          <div class="stat">
+            <div class="label">Trades</div>
+            <div class="value">${closed.length}</div>
+          </div>
+          <div class="stat">
+            <div class="label">Win Rate</div>
+            <div class="value green">${closed.length > 0 ? Math.round(wins/closed.length*100) : 0}%</div>
+          </div>
+        </div>
+      </div>`;
+    }
+
+    html += `<div class="table-wrap"><table>
+      <thead><tr>
+        <th>Date</th><th>Ticker</th><th>Strike</th><th>Entry</th><th>Exit</th><th>P&L</th>
+      </tr></thead>
+      <tbody>`;
+
+    [...open, ...closed].forEach(t => {
+      const isOpen = t.status === 'open';
+      const pnlClass = isOpen ? 'open-trade' : (t.pnl >= 0 ? 'win' : 'loss');
+      const pnlText = isOpen ? 'Open' : (t.pnl >= 0 ? '+$' + t.pnl?.toFixed(2) : '-$' + Math.abs(t.pnl)?.toFixed(2));
+      html += `<tr>
+        <td>${t.date}</td>
+        <td><strong>${t.ticker}</strong></td>
+        <td>$${t.strike}C</td>
+        <td>$${t.entry?.toFixed(2)}</td>
+        <td>${t.exit ? '$' + t.exit.toFixed(2) : '—'}</td>
+        <td class="${pnlClass}">${pnlText}</td>
+      </tr>`;
+    });
+
+    html += '</tbody></table></div>';
+    el.innerHTML = html;
+  }
+
+  function renderPortfolio() {
+    const el = document.getElementById('port-content');
+    const p = data.portfolio;
+    const unrealized = (data.positions || []).filter(p => p.status === 'open').reduce((s, p) => s + p.pnl, 0);
+    const totalValue = p.current_balance + unrealized;
+    const progress = Math.min(100, ((totalValue - p.starting_balance) / (p.goal - p.starting_balance)) * 100);
+    const pctToGoal = ((totalValue / p.goal) * 100).toFixed(1);
+
+    el.innerHTML = `
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div style="font-size:13px;color:var(--muted)">Total Value (incl. open)</div>
+            <div style="font-size:36px;font-weight:800;letter-spacing:-1px;margin-top:4px">$${totalValue.toFixed(2)}</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:11px;color:var(--muted)">Goal</div>
+            <div style="font-size:22px;font-weight:700;color:var(--green)">$${p.goal}</div>
+          </div>
+        </div>
+
+        <div style="font-size:11px;color:var(--muted);margin-bottom:6px">${pctToGoal}% of goal reached · Target: ${p.goal_date}</div>
+        <div class="progress-wrap">
+          <div class="progress-label"><span>$${p.starting_balance}</span><span>$${p.goal}</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:${Math.max(2, progress)}%"></div></div>
+        </div>
+      </div>
+
+      <div class="grid2" style="margin-bottom:12px">
+        <div class="stat">
+          <div class="label">Cash Available</div>
+          <div class="value">${fmt(p.available)}</div>
+        </div>
+        <div class="stat">
+          <div class="label">Committed</div>
+          <div class="value yellow">${fmt(p.committed)}</div>
+        </div>
+        <div class="stat">
+          <div class="label">Realized P&L</div>
+          <div class="value green">+${fmt(p.total_realized_pnl)}</div>
+        </div>
+        <div class="stat">
+          <div class="label">Unrealized</div>
+          <div class="value green">+${fmt(unrealized)}</div>
+        </div>
+      </div>
+
+      <div class="section-title" style="margin-top:8px">Weekly Snapshots</div>
+      ${p.weekly_snapshots.map(w => `
+        <div class="retro-week">
+          <div>
+            <div class="week-label">Week ${w.week} — ${w.label}</div>
+            <div class="week-sub">${w.note || ''}</div>
+          </div>
+          <div class="${w.balance ? 'week-balance' : 'week-balance pending'}">
+            ${w.balance ? '$' + w.balance.toFixed(2) : 'Pending'}
+          </div>
+        </div>
+      `).join('')}
+    `;
+  }
+
+  loadData();
+</script>
+</body>
+</html>
