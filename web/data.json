@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-06-04T22:46:39",
-  "oil_price": 93.44,
+  "last_updated": "2026-06-04T23:40:40",
+  "oil_price": 93.22,
   "oil_status": "ok",
   "opportunities": [],
   "positions": [
@@ -59,7 +59,7 @@
     "starting_balance": 178.08,
     "current_balance": 621.92,
     "committed": 183.0,
-    "available": 138.00,
+    "available": 438.92,
     "ultimate_goal": 10000,
     "phase": 1,
     "phases": [
