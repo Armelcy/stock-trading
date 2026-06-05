@@ -585,7 +585,7 @@
     const el = document.getElementById('port-content');
     const p = data.portfolio;
     const unrealized = (data.positions || []).filter(pos => pos.status === 'open').reduce((s, pos) => s + pos.pnl, 0);
-    const totalValue = p.current_balance + unrealized;
+    const totalValue = p.current_balance + p.committed + unrealized;
 
     // Phase progress
     const currentPhase = p.phases.find(ph => ph.status === 'active') || p.phases[0];
