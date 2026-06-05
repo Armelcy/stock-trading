@@ -56,7 +56,7 @@
     }
   ],
   "portfolio": {
-    "starting_balance": 500,
+    "starting_balance": 178.08,
     "current_balance": 621.92,
     "committed": 183.0,
     "available": 138.00,
@@ -66,7 +66,7 @@
       {
         "phase": 1,
         "label": "Build Base",
-        "from": 500,
+        "from": 178.08,
         "to": 1500,
         "target_date": "2026-06-20",
         "status": "active"
@@ -95,8 +95,8 @@
       {
         "week": 1,
         "label": "Jun 2",
-        "balance": 500,
-        "note": "First trade: SLB"
+        "balance": 178.08,
+        "note": "Seed capital deployed: SLB"
       },
       {
         "week": 2,
