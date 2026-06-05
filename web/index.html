@@ -278,7 +278,8 @@
 
   async function loadData() {
     try {
-      const res = await fetch('data.json?t=' + Date.now());
+      const url = 'https://raw.githubusercontent.com/Armelcy/stock-trading/main/web/data.json?t=' + Date.now();
+      const res = await fetch(url);
       data = await res.json();
       render();
     } catch(e) {
