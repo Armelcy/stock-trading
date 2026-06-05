@@ -1,12 +1,12 @@
 {
-  "last_updated": "2026-06-05T09:45:00",
-  "oil_price": 93.22,
+  "last_updated": "2026-06-05T07:38:52",
+  "oil_price": 93.12,
   "oil_status": "ok",
   "briefing": {
     "date": "2026-06-05",
     "type": "info",
     "headline": "Thursday. HAL open, $138 liquid. Hold the position.",
-    "body": "Good morning. Portfolio total is $321 — $138 liquid + $183 locked in HAL $43C Jun18. Limit sell is armed at $1.16 (GTC), fires automatically. Tomorrow is Friday: options get choppy EOD before the weekend, but your exit is automatic so no action needed unless HAL drops toward $0.37 stop. Screener ran this morning — $138 is too tight for a quality second trade, so stay patient and let HAL work.",
+    "body": "Good morning. Portfolio total is $321 \u2014 $138 liquid + $183 locked in HAL $43C Jun18. Limit sell is armed at $1.16 (GTC), fires automatically. Tomorrow is Friday: options get choppy EOD before the weekend, but your exit is automatic so no action needed unless HAL drops toward $0.37 stop. Screener ran this morning \u2014 $138 is too tight for a quality second trade, so stay patient and let HAL work.",
     "action": "HOLD",
     "action_detail": "HAL limit sell at $1.16 is live. Nothing to do unless a new setup appears below."
   },
@@ -65,9 +65,9 @@
   ],
   "portfolio": {
     "starting_balance": 178.08,
-    "current_balance": 138.00,
+    "current_balance": 138.0,
     "committed": 183.0,
-    "available": 138.00,
+    "available": 138.0,
     "ultimate_goal": 10000,
     "phase": 1,
     "phases": [
