@@ -1,7 +1,15 @@
 {
-  "last_updated": "2026-06-04T23:40:40",
+  "last_updated": "2026-06-05T09:45:00",
   "oil_price": 93.22,
   "oil_status": "ok",
+  "briefing": {
+    "date": "2026-06-05",
+    "type": "info",
+    "headline": "SLB proceeds settled. Cash is $438. HAL, hold firm.",
+    "body": "Good morning. Today is Thursday — SLB's $300 settlement landed, so your available buying power is now $438. HAL $43C Jun18 is still open with a limit sell at $1.16 (GTC). Tomorrow is Friday: options can get choppy EOD before the weekend, so if HAL spikes above $1.16 at any point today or tomorrow, it closes automatically — no action needed. Screener ran this morning. If energy stays hot and a new setup appears under $250, you'll see it in the Today tab. Otherwise stay patient — cash is your weapon.",
+    "action": "HOLD",
+    "action_detail": "HAL limit sell at $1.16 is live. Nothing to do unless a new setup appears below."
+  },
   "opportunities": [],
   "positions": [
     {
@@ -57,9 +65,9 @@
   ],
   "portfolio": {
     "starting_balance": 178.08,
-    "current_balance": 138.00,
+    "current_balance": 438.00,
     "committed": 183.0,
-    "available": 138.00,
+    "available": 438.00,
     "ultimate_goal": 10000,
     "phase": 1,
     "phases": [

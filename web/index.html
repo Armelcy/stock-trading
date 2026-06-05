@@ -176,6 +176,35 @@
     .empty { text-align: center; padding: 40px 20px; color: var(--muted); font-size: 14px; }
     .empty .icon { font-size: 32px; margin-bottom: 8px; }
 
+    /* Briefing bar */
+    .briefing {
+      margin: 12px 16px;
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      border-left: 4px solid var(--green);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--green);
+    }
+    .briefing.warning { border-left-color: var(--yellow); }
+    .briefing.danger  { border-left-color: var(--red); }
+    .briefing-date { font-size: 11px; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .briefing-headline { font-size: 16px; font-weight: 800; margin-bottom: 8px; }
+    .briefing-body { font-size: 13px; color: #ccc; line-height: 1.5; margin-bottom: 12px; }
+    .briefing-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .briefing-action.HOLD    { background: var(--yellow-dim); color: var(--yellow); }
+    .briefing-action.BUY     { background: var(--green-dim);  color: var(--green);  }
+    .briefing-action.SELL    { background: var(--red-dim);    color: var(--red);    }
+    .briefing-action.WATCH   { background: var(--surface2);   color: var(--muted);  }
+
     /* Bottom nav */
     .bottom-nav {
       position: fixed;
@@ -241,6 +270,8 @@
     <span id="oil-text">Oil</span>
   </div>
 </div>
+
+<div id="briefing-bar"></div>
 
 <div class="tabs">
   <div class="tab active" onclick="showTab('opportunities')">🎯 Today</div>
@@ -318,10 +349,36 @@
     oilText.textContent = 'WTI $' + data.oil_price;
     if (data.oil_status !== 'ok') oilBadge.classList.add('warn');
 
+    renderBriefing();
     renderOpportunities();
     renderPositions();
     renderHistory();
     renderPortfolio();
+  }
+
+  function renderBriefing() {
+    const el = document.getElementById('briefing-bar');
+    const b = data.briefing;
+    if (!b) { el.innerHTML = ''; return; }
+
+    const typeClass = b.type === 'warning' ? 'warning' : b.type === 'danger' ? 'danger' : '';
+    const actionLabel = {
+      HOLD:  '✋ HOLD',
+      BUY:   '✅ BUY',
+      SELL:  '🔴 SELL',
+      WATCH: '👀 WATCH'
+    }[b.action] || b.action;
+
+    el.innerHTML = `
+      <div class="briefing ${typeClass}">
+        <div class="briefing-date">${b.date} · AI Morning Briefing</div>
+        <div class="briefing-headline">${b.headline}</div>
+        <div class="briefing-body">${b.body}</div>
+        <div>
+          <span class="briefing-action ${b.action}">${actionLabel}</span>
+          ${b.action_detail ? `<span style="font-size:12px;color:var(--muted);margin-left:10px">${b.action_detail}</span>` : ''}
+        </div>
+      </div>`;
   }
 
   function renderOpportunities() {
