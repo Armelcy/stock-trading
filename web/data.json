@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-06-04T22:38:00",
-  "oil_price": 94.96,
+  "last_updated": "2026-06-04T22:46:39",
+  "oil_price": 93.44,
   "oil_status": "ok",
   "opportunities": [],
   "positions": [
@@ -11,11 +11,11 @@
       "expiry": "2026-06-18",
       "contracts": 3,
       "entry_premium": 0.61,
-      "entry_cost": 183.00,
-      "current_premium": 0.61,
-      "current_value": 183.00,
-      "pnl": 0.00,
-      "pnl_pct": 0.0,
+      "entry_cost": 183.0,
+      "current_premium": 0.68,
+      "current_value": 204.0,
+      "pnl": 21.0,
+      "pnl_pct": 11.5,
       "target_premium": 1.16,
       "stop_premium": 0.37,
       "entry_date": "2026-06-04",
@@ -33,8 +33,8 @@
       "contracts": 2,
       "entry": 0.89,
       "entry_cost": 178.08,
-      "exit": 1.50,
-      "exit_value": 300.00,
+      "exit": 1.5,
+      "exit_value": 300.0,
       "pnl": 121.92,
       "pnl_pct": 68.5,
       "status": "closed"
@@ -47,7 +47,7 @@
       "expiry": "2026-06-18",
       "contracts": 3,
       "entry": 0.61,
-      "entry_cost": 183.00,
+      "entry_cost": 183.0,
       "exit": null,
       "exit_value": null,
       "pnl": null,
@@ -58,23 +58,64 @@
   "portfolio": {
     "starting_balance": 500,
     "current_balance": 621.92,
-    "committed": 183.00,
-    "available": 138.00,
+    "committed": 183.0,
+    "available": 438.92,
     "ultimate_goal": 10000,
     "phase": 1,
     "phases": [
-      { "phase": 1, "label": "Build Base", "from": 500, "to": 1500, "target_date": "2026-06-20", "status": "active" },
-      { "phase": 2, "label": "Compound & Grow", "from": 1500, "to": 3000, "target_date": "2026-09-01", "status": "pending" },
-      { "phase": 3, "label": "Stock Portfolio", "from": 3000, "to": 10000, "target_date": "2027-03-01", "status": "pending" }
+      {
+        "phase": 1,
+        "label": "Build Base",
+        "from": 500,
+        "to": 1500,
+        "target_date": "2026-06-20",
+        "status": "active"
+      },
+      {
+        "phase": 2,
+        "label": "Compound & Grow",
+        "from": 1500,
+        "to": 3000,
+        "target_date": "2026-09-01",
+        "status": "pending"
+      },
+      {
+        "phase": 3,
+        "label": "Stock Portfolio",
+        "from": 3000,
+        "to": 10000,
+        "target_date": "2027-03-01",
+        "status": "pending"
+      }
     ],
     "goal": 1500,
     "goal_date": "2026-06-20",
     "total_realized_pnl": 121.92,
     "weekly_snapshots": [
-      { "week": 1, "label": "Jun 2", "balance": 500, "note": "First trade: SLB" },
-      { "week": 2, "label": "Jun 9", "balance": null, "note": "HAL open" },
-      { "week": 3, "label": "Jun 16", "balance": null, "note": "" },
-      { "week": 4, "label": "Jun 20", "balance": null, "note": "Phase 1 Goal: $1,500" }
+      {
+        "week": 1,
+        "label": "Jun 2",
+        "balance": 500,
+        "note": "First trade: SLB"
+      },
+      {
+        "week": 2,
+        "label": "Jun 9",
+        "balance": null,
+        "note": "HAL open"
+      },
+      {
+        "week": 3,
+        "label": "Jun 16",
+        "balance": null,
+        "note": ""
+      },
+      {
+        "week": 4,
+        "label": "Jun 20",
+        "balance": null,
+        "note": "Phase 1 Goal: $1,500"
+      }
     ]
   }
 }
