@@ -5,8 +5,8 @@
   "briefing": {
     "date": "2026-06-05",
     "type": "info",
-    "headline": "SLB proceeds settled. Cash is $438. HAL, hold firm.",
-    "body": "Good morning. Today is Thursday — SLB's $300 settlement landed, so your available buying power is now $438. HAL $43C Jun18 is still open with a limit sell at $1.16 (GTC). Tomorrow is Friday: options can get choppy EOD before the weekend, so if HAL spikes above $1.16 at any point today or tomorrow, it closes automatically — no action needed. Screener ran this morning. If energy stays hot and a new setup appears under $250, you'll see it in the Today tab. Otherwise stay patient — cash is your weapon.",
+    "headline": "Thursday. HAL open, $138 liquid. Hold the position.",
+    "body": "Good morning. Portfolio total is $321 — $138 liquid + $183 locked in HAL $43C Jun18. Limit sell is armed at $1.16 (GTC), fires automatically. Tomorrow is Friday: options get choppy EOD before the weekend, but your exit is automatic so no action needed unless HAL drops toward $0.37 stop. Screener ran this morning — $138 is too tight for a quality second trade, so stay patient and let HAL work.",
     "action": "HOLD",
     "action_detail": "HAL limit sell at $1.16 is live. Nothing to do unless a new setup appears below."
   },
@@ -65,9 +65,9 @@
   ],
   "portfolio": {
     "starting_balance": 178.08,
-    "current_balance": 438.00,
+    "current_balance": 138.00,
     "committed": 183.0,
-    "available": 438.00,
+    "available": 138.00,
     "ultimate_goal": 10000,
     "phase": 1,
     "phases": [
