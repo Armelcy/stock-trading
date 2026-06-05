@@ -69,11 +69,12 @@ def update_oil(data):
 
 
 def update_portfolio(data):
-    """Recalculate committed and available capital."""
+    """Recalculate committed capital. Leave current_balance and available unchanged
+    — those are set manually to reflect actual Robinhood buying power."""
     open_positions = [p for p in data.get("positions", []) if p["status"] == "open"]
     committed = sum(p["entry_cost"] for p in open_positions)
     data["portfolio"]["committed"] = round(committed, 2)
-    data["portfolio"]["available"] = round(data["portfolio"]["current_balance"] - committed, 2)
+    # Do NOT auto-calculate available — Robinhood settlement affects it
     return data
 
 
