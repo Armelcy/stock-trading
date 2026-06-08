@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-06-05T09:45:19",
-  "oil_price": 91.66,
+  "last_updated": "2026-06-08T08:07:00",
+  "oil_price": 91.1,
   "oil_status": "ok",
   "briefing": {
     "date": "2026-06-05",
@@ -20,10 +20,10 @@
       "contracts": 3,
       "entry_premium": 0.61,
       "entry_cost": 183.0,
-      "current_premium": 0.68,
-      "current_value": 204.0,
-      "pnl": 21.0,
-      "pnl_pct": 11.5,
+      "current_premium": 0.15,
+      "current_value": 45.0,
+      "pnl": -138.0,
+      "pnl_pct": -75.4,
       "target_premium": 1.16,
       "stop_premium": 0.37,
       "entry_date": "2026-06-04",
