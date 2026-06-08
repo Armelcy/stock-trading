@@ -3,12 +3,12 @@
   "oil_price": 91.3,
   "oil_status": "ok",
   "briefing": {
-    "date": "2026-06-05",
-    "type": "info",
-    "headline": "Thursday. HAL open, $138 liquid. Hold the position.",
-    "body": "Good morning. Portfolio total is $321 \u2014 $138 liquid + $183 locked in HAL $43C Jun18. Limit sell is armed at $1.16 (GTC), fires automatically. Tomorrow is Friday: options get choppy EOD before the weekend, but your exit is automatic so no action needed unless HAL drops toward $0.37 stop. Screener ran this morning \u2014 $138 is too tight for a quality second trade, so stay patient and let HAL work.",
-    "action": "HOLD",
-    "action_detail": "HAL limit sell at $1.16 is live. Nothing to do unless a new setup appears below."
+    "date": "2026-06-08",
+    "type": "warning",
+    "headline": "⚠️ HAL down 5% today — option bid/ask at $0. Decision needed.",
+    "body": "HAL stock dropped from $41.22 → $39.18 (-5%) this morning despite Iran/Hormuz war news. The $43C option is now at $0.15 last price but bid=0 ask=0 — no active buyers. To reach your $43 strike, HAL needs a 10% rally in 10 days, which is unlikely at this pace. Screener found no new trades today. Two options: (1) Place a limit sell at $0.10 on Robinhood to recover ~$30, or (2) Hold and hope for an oil spike — risk going to $0. The $183 is mostly gone either way.",
+    "action": "DECIDE",
+    "action_detail": "On Robinhood: try limit sell HAL $43C at $0.10 to recover ~$30. If no fill by EOD, drop to $0.05. Otherwise accept $0 at expiry Jun 18."
   },
   "opportunities": [],
   "positions": [
