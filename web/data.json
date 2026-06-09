@@ -3,12 +3,12 @@
   "oil_price": 91.3,
   "oil_status": "ok",
   "briefing": {
-    "date": "2026-06-08",
+    "date": "2026-06-09",
     "type": "warning",
-    "headline": "⚠️ HAL down 5% today — option bid/ask at $0. Decision needed.",
-    "body": "HAL stock dropped from $41.22 → $39.18 (-5%) this morning despite Iran/Hormuz war news. The $43C option is now at $0.15 last price but bid=0 ask=0 — no active buyers. To reach your $43 strike, HAL needs a 10% rally in 10 days, which is unlikely at this pace. Screener found no new trades today. Two options: (1) Place a limit sell at $0.10 on Robinhood to recover ~$30, or (2) Hold and hope for an oil spike — risk going to $0. The $183 is mostly gone either way.",
-    "action": "DECIDE",
-    "action_detail": "On Robinhood: try limit sell HAL $43C at $0.10 to recover ~$30. If no fill by EOD, drop to $0.05. Otherwise accept $0 at expiry Jun 18."
+    "headline": "HAL bounced +3.4% today ($40.51). Option last=$0.30 but bid/ask still $0.",
+    "body": "HAL recovered from yesterday's $39.18 low back to $40.51 (+$1.33). The option last price doubled from $0.15 → $0.30, but bid=0 ask=0 means no active buyers in the market right now. HAL still needs to reach $43 — another $2.50 rally (+6%) in 9 days. Screener found no new trades. WTI crude at $89.55, down from $91 yesterday. The bounce is encouraging but the trade is still deeply OTM. Watch HAL closely today — if it pushes toward $41.50+ with volume, option buyers may return.",
+    "action": "WATCH",
+    "action_detail": "Hold for now. If HAL hits $41.50+ and bid comes back above $0.05, consider selling to recover something. If it fades back below $40, close at any price."
   },
   "opportunities": [],
   "positions": [
@@ -20,10 +20,10 @@
       "contracts": 3,
       "entry_premium": 0.61,
       "entry_cost": 183.0,
-      "current_premium": 0.15,
-      "current_value": 45.0,
-      "pnl": -138.0,
-      "pnl_pct": -75.4,
+      "current_premium": 0.30,
+      "current_value": 90.0,
+      "pnl": -93.0,
+      "pnl_pct": -50.8,
       "target_premium": 1.16,
       "stop_premium": 0.37,
       "entry_date": "2026-06-04",
