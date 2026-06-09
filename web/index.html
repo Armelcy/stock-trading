@@ -545,6 +545,8 @@
           <span class="badge ${w.status === 'watching' ? 'badge-hold' : 'badge-buy'}">${w.status.toUpperCase()}</span>
         </div>
         <div class="pos-row"><span class="label">Added</span><span>${w.added_date} @ $${w.price_at_add}</span></div>
+        ${w.current_price != null ? `<div class="pos-row"><span class="label">Price</span><span>$${w.current_price} <span style="color:${w.price_change_pct >= 0 ? '#7ec8a0' : '#f87171'}">${w.price_change_pct >= 0 ? '+' : ''}${w.price_change_pct}%</span> &nbsp; Vol ${w.vol_ratio_today}x avg</span></div>` : ''}
+        ${w.signal ? `<div class="pos-row"><span class="label">Signal</span><span style="font-size:12px">${w.signal}</span></div>` : ''}
         <div class="pos-row"><span class="label">Thesis</span><span style="font-size:11px;color:#ccc">${w.thesis}</span></div>
         <div class="pos-row"><span class="label">Watch for</span><span style="font-size:11px;color:#f0c040">${w.watch_for}</span></div>
         ${w.day_trade_plan ? `<div class="pos-row"><span class="label">Day trade plan</span><span style="font-size:11px;color:#7ec8a0">${w.day_trade_plan}</span></div>` : ''}
