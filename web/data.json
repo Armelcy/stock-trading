@@ -1,12 +1,12 @@
 {
-  "last_updated": "2026-06-08T08:11:35",
-  "oil_price": 91.3,
+  "last_updated": "2026-06-09T19:50:25",
+  "oil_price": 89.05,
   "oil_status": "ok",
   "briefing": {
     "date": "2026-06-09",
     "type": "warning",
     "headline": "HAL bounced +3.4% today ($40.51). Option last=$0.30 but bid/ask still $0.",
-    "body": "HAL recovered from yesterday's $39.18 low back to $40.51 (+$1.33). The option last price doubled from $0.15 → $0.30, but bid=0 ask=0 means no active buyers in the market right now. HAL still needs to reach $43 — another $2.50 rally (+6%) in 9 days. Screener found no new trades. WTI crude at $89.55, down from $91 yesterday. The bounce is encouraging but the trade is still deeply OTM. Watch HAL closely today — if it pushes toward $41.50+ with volume, option buyers may return.",
+    "body": "HAL recovered from yesterday's $39.18 low back to $40.51 (+$1.33). The option last price doubled from $0.15 \u2192 $0.30, but bid=0 ask=0 means no active buyers in the market right now. HAL still needs to reach $43 \u2014 another $2.50 rally (+6%) in 9 days. Screener found no new trades. WTI crude at $89.55, down from $91 yesterday. The bounce is encouraging but the trade is still deeply OTM. Watch HAL closely today \u2014 if it pushes toward $41.50+ with volume, option buyers may return.",
     "action": "WATCH",
     "action_detail": "Hold for now. If HAL hits $41.50+ and bid comes back above $0.05, consider selling to recover something. If it fades back below $40, close at any price."
   },
@@ -15,11 +15,13 @@
       "ticker": "FAC",
       "name": "Factorial Energy",
       "added_date": "2026-06-09",
-      "price_at_add": 16.00,
-      "thesis": "Solid-state battery company. Strong macro tailwinds: Iran/Hormuz crisis driving $5 gas, EV adoption urgency, defense/drone demand (IQT-backed). Market growing 43% CAGR. Risk: pre-scale SPAC, thin volume (~10K shares/day). Strategy: observe first hour daily, consider long on morning dip if volume picks up. Do NOT short — macro tailwinds too strong.",
+      "price_at_add": 16.0,
+      "thesis": "Solid-state battery company. Strong macro tailwinds: Iran/Hormuz crisis driving $5 gas, EV adoption urgency, defense/drone demand (IQT-backed). Market growing 43% CAGR. Risk: pre-scale SPAC, thin volume (~10K shares/day). Strategy: observe first hour daily, consider long on morning dip if volume picks up. Do NOT short \u2014 macro tailwinds too strong.",
       "watch_for": "Volume spike above 50K/day, price stabilization above $15, options chain availability",
       "status": "watching",
-      "day_trade_plan": "Buy long on morning dip (first 30-60 min), $100 position, limit sell at +15-20%, same-day exit. Wait for bid/ask spread to tighten before entering."
+      "day_trade_plan": "Buy long on morning dip (first 30-60 min), $100 position, limit sell at +15-20%, same-day exit. Wait for bid/ask spread to tighten before entering.",
+      "signal": "\u26a0\ufe0f No data \u2014 check manually",
+      "last_checked": "2026-06-09 19:49"
     }
   ],
   "opportunities": [],
@@ -32,10 +34,10 @@
       "contracts": 3,
       "entry_premium": 0.61,
       "entry_cost": 183.0,
-      "current_premium": 0.30,
-      "current_value": 90.0,
-      "pnl": -93.0,
-      "pnl_pct": -50.8,
+      "current_premium": 0.13,
+      "current_value": 39.0,
+      "pnl": -144.0,
+      "pnl_pct": -78.7,
       "target_premium": 1.16,
       "stop_premium": 0.37,
       "entry_date": "2026-06-04",
