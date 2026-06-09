@@ -276,6 +276,7 @@
 <div class="tabs">
   <div class="tab active" onclick="showTab('opportunities')">🎯 Today</div>
   <div class="tab" onclick="showTab('positions')">📊 Positions</div>
+  <div class="tab" onclick="showTab('watchlist')">👁 Watchlist</div>
   <div class="tab" onclick="showTab('history')">📋 History</div>
   <div class="tab" onclick="showTab('portfolio')">💰 Portfolio</div>
 </div>
@@ -290,6 +291,12 @@
 <div id="positions" class="section">
   <div class="section-title">Open Positions</div>
   <div id="pos-content"></div>
+</div>
+
+<!-- WATCHLIST -->
+<div id="watchlist" class="section">
+  <div class="section-title">Watchlist</div>
+  <div id="watch-content"></div>
 </div>
 
 <!-- HISTORY -->
@@ -352,6 +359,7 @@
     renderBriefing();
     renderOpportunities();
     renderPositions();
+    renderWatchlist();
     renderHistory();
     renderPortfolio();
   }
@@ -518,6 +526,29 @@
         </div>
       </div>`;
     }).join('');
+  }
+
+  function renderWatchlist() {
+    const el = document.getElementById('watch-content');
+    const list = data.watchlist || [];
+    if (list.length === 0) {
+      el.innerHTML = '<div class="empty"><div class="icon">👁</div>No stocks on watchlist.</div>';
+      return;
+    }
+    el.innerHTML = list.map(w => `
+      <div class="pos-card">
+        <div class="pos-header">
+          <div>
+            <span class="ticker">${w.ticker}</span>
+            <span class="expiry">${w.name}</span>
+          </div>
+          <span class="badge ${w.status === 'watching' ? 'badge-hold' : 'badge-buy'}">${w.status.toUpperCase()}</span>
+        </div>
+        <div class="pos-row"><span class="label">Added</span><span>${w.added_date} @ $${w.price_at_add}</span></div>
+        <div class="pos-row"><span class="label">Thesis</span><span style="font-size:11px;color:#ccc">${w.thesis}</span></div>
+        <div class="pos-row"><span class="label">Watch for</span><span style="font-size:11px;color:#f0c040">${w.watch_for}</span></div>
+        ${w.day_trade_plan ? `<div class="pos-row"><span class="label">Day trade plan</span><span style="font-size:11px;color:#7ec8a0">${w.day_trade_plan}</span></div>` : ''}
+      </div>`).join('');
   }
 
   function renderHistory() {

@@ -10,6 +10,18 @@
     "action": "WATCH",
     "action_detail": "Hold for now. If HAL hits $41.50+ and bid comes back above $0.05, consider selling to recover something. If it fades back below $40, close at any price."
   },
+  "watchlist": [
+    {
+      "ticker": "FAC",
+      "name": "Factorial Energy",
+      "added_date": "2026-06-09",
+      "price_at_add": 16.00,
+      "thesis": "Solid-state battery company. Strong macro tailwinds: Iran/Hormuz crisis driving $5 gas, EV adoption urgency, defense/drone demand (IQT-backed). Market growing 43% CAGR. Risk: pre-scale SPAC, thin volume (~10K shares/day). Strategy: observe first hour daily, consider long on morning dip if volume picks up. Do NOT short — macro tailwinds too strong.",
+      "watch_for": "Volume spike above 50K/day, price stabilization above $15, options chain availability",
+      "status": "watching",
+      "day_trade_plan": "Buy long on morning dip (first 30-60 min), $100 position, limit sell at +15-20%, same-day exit. Wait for bid/ask spread to tighten before entering."
+    }
+  ],
   "opportunities": [],
   "positions": [
     {
