@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-06-09T19:50:25",
-  "oil_price": 89.05,
+  "last_updated": "2026-06-09T21:51:52",
+  "oil_price": 88.89,
   "oil_status": "ok",
   "briefing": {
     "date": "2026-06-09",
@@ -21,7 +21,7 @@
       "status": "watching",
       "day_trade_plan": "Buy long on morning dip (first 30-60 min), $100 position, limit sell at +15-20%, same-day exit. Wait for bid/ask spread to tighten before entering.",
       "signal": "\u26a0\ufe0f No data \u2014 check manually",
-      "last_checked": "2026-06-09 19:49"
+      "last_checked": "2026-06-09 21:50"
     }
   ],
   "opportunities": [],
