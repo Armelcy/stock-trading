@@ -14,14 +14,17 @@ from datetime import datetime, timedelta
 MAX_TRADE_BUDGET    = 250       # max dollars per trade
 TARGET_PREMIUM_LOW  = 0.20      # min premium per share
 TARGET_PREMIUM_HIGH = 1.00      # max premium per share (gives room above $0.80)
-MAX_DIST_FROM_HIGH  = 0.08      # within 8% of 52-week high
+MAX_DIST_FROM_HIGH  = 0.05      # within 5% of 52-week high (tightened from 8% — reduces weak setups)
+MAX_OTM_PCT         = 0.03      # strike must be within 3% above current price (HAL lesson — no far OTM)
 MIN_EXPIRY_DAYS     = 10        # at least 10 days out
 MAX_EXPIRY_DAYS     = 25        # no more than 25 days out (2–3 weeks)
 OIL_DANGER_LEVEL    = 84.0      # warn on energy trades if WTI crude below this
-MIN_OI              = 100       # minimum open interest — below this = illiquid
-MIN_VOL_RATIO       = 0.8       # stock must trade at ≥80% of its 20-day avg volume
-MAX_SPREAD_PCT      = 0.20      # skip if bid/ask spread > 20% of mid price
+OIL_TREND_WARN      = 87.0      # soft warning if oil trending toward danger zone
+MIN_OI              = 200       # minimum open interest (raised from 100 — better liquidity)
+MIN_VOL_RATIO       = 1.0       # stock must trade at ≥100% of its 20-day avg volume (raised from 0.8)
+MAX_SPREAD_PCT      = 0.15      # skip if bid/ask spread > 15% of mid price (tightened from 20%)
 EARNINGS_BLACKOUT   = 14        # skip if earnings within this many days
+MIN_CONVICTION      = 3         # all 3 must pass: dist from high + vol ratio + OI — no partial entries
 
 # Energy tickers — flag these if oil is weak
 ENERGY_TICKERS = {"SLB", "MPC", "XOM", "CVX", "OXY", "HAL"}
@@ -173,9 +176,10 @@ def find_calls(ticker, stock_price):
         except Exception:
             continue
 
-        # Only ATM / slightly ITM (within 5% of current price)
+        # Only ATM or slightly ITM — no far OTM (HAL lesson)
+        # Strike must be between 5% below and MAX_OTM_PCT above current price
         calls = calls[calls["strike"] >= stock_price * 0.95]
-        calls = calls[calls["strike"] <= stock_price * 1.05]
+        calls = calls[calls["strike"] <= stock_price * (1 + MAX_OTM_PCT)]
 
         # Filter by premium budget
         calls = calls[calls["lastPrice"] >= TARGET_PREMIUM_LOW]
@@ -326,7 +330,12 @@ def main():
     if wti is None:
         print("  WTI crude: unavailable (check manually before energy trades)")
     else:
-        status = "✅ OK" if wti >= OIL_DANGER_LEVEL else f"⚠️  BELOW ${OIL_DANGER_LEVEL} — AVOID ENERGY TRADES"
+        if wti >= OIL_TREND_WARN:
+            status = "✅ OK"
+        elif wti >= OIL_DANGER_LEVEL:
+            status = f"🟡 TRENDING WEAK (${OIL_DANGER_LEVEL}–${OIL_TREND_WARN}) — caution on energy trades"
+        else:
+            status = f"⚠️  BELOW ${OIL_DANGER_LEVEL} — AVOID ENERGY TRADES"
         print(f"  WTI Crude (CL=F): ${wti}  {status}")
     print()
 
@@ -335,7 +344,7 @@ def main():
     candidates = screen_stocks(TICKERS)
 
     if candidates.empty:
-        print("No candidates found today. Try widening MAX_DIST_FROM_HIGH.")
+        print("No candidates found today. Sitting in cash is the right move — do not force a trade.")
         return
 
     # Remove energy tickers if oil is in danger zone
