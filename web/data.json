@@ -3,12 +3,12 @@
   "oil_price": 81.4,
   "oil_status": "warn",
   "briefing": {
-    "date": "2026-06-09",
-    "type": "warning",
-    "headline": "HAL nearly dead (-78.7%). SLB is only affordable option. $138 cash available.",
-    "body": "Screener ran Jun 9 evening. 7 stocks within 8% of 52w high: UNH (AT high), LLY, CAT, SLB, GE, MPC, ETN. Only 1 tradeable call found within budget: SLB $58C 6/26 at $0.75/sh (3 contracts = $225). Problem: you only have $138 available \u2014 $225 is out of reach unless HAL frees up capital. HAL $43C expires Jun 18, currently $0.13/sh (bid=0, ask=0). Needs +6% move to $43 in 9 days \u2014 very unlikely. Best path: close HAL at any bid that appears, redeploy into SLB (1 contract = $75 fits budget). UNH is the strongest momentum name (AT 52w high, +9.3% last week) but options are too expensive for this budget.",
-    "action": "CLOSE HAL",
-    "action_detail": "HAL is effectively dead. Close it as soon as any bid appears (even $0.05). That frees $39 + your $138 = ~$177. Then enter SLB $58C 6/26 at $0.75 \u2014 1 contract ($75) leaves $100 in reserve. Do NOT chase LLY or UNH \u2014 premiums exceed budget."
+    "date": "2026-06-15",
+    "type": "action",
+    "headline": "HAL expires Thu (worthless). New trade: AAPL $310C 6/26 at $0.83 \u2014 1 contract fits budget. OIL WEAK \u2014 no energy trades.",
+    "body": "Screener ran Jun 15. Oil at $81.40 \u2014 below $84 danger level. SLB dropped 4.4% today, all energy trades cancelled. HAL $43C now $0.02/sh (-96.7%), expires Jun 18 \u2014 let it expire worthless, not worth paying commission on $6. New opportunity: AAPL $310C 6/26 at $0.83/sh. Stock at $296.42, 6.61% from 52w high ($317.40). IV only 23.8% (cheap). OI 6,394 (highly liquid). Needs +4.6% move to reach $310 by Jun 26. 1 contract = $83 \u2014 fits $138 available with $55 reserve.",
+    "action": "BUY AAPL",
+    "action_detail": "Enter AAPL $310C 6/26 at $0.83/sh. 1 contract = $83. Leaves $55 in reserve. Target: $1.58/sh (+90%, +$75 profit). Stop: $0.50/sh (-40%, -$33 loss). Exit no later than Jun 23. Do NOT enter energy trades \u2014 oil below $84."
   },
   "watchlist": [
     {
@@ -20,8 +20,11 @@
       "watch_for": "Pullback to $395-400 for better entry. Account size needs to reach $1,000+ for options to be viable.",
       "status": "watching",
       "day_trade_plan": "Not viable at current budget. Monitor for breakout continuation. Revisit when available capital > $500.",
-      "signal": "Strong momentum \u2014 budget too small",
-      "last_checked": "2026-06-09 21:55"
+      "signal": "\ud83d\ude34 QUIET \u2014 no signal today.",
+      "last_checked": "2026-06-15 20:37",
+      "current_price": 411.04,
+      "price_change_pct": 0.62,
+      "vol_ratio_today": 0.99
     },
     {
       "ticker": "GE",
@@ -32,8 +35,11 @@
       "watch_for": "Volume pickup above 1.5x average, push above $340, affordable ATM calls under $2.50/sh",
       "status": "watching",
       "day_trade_plan": "Not viable at current budget. Check options chain weekly \u2014 if account reaches $500+ available, enter ATM call 2-3 weeks out.",
-      "signal": "Solid uptrend \u2014 budget too small",
-      "last_checked": "2026-06-09 21:55"
+      "signal": "\ud83d\ude34 QUIET \u2014 no signal today.",
+      "last_checked": "2026-06-15 20:37",
+      "current_price": 342.26,
+      "price_change_pct": 2.08,
+      "vol_ratio_today": 0.81
     },
     {
       "ticker": "SLB",
@@ -44,8 +50,11 @@
       "watch_for": "Close HAL first to free capital. Then enter $58C 6/26 at $0.75 \u2014 1 contract ($75) or 2 contracts ($150) depending on HAL recovery.",
       "status": "watching",
       "day_trade_plan": "Enter $58C 6/26 at $0.75/sh. 1 contract = $75. Target exit: $1.42/sh (+90%). Stop: $0.45/sh (-40%). Exit no later than Jun 23.",
-      "signal": "READY \u2014 waiting for HAL capital to free up",
-      "last_checked": "2026-06-09 21:55"
+      "signal": "\ud83d\udfe1 WATCH \u2014 mild dip. Wait for volume confirmation before entering.",
+      "last_checked": "2026-06-15 20:37",
+      "current_price": 53.71,
+      "price_change_pct": -4.4,
+      "vol_ratio_today": 1.04
     },
     {
       "ticker": "FAC",
@@ -56,28 +65,31 @@
       "watch_for": "Volume spike above 50K/day, price stabilization above $15, options chain availability",
       "status": "watching",
       "day_trade_plan": "Buy long on morning dip (first 30-60 min), $100 position, limit sell at +15-20%, same-day exit. Wait for bid/ask spread to tighten before entering.",
-      "signal": "No data \u2014 check manually",
-      "last_checked": "2026-06-09 21:50"
+      "signal": "\ud83d\ude34 QUIET \u2014 no signal today.",
+      "last_checked": "2026-06-15 20:37",
+      "current_price": 15.55,
+      "price_change_pct": 1.44,
+      "vol_ratio_today": 0.21
     }
   ],
   "opportunities": [
     {
-      "ticker": "SLB",
+      "ticker": "AAPL",
       "direction": "CALL",
-      "strike": 58.0,
+      "strike": 310.0,
       "expiry": "2026-06-26",
       "contracts_max": 3,
       "contracts_affordable": 1,
-      "premium": 0.75,
-      "cost_1x": 75.0,
-      "cost_3x": 225.0,
-      "iv_pct": 39.1,
-      "open_interest": 101,
-      "dist_from_high_pct": 4.55,
-      "target_premium": 1.42,
-      "stop_premium": 0.45,
-      "note": "Only tradeable option found today. Budget allows 1 contract ($75) now. Close HAL first for 2 contracts ($150). Do not enter more than 2x \u2014 leaves reserve.",
-      "scanned_date": "2026-06-09"
+      "premium": 0.83,
+      "cost_1x": 83.0,
+      "cost_3x": 249.0,
+      "iv_pct": 23.8,
+      "open_interest": 6394,
+      "dist_from_high_pct": 6.61,
+      "target_premium": 1.58,
+      "stop_premium": 0.50,
+      "note": "1 contract ($83) fits $138 budget. Oil below $84 \u2014 no energy trades. Low IV (23.8%) = cheap entry. High OI (6,394) = liquid. Exit by Jun 23.",
+      "scanned_date": "2026-06-15"
     }
   ],
   "positions": [
