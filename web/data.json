@@ -1,14 +1,14 @@
 {
-  "last_updated": "2026-06-09T21:51:52",
-  "oil_price": 88.89,
-  "oil_status": "ok",
+  "last_updated": "2026-06-15T20:36:47",
+  "oil_price": 81.4,
+  "oil_status": "warn",
   "briefing": {
     "date": "2026-06-09",
     "type": "warning",
     "headline": "HAL nearly dead (-78.7%). SLB is only affordable option. $138 cash available.",
-    "body": "Screener ran Jun 9 evening. 7 stocks within 8% of 52w high: UNH (AT high), LLY, CAT, SLB, GE, MPC, ETN. Only 1 tradeable call found within budget: SLB $58C 6/26 at $0.75/sh (3 contracts = $225). Problem: you only have $138 available — $225 is out of reach unless HAL frees up capital. HAL $43C expires Jun 18, currently $0.13/sh (bid=0, ask=0). Needs +6% move to $43 in 9 days — very unlikely. Best path: close HAL at any bid that appears, redeploy into SLB (1 contract = $75 fits budget). UNH is the strongest momentum name (AT 52w high, +9.3% last week) but options are too expensive for this budget.",
+    "body": "Screener ran Jun 9 evening. 7 stocks within 8% of 52w high: UNH (AT high), LLY, CAT, SLB, GE, MPC, ETN. Only 1 tradeable call found within budget: SLB $58C 6/26 at $0.75/sh (3 contracts = $225). Problem: you only have $138 available \u2014 $225 is out of reach unless HAL frees up capital. HAL $43C expires Jun 18, currently $0.13/sh (bid=0, ask=0). Needs +6% move to $43 in 9 days \u2014 very unlikely. Best path: close HAL at any bid that appears, redeploy into SLB (1 contract = $75 fits budget). UNH is the strongest momentum name (AT 52w high, +9.3% last week) but options are too expensive for this budget.",
     "action": "CLOSE HAL",
-    "action_detail": "HAL is effectively dead. Close it as soon as any bid appears (even $0.05). That frees $39 + your $138 = ~$177. Then enter SLB $58C 6/26 at $0.75 — 1 contract ($75) leaves $100 in reserve. Do NOT chase LLY or UNH — premiums exceed budget."
+    "action_detail": "HAL is effectively dead. Close it as soon as any bid appears (even $0.05). That frees $39 + your $138 = ~$177. Then enter SLB $58C 6/26 at $0.75 \u2014 1 contract ($75) leaves $100 in reserve. Do NOT chase LLY or UNH \u2014 premiums exceed budget."
   },
   "watchlist": [
     {
@@ -20,7 +20,7 @@
       "watch_for": "Pullback to $395-400 for better entry. Account size needs to reach $1,000+ for options to be viable.",
       "status": "watching",
       "day_trade_plan": "Not viable at current budget. Monitor for breakout continuation. Revisit when available capital > $500.",
-      "signal": "Strong momentum — budget too small",
+      "signal": "Strong momentum \u2014 budget too small",
       "last_checked": "2026-06-09 21:55"
     },
     {
@@ -28,11 +28,11 @@
       "name": "GE Aerospace",
       "added_date": "2026-06-09",
       "price_at_add": 330.44,
-      "thesis": "5% from 52w high ($347.97). Consistent uptrend: +4% 1w, +5.1% 2w, +11.2% 1m. Industrial sector leader. Steady, predictable movement — better for options timing than volatile names. Options marginally expensive for budget but worth monitoring.",
+      "thesis": "5% from 52w high ($347.97). Consistent uptrend: +4% 1w, +5.1% 2w, +11.2% 1m. Industrial sector leader. Steady, predictable movement \u2014 better for options timing than volatile names. Options marginally expensive for budget but worth monitoring.",
       "watch_for": "Volume pickup above 1.5x average, push above $340, affordable ATM calls under $2.50/sh",
       "status": "watching",
-      "day_trade_plan": "Not viable at current budget. Check options chain weekly — if account reaches $500+ available, enter ATM call 2-3 weeks out.",
-      "signal": "Solid uptrend — budget too small",
+      "day_trade_plan": "Not viable at current budget. Check options chain weekly \u2014 if account reaches $500+ available, enter ATM call 2-3 weeks out.",
+      "signal": "Solid uptrend \u2014 budget too small",
       "last_checked": "2026-06-09 21:55"
     },
     {
@@ -40,11 +40,11 @@
       "name": "SLB (Schlumberger)",
       "added_date": "2026-06-09",
       "price_at_add": 55.85,
-      "thesis": "4.55% from 52w high ($58.51). $58C 6/26 available at $0.75/sh — only option that fits budget. WTI crude at $88.89 (above $84 danger threshold). Previously traded SLB successfully (+68.5% in Jun 2). Familiar setup.",
-      "watch_for": "Close HAL first to free capital. Then enter $58C 6/26 at $0.75 — 1 contract ($75) or 2 contracts ($150) depending on HAL recovery.",
+      "thesis": "4.55% from 52w high ($58.51). $58C 6/26 available at $0.75/sh \u2014 only option that fits budget. WTI crude at $88.89 (above $84 danger threshold). Previously traded SLB successfully (+68.5% in Jun 2). Familiar setup.",
+      "watch_for": "Close HAL first to free capital. Then enter $58C 6/26 at $0.75 \u2014 1 contract ($75) or 2 contracts ($150) depending on HAL recovery.",
       "status": "watching",
       "day_trade_plan": "Enter $58C 6/26 at $0.75/sh. 1 contract = $75. Target exit: $1.42/sh (+90%). Stop: $0.45/sh (-40%). Exit no later than Jun 23.",
-      "signal": "READY — waiting for HAL capital to free up",
+      "signal": "READY \u2014 waiting for HAL capital to free up",
       "last_checked": "2026-06-09 21:55"
     },
     {
@@ -52,11 +52,11 @@
       "name": "Factorial Energy",
       "added_date": "2026-06-09",
       "price_at_add": 16.0,
-      "thesis": "Solid-state battery company. Strong macro tailwinds: Iran/Hormuz crisis driving $5 gas, EV adoption urgency, defense/drone demand (IQT-backed). Market growing 43% CAGR. Risk: pre-scale SPAC, thin volume (~10K shares/day). Strategy: observe first hour daily, consider long on morning dip if volume picks up. Do NOT short — macro tailwinds too strong.",
+      "thesis": "Solid-state battery company. Strong macro tailwinds: Iran/Hormuz crisis driving $5 gas, EV adoption urgency, defense/drone demand (IQT-backed). Market growing 43% CAGR. Risk: pre-scale SPAC, thin volume (~10K shares/day). Strategy: observe first hour daily, consider long on morning dip if volume picks up. Do NOT short \u2014 macro tailwinds too strong.",
       "watch_for": "Volume spike above 50K/day, price stabilization above $15, options chain availability",
       "status": "watching",
       "day_trade_plan": "Buy long on morning dip (first 30-60 min), $100 position, limit sell at +15-20%, same-day exit. Wait for bid/ask spread to tighten before entering.",
-      "signal": "No data — check manually",
+      "signal": "No data \u2014 check manually",
       "last_checked": "2026-06-09 21:50"
     }
   ],
@@ -76,7 +76,7 @@
       "dist_from_high_pct": 4.55,
       "target_premium": 1.42,
       "stop_premium": 0.45,
-      "note": "Only tradeable option found today. Budget allows 1 contract ($75) now. Close HAL first for 2 contracts ($150). Do not enter more than 2x — leaves reserve.",
+      "note": "Only tradeable option found today. Budget allows 1 contract ($75) now. Close HAL first for 2 contracts ($150). Do not enter more than 2x \u2014 leaves reserve.",
       "scanned_date": "2026-06-09"
     }
   ],
@@ -89,10 +89,10 @@
       "contracts": 3,
       "entry_premium": 0.61,
       "entry_cost": 183.0,
-      "current_premium": 0.13,
-      "current_value": 39.0,
-      "pnl": -144.0,
-      "pnl_pct": -78.7,
+      "current_premium": 0.02,
+      "current_value": 6.0,
+      "pnl": -177.0,
+      "pnl_pct": -96.7,
       "target_premium": 1.16,
       "stop_premium": 0.37,
       "entry_date": "2026-06-04",
