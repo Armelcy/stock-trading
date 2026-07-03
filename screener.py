@@ -221,9 +221,10 @@ def find_calls(ticker, stock_price):
         calls = calls[calls["openInterest"].fillna(0) >= MIN_OI]
 
         # Filter: bid/ask spread must be ≤ MAX_SPREAD_PCT of mid price
-        # Skip spread check when market is closed (bid/ask = 0)
-        spread_pct = (calls["ask"] - calls["bid"]) / mid.replace(0, float("nan"))
-        calls = calls[~has_quote | (spread_pct.fillna(1) <= MAX_SPREAD_PCT)]
+        # Recompute on current (filtered) rows to avoid index alignment warnings
+        live = (calls["bid"] > 0) & (calls["ask"] > 0)
+        spread_pct = ((calls["ask"] - calls["bid"]) / calls["mid_price"]).where(live, 0)
+        calls = calls[~live | (spread_pct <= MAX_SPREAD_PCT)]
 
         for _, row in calls.iterrows():
             contracts = int(MAX_TRADE_BUDGET // (row["mid_price"] * 100))
