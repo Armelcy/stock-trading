@@ -31,38 +31,34 @@ Grow $500 → $1,500 in 6 weeks (by ~June 20, 2026)
 
 ## Active Trades
 
-### Trade #1 — SLB $57 Call 6/12
-| Field | Value |
-|-------|-------|
-| Status | **ACTIVE ✅** |
-| Entry date | June 2, 2026 |
-| Ticker | SLB (Schlumberger) |
-| Direction | CALL |
-| Strike | $57.00 |
-| Expiry | June 12, 2026 |
-| Contracts | 2 |
-| Entry premium | $0.89/share |
-| Total cost | $178.08 |
-| Breakeven | $57.89 (+3.84% from entry stock price ~$55.75) |
-| Target exit | $1.69/share (~90% gain, +$160 profit) |
-| Stop loss | $0.53/share (-40%, -$71 loss) |
-| Remaining budget | $321.92 (1 trade slot still open) |
-
-**Key dates:**
-- June 3 — Ex-dividend date (expect minor dip ~$0.30, hold through it)
-- June 9 — Exit by EOD regardless (theta accelerates final week)
-- June 12 — Expiry
-
-**Robinhood alerts to set:**
-- SLB stock > $57.00 → consider taking profit
-- SLB stock < $53.00 → review stop loss
+*No active trades as of July 3, 2026. Cash available: $132.18.*
 
 ---
 
 ## Trade Log
 | Date | Ticker | Direction | Strike | Expiry | Entry | Exit | P&L | Notes |
 |------|--------|-----------|--------|--------|-------|------|-----|-------|
-| Jun 2 | SLB | CALL | $57 | Jun 12 | $0.89 | — | +$46 (open) | 2 contracts, $178.08 total. EOD: $1.12/share, stock $56.51, +25.84% day 1 |
+| Jun 2 | SLB | CALL | $57 | Jun 12 | $0.89 | $1.50 | **+$121.92 (+68.5%)** | 2 contracts, $178.08 total. Sold Jun ~9 before expiry week. |
+| Jun 4 | HAL | CALL | $43 | Jun 18 | $0.61 | $0.00 | **-$183.00 (-100%)** | 3 contracts, $183.00 total. Expired worthless Jun 18. OI=0 entry, oil weakness (-$68 WTI). |
+
+**Running P&L: -$61.08** | Starting capital: $178.08 | Current cash: $132.18
+
+---
+
+## Post-Mortems
+
+### HAL $43C Jun 18 — Expired Worthless (-100%)
+**What went wrong:**
+- Entered Jun 4 at $0.61/share — OI was 0 (entered before the OI ≥ 100 filter was added)
+- WTI crude fell well below $84 danger threshold (reached ~$68 by Jul 2026) — energy sector crushed
+- HAL stock never approached $43 strike; expired worthless Jun 18
+- Should have exited by exit deadline Jun 16 even at a loss to preserve capital
+
+**Lessons:**
+1. Always respect OI ≥ 100 filter — illiquid options are hard to exit
+2. Energy sector = oil-dependent; WTI below $84 is a hard NO
+3. When stop (-40%) is hit, exit immediately. Don't hold hoping for recovery
+4. The screener's oil trend warning now flags this scenario — trust it
 
 ---
 

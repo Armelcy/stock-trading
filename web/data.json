@@ -1,15 +1,8 @@
 {
-  "last_updated": "2026-06-15T20:36:47",
-  "oil_price": 81.4,
-  "oil_status": "warn",
-  "briefing": {
-    "date": "2026-06-15",
-    "type": "action",
-    "headline": "HAL expires Thu (worthless). New trade: AAPL $310C 6/26 at $0.83 \u2014 1 contract fits budget. OIL WEAK \u2014 no energy trades.",
-    "body": "Screener ran Jun 15. Oil at $81.40 \u2014 below $84 danger level. SLB dropped 4.4% today, all energy trades cancelled. HAL $43C now $0.02/sh (-96.7%), expires Jun 18 \u2014 let it expire worthless, not worth paying commission on $6. New opportunity: AAPL $310C 6/26 at $0.83/sh. Stock at $296.42, 6.61% from 52w high ($317.40). IV only 23.8% (cheap). OI 6,394 (highly liquid). Needs +4.6% move to reach $310 by Jun 26. 1 contract = $83 \u2014 fits $138 available with $55 reserve.",
-    "action": "BUY AAPL",
-    "action_detail": "Enter AAPL $310C 6/26 at $0.83/sh. 1 contract = $83. Leaves $55 in reserve. Target: $1.58/sh (+90%, +$75 profit). Stop: $0.50/sh (-40%, -$33 loss). Exit no later than Jun 23. Do NOT enter energy trades \u2014 oil below $84."
-  },
+  "last_updated": "2026-07-03 09:56",
+  "oil_price": 68.57,
+  "oil_status": "danger",
+  "briefing": "No setups today. Sitting in cash is the right move \u2014 do not force a trade.",
   "watchlist": [
     {
       "ticker": "UNH",
@@ -21,10 +14,10 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget. Monitor for breakout continuation. Revisit when available capital > $500.",
       "signal": "\ud83d\ude34 QUIET \u2014 no signal today.",
-      "last_checked": "2026-06-15 20:37",
-      "current_price": 411.04,
-      "price_change_pct": 0.62,
-      "vol_ratio_today": 0.99
+      "last_checked": "2026-07-03 09:56",
+      "current_price": 425.36,
+      "price_change_pct": -0.28,
+      "vol_ratio_today": 0.65
     },
     {
       "ticker": "GE",
@@ -36,10 +29,10 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget. Check options chain weekly \u2014 if account reaches $500+ available, enter ATM call 2-3 weeks out.",
       "signal": "\ud83d\ude34 QUIET \u2014 no signal today.",
-      "last_checked": "2026-06-15 20:37",
-      "current_price": 342.26,
-      "price_change_pct": 2.08,
-      "vol_ratio_today": 0.81
+      "last_checked": "2026-07-03 09:56",
+      "current_price": 377.52,
+      "price_change_pct": 0.69,
+      "vol_ratio_today": 0.62
     },
     {
       "ticker": "SLB",
@@ -50,11 +43,11 @@
       "watch_for": "Close HAL first to free capital. Then enter $58C 6/26 at $0.75 \u2014 1 contract ($75) or 2 contracts ($150) depending on HAL recovery.",
       "status": "watching",
       "day_trade_plan": "Enter $58C 6/26 at $0.75/sh. 1 contract = $75. Target exit: $1.42/sh (+90%). Stop: $0.45/sh (-40%). Exit no later than Jun 23.",
-      "signal": "\ud83d\udfe1 WATCH \u2014 mild dip. Wait for volume confirmation before entering.",
-      "last_checked": "2026-06-15 20:37",
-      "current_price": 53.71,
-      "price_change_pct": -4.4,
-      "vol_ratio_today": 1.04
+      "signal": "\ud83d\ude34 QUIET \u2014 no signal today.",
+      "last_checked": "2026-07-03 09:56",
+      "current_price": 45.13,
+      "price_change_pct": 0.09,
+      "vol_ratio_today": 0.87
     },
     {
       "ticker": "FAC",
@@ -65,53 +58,15 @@
       "watch_for": "Volume spike above 50K/day, price stabilization above $15, options chain availability",
       "status": "watching",
       "day_trade_plan": "Buy long on morning dip (first 30-60 min), $100 position, limit sell at +15-20%, same-day exit. Wait for bid/ask spread to tighten before entering.",
-      "signal": "\ud83d\ude34 QUIET \u2014 no signal today.",
-      "last_checked": "2026-06-15 20:37",
-      "current_price": 15.55,
-      "price_change_pct": 1.44,
-      "vol_ratio_today": 0.21
+      "signal": "\ud83d\udfe1 WATCH \u2014 mild dip. Wait for volume confirmation before entering.",
+      "last_checked": "2026-07-03 09:56",
+      "current_price": 10.23,
+      "price_change_pct": -7.25,
+      "vol_ratio_today": 0.89
     }
   ],
-  "opportunities": [
-    {
-      "ticker": "AAPL",
-      "direction": "CALL",
-      "strike": 310.0,
-      "expiry": "2026-06-26",
-      "contracts_max": 3,
-      "contracts_affordable": 1,
-      "premium": 0.83,
-      "cost_1x": 83.0,
-      "cost_3x": 249.0,
-      "iv_pct": 23.8,
-      "open_interest": 6394,
-      "dist_from_high_pct": 6.61,
-      "target_premium": 1.58,
-      "stop_premium": 0.50,
-      "note": "1 contract ($83) fits $138 budget. Oil below $84 \u2014 no energy trades. Low IV (23.8%) = cheap entry. High OI (6,394) = liquid. Exit by Jun 23.",
-      "scanned_date": "2026-06-15"
-    }
-  ],
-  "positions": [
-    {
-      "ticker": "HAL",
-      "direction": "CALL",
-      "strike": 43,
-      "expiry": "2026-06-18",
-      "contracts": 3,
-      "entry_premium": 0.61,
-      "entry_cost": 183.0,
-      "current_premium": 0.02,
-      "current_value": 6.0,
-      "pnl": -177.0,
-      "pnl_pct": -96.7,
-      "target_premium": 1.16,
-      "stop_premium": 0.37,
-      "entry_date": "2026-06-04",
-      "exit_deadline": "2026-06-16",
-      "status": "open"
-    }
-  ],
+  "opportunities": [],
+  "positions": [],
   "trade_history": [
     {
       "date": "2026-06-02",
@@ -137,18 +92,18 @@
       "contracts": 3,
       "entry": 0.61,
       "entry_cost": 183.0,
-      "exit": null,
-      "exit_value": null,
-      "pnl": null,
-      "pnl_pct": null,
-      "status": "open"
+      "exit": 0,
+      "exit_value": 0,
+      "pnl": -183.0,
+      "pnl_pct": -100.0,
+      "status": "closed"
     }
   ],
   "portfolio": {
     "starting_balance": 178.08,
-    "current_balance": 138.0,
-    "committed": 183.0,
-    "available": 138.0,
+    "current_balance": 132.18,
+    "committed": 0,
+    "available": 132.18,
     "ultimate_goal": 10000,
     "phase": 1,
     "phases": [
@@ -179,7 +134,7 @@
     ],
     "goal": 1500,
     "goal_date": "2026-06-20",
-    "total_realized_pnl": 121.92,
+    "total_realized_pnl": -61.08,
     "weekly_snapshots": [
       {
         "week": 1,
@@ -196,8 +151,8 @@
       {
         "week": 3,
         "label": "Jun 16",
-        "balance": null,
-        "note": ""
+        "balance": 132.18,
+        "note": "HAL expired worthless Jun 18 (-100%, -$183). Net P&L: -$61.08. Regrouping."
       },
       {
         "week": 4,
