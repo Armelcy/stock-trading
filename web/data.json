@@ -1,8 +1,14 @@
 {
-  "last_updated": "2026-07-28T20:35:55",
-  "oil_price": 81.75,
+  "last_updated": "2026-07-29T07:18:51",
+  "oil_price": 83.02,
   "oil_status": "warn",
-  "briefing": "No setups today. Sitting in cash is the right move \u2014 do not force a trade.",
+  "briefing": {
+    "date": "Jul 29",
+    "headline": "No setups today.",
+    "body": "Sitting in cash is the right move \u2014 do not force a trade.",
+    "action": "HOLD",
+    "action_detail": null
+  },
   "watchlist": [
     {
       "ticker": "V",
@@ -14,10 +20,10 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget ($132). Revisit when capital > $300.",
       "signal": "\ud83d\ude34 QUIET \u2014 no signal today.",
-      "last_checked": "2026-07-28 19:00",
+      "last_checked": "2026-07-29 07:18",
       "current_price": 366.59,
       "price_change_pct": 1.12,
-      "vol_ratio_today": 1.77
+      "vol_ratio_today": 1.78
     },
     {
       "ticker": "AAPL",
@@ -29,10 +35,10 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget ($132). Revisit when capital > $300. Target $315C or $320C for Jul 17 expiry.",
       "signal": "\ud83d\ude34 QUIET \u2014 no signal today.",
-      "last_checked": "2026-07-28 19:00",
+      "last_checked": "2026-07-29 07:18",
       "current_price": 340.08,
       "price_change_pct": 0.94,
-      "vol_ratio_today": 1.12
+      "vol_ratio_today": 1.13
     },
     {
       "ticker": "RTX",
@@ -44,7 +50,7 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget. Earnings Jul 23 means Jul 17 expiry only. Need $400 to trade 1 contract properly.",
       "signal": "\ud83d\ude34 QUIET \u2014 no signal today.",
-      "last_checked": "2026-07-28 19:00",
+      "last_checked": "2026-07-29 07:18",
       "current_price": 218.58,
       "price_change_pct": 0.07,
       "vol_ratio_today": 1.05
@@ -59,7 +65,7 @@
       "status": "watching",
       "day_trade_plan": "BLACKOUT until Jul 17 (earnings Jul 16). Reassess after.",
       "signal": "\ud83d\ude34 QUIET \u2014 no signal today.",
-      "last_checked": "2026-07-28 19:00",
+      "last_checked": "2026-07-29 07:18",
       "current_price": 363.59,
       "price_change_pct": 0.55,
       "vol_ratio_today": 0.98
