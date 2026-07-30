@@ -1,9 +1,9 @@
 {
-  "last_updated": "2026-07-29T08:14:31",
-  "oil_price": 82.73,
+  "last_updated": "2026-07-30T08:00:44",
+  "oil_price": 83.35,
   "oil_status": "warn",
   "briefing": {
-    "date": "Jul 29",
+    "date": "Jul 30",
     "headline": "No setups today.",
     "body": "Sitting in cash is the right move \u2014 do not force a trade.",
     "action": "HOLD",
@@ -20,10 +20,10 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget ($132). Revisit when capital > $300.",
       "signal": "\ud83d\ude34 QUIET \u2014 no signal today.",
-      "last_checked": "2026-07-29 08:03",
-      "current_price": 366.59,
-      "price_change_pct": 1.12,
-      "vol_ratio_today": 1.78
+      "last_checked": "2026-07-30 08:00",
+      "current_price": 368.73,
+      "price_change_pct": 0.58,
+      "vol_ratio_today": 1.5
     },
     {
       "ticker": "AAPL",
@@ -35,10 +35,10 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget ($132). Revisit when capital > $300. Target $315C or $320C for Jul 17 expiry.",
       "signal": "\ud83d\ude34 QUIET \u2014 no signal today.",
-      "last_checked": "2026-07-29 08:03",
-      "current_price": 340.08,
-      "price_change_pct": 0.94,
-      "vol_ratio_today": 1.13
+      "last_checked": "2026-07-30 08:00",
+      "current_price": 338.19,
+      "price_change_pct": -0.56,
+      "vol_ratio_today": 1.14
     },
     {
       "ticker": "RTX",
@@ -50,10 +50,10 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget. Earnings Jul 23 means Jul 17 expiry only. Need $400 to trade 1 contract properly.",
       "signal": "\ud83d\ude34 QUIET \u2014 no signal today.",
-      "last_checked": "2026-07-29 08:03",
-      "current_price": 218.58,
-      "price_change_pct": 0.07,
-      "vol_ratio_today": 1.05
+      "last_checked": "2026-07-30 08:00",
+      "current_price": 215.25,
+      "price_change_pct": -1.52,
+      "vol_ratio_today": 1.03
     },
     {
       "ticker": "GE",
@@ -64,11 +64,11 @@
       "watch_for": "Earnings Jul 16. After report, check if momentum continues. Then evaluate Aug calls if account > $300.",
       "status": "watching",
       "day_trade_plan": "BLACKOUT until Jul 17 (earnings Jul 16). Reassess after.",
-      "signal": "\ud83d\ude34 QUIET \u2014 no signal today.",
-      "last_checked": "2026-07-29 08:03",
-      "current_price": 363.59,
-      "price_change_pct": 0.55,
-      "vol_ratio_today": 0.98
+      "signal": "\ud83d\udfe1 WATCH \u2014 mild dip. Wait for volume confirmation before entering.",
+      "last_checked": "2026-07-30 08:00",
+      "current_price": 350.63,
+      "price_change_pct": -3.56,
+      "vol_ratio_today": 1.04
     }
   ],
   "opportunities": [],
