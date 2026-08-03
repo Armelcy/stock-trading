@@ -1,9 +1,9 @@
 {
-  "last_updated": "2026-07-31T08:01:02",
-  "oil_price": 84.8,
-  "oil_status": "ok",
+  "last_updated": "2026-08-03T08:00:39",
+  "oil_price": 79.29,
+  "oil_status": "warn",
   "briefing": {
-    "date": "Jul 31",
+    "date": "Aug 03",
     "headline": "No setups today.",
     "body": "Sitting in cash is the right move \u2014 do not force a trade.",
     "action": "HOLD",
@@ -20,10 +20,10 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget ($132). Revisit when capital > $300.",
       "signal": "\ud83d\ude34 QUIET \u2014 no signal today.",
-      "last_checked": "2026-07-31 08:00",
-      "current_price": 366.27,
-      "price_change_pct": -0.67,
-      "vol_ratio_today": 1.0
+      "last_checked": "2026-08-03 08:00",
+      "current_price": 366.13,
+      "price_change_pct": -0.04,
+      "vol_ratio_today": 0.87
     },
     {
       "ticker": "AAPL",
@@ -34,11 +34,11 @@
       "watch_for": "Confirm earnings date \u2014 if after Aug 1, safe to trade July expiry. Account needs $300+ for ATM calls. Watch for continued momentum above $305.",
       "status": "watching",
       "day_trade_plan": "Not viable at current budget ($132). Revisit when capital > $300. Target $315C or $320C for Jul 17 expiry.",
-      "signal": "\ud83d\ude34 QUIET \u2014 no signal today.",
-      "last_checked": "2026-07-31 08:00",
-      "current_price": 333.43,
-      "price_change_pct": -1.41,
-      "vol_ratio_today": 1.32
+      "signal": "\ud83d\udfe2 BUY DIP \u2014 down 5%+ with high volume. Long entry window.",
+      "last_checked": "2026-08-03 08:00",
+      "current_price": 308.91,
+      "price_change_pct": -7.35,
+      "vol_ratio_today": 1.81
     },
     {
       "ticker": "RTX",
@@ -50,10 +50,10 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget. Earnings Jul 23 means Jul 17 expiry only. Need $400 to trade 1 contract properly.",
       "signal": "\ud83d\ude34 QUIET \u2014 no signal today.",
-      "last_checked": "2026-07-31 08:00",
-      "current_price": 214.38,
-      "price_change_pct": -0.4,
-      "vol_ratio_today": 0.74
+      "last_checked": "2026-08-03 08:00",
+      "current_price": 215.22,
+      "price_change_pct": 0.39,
+      "vol_ratio_today": 0.52
     },
     {
       "ticker": "GE",
@@ -65,10 +65,10 @@
       "status": "watching",
       "day_trade_plan": "BLACKOUT until Jul 17 (earnings Jul 16). Reassess after.",
       "signal": "\ud83d\ude34 QUIET \u2014 no signal today.",
-      "last_checked": "2026-07-31 08:00",
-      "current_price": 355.04,
-      "price_change_pct": 1.26,
-      "vol_ratio_today": 0.92
+      "last_checked": "2026-08-03 08:00",
+      "current_price": 360.07,
+      "price_change_pct": 1.42,
+      "vol_ratio_today": 0.9
     }
   ],
   "opportunities": [],
