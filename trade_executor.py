@@ -184,11 +184,23 @@ def check_exits(r, data):
 
         log(f"  Live: ${mid}/sh | Entry: ${entry}/sh | P&L: {pnl_pct*100:+.1f}%")
 
+        # Trailing stop: once +40% reached, move stop to breakeven
+        trailing_active = pos.get("trailing_stop_active", False)
+        if pnl_pct >= 0.40 and not trailing_active:
+            pos["trailing_stop_active"] = True
+            pos["stop"] = entry  # stop moves to breakeven
+            updated = True
+            log(f"  🔒 Trailing stop activated — stop moved to breakeven (${entry}/sh)")
+
+        # Determine effective stop (trailing or original -40%)
+        effective_stop = pos.get("stop", round(entry * (1 + STOP_LOSS_PCT), 2))
+        current_stop_pct = (effective_stop - entry) / entry
+
         reason = None
         if pnl_pct >= TAKE_PROFIT_PCT:
             reason = f"TAKE PROFIT (+{pnl_pct*100:.0f}%)"
-        elif pnl_pct <= STOP_LOSS_PCT:
-            reason = f"STOP LOSS ({pnl_pct*100:.0f}%)"
+        elif mid <= effective_stop:
+            reason = f"STOP HIT (${mid:.2f} ≤ stop ${effective_stop:.2f}, {pnl_pct*100:+.1f}%)"
         elif is_expiry_week(expiry):
             reason = "EXPIRY WEEK — exit by Thursday rule"
 
