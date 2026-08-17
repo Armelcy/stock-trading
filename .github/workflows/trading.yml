@@ -1,0 +1,47 @@
+name: Daily Trading
+
+on:
+  schedule:
+    # 8:05 AM ET = 12:05 UTC (summer/EDT). In winter (EST) this is 7:05 AM — still fine for pre-market.
+    - cron: '5 12 * * 1-5'
+  workflow_dispatch:  # allow manual run from GitHub Actions UI
+
+jobs:
+  trade:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # needed to push data.json back to repo
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install yfinance pandas requests pyotp robin_stocks
+
+      - name: Run screener
+        run: python screener.py
+
+      - name: Run trade executor
+        env:
+          RH_USERNAME: ${{ secrets.RH_USERNAME }}
+          RH_PASSWORD: ${{ secrets.RH_PASSWORD }}
+          RH_TOTP_KEY: ${{ secrets.RH_TOTP_KEY }}
+          RH_ACCOUNT:  ${{ secrets.RH_ACCOUNT }}
+        run: python trade_executor.py
+
+      - name: Update dashboard positions (P&L refresh)
+        run: python update_dashboard.py
+
+      - name: Commit and push updated data.json
+        run: |
+          git config user.name  "trading-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add web/data.json
+          git diff --cached --quiet || git commit -m "trading update $(date +'%Y-%m-%d %H:%M UTC')"
+          git push

@@ -1,9 +1,9 @@
 {
-  "last_updated": "2026-08-07T08:00:42",
-  "oil_price": 76.63,
-  "oil_status": "warn",
+  "last_updated": "2026-08-17 01:05",
+  "oil_price": 82.19,
+  "oil_status": "danger",
   "briefing": {
-    "date": "Aug 07",
+    "date": "Aug 17",
     "headline": "No setups today.",
     "body": "Sitting in cash is the right move \u2014 do not force a trade.",
     "action": "HOLD",
@@ -20,10 +20,10 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget ($132). Revisit when capital > $300.",
       "signal": "\ud83d\ude34 QUIET \u2014 no signal today.",
-      "last_checked": "2026-08-07 08:00",
-      "current_price": 370.47,
-      "price_change_pct": 0.52,
-      "vol_ratio_today": 0.79
+      "last_checked": "2026-08-17 01:05",
+      "current_price": 364.15,
+      "price_change_pct": -0.36,
+      "vol_ratio_today": 1.27
     },
     {
       "ticker": "AAPL",
@@ -35,10 +35,10 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget ($132). Revisit when capital > $300. Target $315C or $320C for Jul 17 expiry.",
       "signal": "\ud83d\ude34 QUIET \u2014 no signal today.",
-      "last_checked": "2026-08-07 08:00",
-      "current_price": 312.41,
-      "price_change_pct": 0.45,
-      "vol_ratio_today": 0.62
+      "last_checked": "2026-08-17 01:05",
+      "current_price": 305.93,
+      "price_change_pct": 0.22,
+      "vol_ratio_today": 0.73
     },
     {
       "ticker": "RTX",
@@ -50,10 +50,10 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget. Earnings Jul 23 means Jul 17 expiry only. Need $400 to trade 1 contract properly.",
       "signal": "\ud83d\ude34 QUIET \u2014 no signal today.",
-      "last_checked": "2026-08-07 08:00",
-      "current_price": 223.25,
-      "price_change_pct": 0.42,
-      "vol_ratio_today": 1.25
+      "last_checked": "2026-08-17 01:05",
+      "current_price": 222.97,
+      "price_change_pct": 1.13,
+      "vol_ratio_today": 0.88
     },
     {
       "ticker": "GE",
@@ -65,10 +65,10 @@
       "status": "watching",
       "day_trade_plan": "BLACKOUT until Jul 17 (earnings Jul 16). Reassess after.",
       "signal": "\ud83d\ude34 QUIET \u2014 no signal today.",
-      "last_checked": "2026-08-07 08:00",
-      "current_price": 374.55,
-      "price_change_pct": -1.75,
-      "vol_ratio_today": 1.02
+      "last_checked": "2026-08-17 01:05",
+      "current_price": 368.38,
+      "price_change_pct": 2.15,
+      "vol_ratio_today": 1.12
     }
   ],
   "opportunities": [],
@@ -106,10 +106,10 @@
     }
   ],
   "portfolio": {
-    "starting_balance": 178.08,
-    "current_balance": 132.18,
+    "starting_balance": 500.0,
+    "current_balance": 500.0,
     "committed": 0,
-    "available": 132.18,
+    "available": 500.0,
     "ultimate_goal": 10000,
     "phase": 1,
     "phases": [
@@ -165,6 +165,12 @@
         "label": "Jun 20",
         "balance": null,
         "note": "Phase 1 Goal: $1,500"
+      },
+      {
+        "week": 11,
+        "label": "Aug 17",
+        "balance": 500.0,
+        "note": "Fresh $500 deposited to Agentic account (••••8728). Max/trade bumped to $150. Awaiting options level approval."
       }
     ]
   }

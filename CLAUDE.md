@@ -19,7 +19,7 @@ If `opportunities` is empty → **do not trade. Hold cash.**
 ## Step 2 — Hard Rules (non-negotiable)
 
 ### Position Limits
-- Max **$100 per trade** (current account cap — update this when account is funded beyond $500)
+- Max **$150 per trade** (updated Aug 17 — account funded to $500 in Agentic account ••••8728)
 - Max **2 open positions** at once
 - Never use more than 75% of available buying power across all positions
 
@@ -94,9 +94,11 @@ To update dashboard: `.venv/bin/python update_dashboard.py`
 ---
 
 ## Current Account Status
-- Starting capital: $178.08
-- Current balance: $132.18
-- Running P&L: -$61.08 (HAL loss Jun 2026)
+- Trading account: Agentic cash account ••••8728 (agentic_allowed=true)
+- Starting capital: $500.00 (fresh deposit Aug 17, 2026)
+- Current balance: $500.00
+- Running P&L: $0 (fresh start; prior -$61.08 was on separate account ••••8518)
 - Phase: 1 (Build Base → target $1,500)
+- ✅ Options Level 2 approved on ••••8728 (Aug 17, 2026) — fully operational
 
 *Update the balance here after each trade.*
