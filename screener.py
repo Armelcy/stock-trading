@@ -29,24 +29,28 @@ MIN_CONVICTION      = 3         # all 3 must pass: dist from high + vol ratio + 
 # Energy tickers — flag these if oil is weak
 ENERGY_TICKERS = {"SLB", "MPC", "XOM", "CVX", "OXY", "HAL"}
 
-# Watchlist — mix of your existing radar + sector leaders
+# Watchlist — curated high-liquidity names across sectors (expanded Aug 17 2026)
 TICKERS = [
-    # Your radar
-    "SOUN", "AMD", "AAPL", "CAT",
-    # Industrials (sector leader YTD)
-    "DE", "HON", "GE", "ETN", "EMR",
-    # Energy  (XOM/CVX/OXY/SLB removed Jul 2026 — oil at $68, blocked until WTI > $84)
-    # (HAL removed Jul 2026 — consistent loser in 3y backtest)
-    # Financials — added Jul 2026 (V hit 52w high, sector leading)
-    "V", "MA", "JPM", "AXP",
-    # Defense — added Jul 2026 (sector surge: RTX/LMT/NOC all +3-5% Jul 2)
-    "RTX", "LMT", "NOC",
-    # Healthcare  (UNH, MDT removed Jul 2026 — consistent losers in 3y backtest)
-    "LLY", "ABT", "DHR",
-    # Communication  (DIS removed Jul 2026 — consistent loser in 3y backtest)
-    "META", "GOOGL", "NFLX",
-    # Momentum/AI + Consumer
-    "NVDA", "MSFT", "PLTR", "CRWD", "AMZN",
+    # AI / Momentum
+    "SOUN", "PLTR", "CRWD", "SNOW",
+    # Mega-cap Tech
+    "AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "TSLA",
+    # Software / Cloud
+    "AMD", "ORCL", "ADBE", "CRM", "NOW",
+    # Communication
+    "NFLX",
+    # Financials
+    "V", "MA", "JPM", "AXP", "GS", "MS", "BAC", "BLK", "SCHW",
+    # Industrials
+    "CAT", "DE", "HON", "GE", "ETN", "EMR", "UNP", "FDX", "MMM",
+    # Defense
+    "RTX", "LMT", "NOC", "BA", "GD",
+    # Healthcare
+    "LLY", "ABT", "DHR", "JNJ", "UNH", "MRK", "PFE",
+    # Consumer
+    "COST", "HD", "NKE", "MCD",
+    # Energy (blocked when WTI < $84)
+    "SLB", "MPC", "XOM", "CVX", "OXY", "HAL",
 ]
 
 # ── Oil price check ────────────────────────────────────────────────────────
@@ -403,11 +407,23 @@ def save_dashboard(opportunities, wti):
                               else "warning" if wti >= OIL_DANGER_LEVEL
                               else "danger")
     data["opportunities"] = opportunities
-    data["briefing"] = (
-        f"{len(opportunities)} setup(s) found — verify live prices before entering."
-        if opportunities else
-        "No setups today. Sitting in cash is the right move — do not force a trade."
-    )
+    today_str = datetime.now().strftime("%b %d")
+    if opportunities:
+        data["briefing"] = {
+            "date": today_str,
+            "headline": f"{len(opportunities)} setup(s) found today.",
+            "body": "Verify live prices before entering any position.",
+            "action": "BUY",
+            "action_detail": f"{len(opportunities)} trade idea(s) below",
+        }
+    else:
+        data["briefing"] = {
+            "date": today_str,
+            "headline": "No setups today.",
+            "body": "Sitting in cash is the right move — do not force a trade.",
+            "action": "HOLD",
+            "action_detail": None,
+        }
     with open(DATA_JSON, "w") as f:
         json.dump(data, f, indent=2)
 
