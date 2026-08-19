@@ -78,6 +78,47 @@ def update_portfolio(data):
     return data
 
 
+def compute_stats(data):
+    """Compute win rate, avg return, and per-ticker breakdown from trade_history."""
+    history = [t for t in data.get("trade_history", []) if t.get("status") == "closed"]
+    if not history:
+        data["stats"] = {"trades": 0, "note": "No closed trades yet."}
+        return data
+
+    wins   = [t for t in history if t.get("pnl", 0) > 0]
+    losses = [t for t in history if t.get("pnl", 0) <= 0]
+
+    by_ticker = {}
+    for t in history:
+        tk = t["ticker"]
+        if tk not in by_ticker:
+            by_ticker[tk] = {"trades": 0, "wins": 0, "total_pnl": 0.0}
+        by_ticker[tk]["trades"] += 1
+        by_ticker[tk]["total_pnl"] = round(by_ticker[tk]["total_pnl"] + t.get("pnl", 0), 2)
+        if t.get("pnl", 0) > 0:
+            by_ticker[tk]["wins"] += 1
+
+    data["stats"] = {
+        "trades":       len(history),
+        "wins":         len(wins),
+        "losses":       len(losses),
+        "win_rate_pct": round(len(wins) / len(history) * 100, 1),
+        "avg_return_pct": round(
+            sum(t.get("pnl_pct", 0) for t in history) / len(history), 1
+        ),
+        "avg_winner_pct": round(
+            sum(t.get("pnl_pct", 0) for t in wins) / len(wins), 1
+        ) if wins else None,
+        "avg_loser_pct": round(
+            sum(t.get("pnl_pct", 0) for t in losses) / len(losses), 1
+        ) if losses else None,
+        "total_realized_pnl": round(sum(t.get("pnl", 0) for t in history), 2),
+        "by_ticker": by_ticker,
+        "last_computed": datetime.now().strftime("%Y-%m-%dT%H:%M:%S"),
+    }
+    return data
+
+
 def set_timestamp(data):
     data["last_updated"] = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
     return data
@@ -106,6 +147,11 @@ def main():
     print("\nMarket:")
     data = update_oil(data)
     data = update_portfolio(data)
+    print("\nStats:")
+    data = compute_stats(data)
+    win_rate = data["stats"].get("win_rate_pct", "N/A")
+    avg_ret  = data["stats"].get("avg_return_pct", "N/A")
+    print(f"  {data['stats']['trades']} trades | Win rate: {win_rate}% | Avg return: {avg_ret}%")
     data = set_timestamp(data)
     save_data(data)
     print("\nPushing to GitHub...")
