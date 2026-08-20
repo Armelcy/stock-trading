@@ -1,5 +1,7 @@
 {
   "last_updated": "2026-08-19T13:02:11",
+  "last_run": "2026-08-19T20:05:00Z",
+  "last_run_summary": "3 positions checked (SCHW pos1 -39.5% near stop, SCHW pos2 0%, BAC 0%), no exits triggered, entries skipped (3 open positions exceeds max 2)",
   "oil_price": 83.87,
   "oil_status": "warn",
   "briefing": {
@@ -21,7 +23,7 @@
     {"ticker": "BAC", "price": 64.23, "dist_pct": 1.53, "strike": 66.0, "expiry": "2026-09-11", "premium": 0.48, "contracts": 3, "cost": 144.0, "target": 0.86, "stop": 0.29, "iv_pct": 3.1}
   ],
   "positions": [
-    {"ticker": "SCHW", "strike": 115.0, "expiry": "2026-09-04", "contracts": 1, "entry": 0.86, "entry_cost": 86.0, "target": 1.55, "stop": 0.52, "status": "open", "order_id": "6a85b65f-854a-4446-9269-30ae99760e24", "opened_at": "2026-08-19 13:57", "current_premium": 0.86, "current_value": 86.0, "pnl": 0, "pnl_pct": 0, "note": "Placed manually as a diagnostic test to confirm the account/connector could execute agentic orders, during troubleshooting of the automated executor."},
+    {"ticker": "SCHW", "strike": 115.0, "expiry": "2026-09-04", "contracts": 1, "entry": 0.86, "entry_cost": 86.0, "target": 1.55, "stop": 0.52, "status": "open", "order_id": "6a85b65f-854a-4446-9269-30ae99760e24", "opened_at": "2026-08-19 13:57", "current_premium": 0.52, "current_value": 52.0, "pnl": -34.0, "pnl_pct": -0.395, "note": "Placed manually as a diagnostic test to confirm the account/connector could execute agentic orders, during troubleshooting of the automated executor."},
     {"ticker": "SCHW", "strike": 115.0, "expiry": "2026-09-04", "contracts": 2, "entry": 0.52, "entry_cost": 104.0, "target": 0.94, "stop": 0.31, "status": "open", "order_id": "6a861c1e-22b2-40e3-9113-4a8b395c3bf2", "opened_at": "2026-08-19 21:11", "current_premium": 0.52, "current_value": 104.0, "pnl": 0, "pnl_pct": 0, "note": "First fully autonomous entry placed by the fixed scheduled executor \u2014 no confirmation prompt."},
     {"ticker": "BAC", "strike": 66.0, "expiry": "2026-09-11", "contracts": 6, "entry": 0.24, "entry_cost": 144.0, "target": 0.43, "stop": 0.14, "status": "open", "order_id": "6a861c32-42f1-47a2-9455-e66527119990", "opened_at": "2026-08-19 21:12", "current_premium": 0.24, "current_value": 144.0, "pnl": 0, "pnl_pct": 0, "note": "Fully autonomous entry placed by the fixed scheduled executor \u2014 no confirmation prompt."}
   ],
