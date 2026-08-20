@@ -86,6 +86,26 @@ Energy tickers (blocked until WTI > $84): SLB, MPC, XOM, CVX, OXY, HAL
 
 ---
 
+## Conviction Score (v3)
+Each setup is scored 0.0-1.0 and ranked best-first:
+- 40% -- 52w proximity (closer = better)
+- 25% -- volume strength (higher = better)
+- 20% -- RS delta vs SPY (outperformance magnitude)
+- 15% -- strike closeness to ATM (lower OTM = better)
+
+## VIX Gate (v3)
+- VIX > 35: block all entries (options too expensive market-wide)
+- VIX 25-35: tighten IV/HV limit from 1.5x to 1.2x
+- VIX < 25: normal operation
+
+## Volume (v3)
+Volume filter uses yesterday's completed session volume (not today's partial open).
+
+## Fail behavior (v3)
+- Market regime + VIX: fail-open (data error should not block all trades)
+- Relative strength: fail-closed per ticker (skip if data insufficient or error)
+- Sector ETF: fail-closed (can't verify = skip)
+
 ## Screener Schedule
 The screener runs automatically at **8am weekdays** via cron. Output is in `web/data.json`.
 To run manually: `.venv/bin/python screener.py`

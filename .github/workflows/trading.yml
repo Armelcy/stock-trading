@@ -30,6 +30,12 @@ jobs:
       - name: Update dashboard (P&L + oil refresh)
         run: python update_dashboard.py
 
+      - name: Sync picks to Supabase
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_EZRA_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_EZRA_SERVICE_KEY }}
+        run: python sync_supabase.py
+
       - name: Commit and push updated data.json
         run: |
           git config user.name  "trading-bot"
