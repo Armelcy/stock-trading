@@ -7,8 +7,9 @@ Reads web/data.json for signals. Updates data.json after trading.
 import json
 import os
 import sys
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 DATA_FILE = Path(__file__).parent / "web" / "data.json"
 
@@ -23,6 +24,9 @@ MAX_PREMIUM         = 1.00
 MIN_OI              = 200
 TAKE_PROFIT_PCT     = 0.80      # exit at +80%
 STOP_LOSS_PCT       = -0.40     # exit at -40%
+ET = ZoneInfo("America/New_York")
+MARKET_OPEN_HOUR    = 9         # 9:45 AM ET minimum for exits
+MARKET_OPEN_MIN     = 45
 
 
 # ── Data helpers ─────────────────────────────────────────────────────────────
@@ -146,8 +150,23 @@ def is_expiry_week(expiry_str):
     return monday <= today <= expiry - timedelta(days=1)  # Mon–Thu before expiry
 
 
+def is_market_hours():
+    """Return True only if current ET time is >= 9:45 AM (post-open volatility settled)."""
+    now_et = datetime.now(ET)
+    if now_et.weekday() >= 5:  # Saturday/Sunday
+        return False
+    market_start = now_et.replace(hour=MARKET_OPEN_HOUR, minute=MARKET_OPEN_MIN, second=0, microsecond=0)
+    market_close = now_et.replace(hour=16, minute=0, second=0, microsecond=0)
+    return market_start <= now_et <= market_close
+
+
 def check_exits(r, data):
     """Check open positions for exit signals. Returns updated data."""
+    if not is_market_hours():
+        now_et = datetime.now(ET)
+        log(f"⏳ Exit check skipped — pre-market or after-hours ({now_et.strftime('%H:%M ET')}). Exits only run after 9:45 AM ET.")
+        return data
+
     positions = data.get("positions", [])
     updated = False
 

@@ -1,7 +1,7 @@
 {
-  "last_updated": "2026-08-19T13:02:11",
+  "last_updated": "2026-08-21T13:30:00",
   "last_run": "2026-08-21T12:19:15Z",
-  "last_run_summary": "2 stop exits placed (SCHW $115C Sep4 -54.7%, BAC $66C Sep11 -58.3%); 1 position held (SCHW $115C Sep4 -25%); entries skipped (3 open positions in tracker)",
+  "last_run_summary": "Executor sold SCHW pos1 (1c) at $0.39 (-54.6%) and BAC (6c) at $0.10 (-58.3%) — both below stop levels — pre-market fills at open. Total realized: -$131. SCHW pos2 (2c) still open.",
   "oil_price": 83.87,
   "oil_status": "warn",
   "briefing": {
@@ -23,54 +23,19 @@
     {"ticker": "BAC", "price": 64.23, "dist_pct": 1.53, "strike": 66.0, "expiry": "2026-09-11", "premium": 0.48, "contracts": 3, "cost": 144.0, "target": 0.86, "stop": 0.29, "iv_pct": 3.1}
   ],
   "positions": [
-    {
-      "ticker": "SCHW", "strike": 115.0, "expiry": "2026-09-04", "contracts": 1,
-      "entry": 0.86, "entry_cost": 86.0, "target": 1.55, "stop": 0.516,
-      "status": "closed",
-      "order_id": "6a85b65f-854a-4446-9269-30ae99760e24",
-      "opened_at": "2026-08-19 13:57",
-      "exit": 0.39, "exit_value": 39.0, "exit_reason": "stop_loss",
-      "exit_order_id": "6a884242-e321-4a8b-8e41-b361f891557e",
-      "closed_at": "2026-08-21T12:19:14Z",
-      "current_premium": 0.39, "current_value": 39.0,
-      "pnl": -47.0, "pnl_pct": -0.547,
-      "note": "Placed manually as a diagnostic test to confirm the account/connector could execute agentic orders, during troubleshooting of the automated executor."
-    },
-    {
-      "ticker": "SCHW", "strike": 115.0, "expiry": "2026-09-04", "contracts": 2,
-      "entry": 0.52, "entry_cost": 104.0, "target": 0.94, "stop": 0.312,
-      "status": "open",
-      "order_id": "6a861c1e-22b2-40e3-9113-4a8b395c3bf2",
-      "opened_at": "2026-08-19 21:11",
-      "current_premium": 0.39, "current_value": 78.0,
-      "pnl": -26.0, "pnl_pct": -0.25,
-      "note": "First fully autonomous entry placed by the fixed scheduled executor — no confirmation prompt."
-    },
-    {
-      "ticker": "BAC", "strike": 66.0, "expiry": "2026-09-11", "contracts": 6,
-      "entry": 0.24, "entry_cost": 144.0, "target": 0.43, "stop": 0.144,
-      "status": "closed",
-      "order_id": "6a861c32-42f1-47a2-9455-e66527119990",
-      "opened_at": "2026-08-19 21:12",
-      "exit": 0.10, "exit_value": 60.0, "exit_reason": "stop_loss",
-      "exit_order_id": "6a884243-2bf7-4269-adf7-14ecfb4f568e",
-      "closed_at": "2026-08-21T12:19:15Z",
-      "current_premium": 0.10, "current_value": 60.0,
-      "pnl": -84.0, "pnl_pct": -0.583,
-      "note": "Fully autonomous entry placed by the fixed scheduled executor — no confirmation prompt."
-    }
+    {"ticker": "SCHW", "strike": 115.0, "expiry": "2026-09-04", "contracts": 2, "entry": 0.52, "entry_cost": 104.0, "target": 0.94, "stop": 0.312, "status": "open", "order_id": "6a861c1e-22b2-40e3-9113-4a8b395c3bf2", "opened_at": "2026-08-19 21:11", "current_premium": 0.39, "current_value": 78.0, "pnl": -26.0, "pnl_pct": -0.25, "note": "Autonomous entry. Sibling pos1 (1c entry $0.86) was cut by executor at $0.39 on Aug 21 (pre-market fill bug). This pos2 still open."}
   ],
   "trade_history": [
     {"date": "2026-06-02", "ticker": "SLB", "direction": "CALL", "strike": 57, "expiry": "2026-06-12", "contracts": 2, "entry": 0.89, "entry_cost": 178.08, "exit": 1.5, "exit_value": 300.0, "pnl": 121.92, "pnl_pct": 68.5, "status": "closed"},
     {"date": "2026-06-04", "ticker": "HAL", "direction": "CALL", "strike": 43, "expiry": "2026-06-18", "contracts": 3, "entry": 0.61, "entry_cost": 183.0, "exit": 0, "exit_value": 0, "pnl": -183.0, "pnl_pct": -100.0, "status": "closed"},
-    {"date": "2026-08-19", "ticker": "SCHW", "direction": "CALL", "strike": 115.0, "expiry": "2026-09-04", "contracts": 1, "entry": 0.86, "entry_cost": 86.0, "exit": 0.39, "exit_value": 39.0, "pnl": -47.0, "pnl_pct": -54.7, "exit_reason": "stop_loss", "closed_at": "2026-08-21T12:19:14Z", "exit_order_id": "6a884242-e321-4a8b-8e41-b361f891557e", "status": "closed"},
-    {"date": "2026-08-19", "ticker": "BAC", "direction": "CALL", "strike": 66.0, "expiry": "2026-09-11", "contracts": 6, "entry": 0.24, "entry_cost": 144.0, "exit": 0.10, "exit_value": 60.0, "pnl": -84.0, "pnl_pct": -58.3, "exit_reason": "stop_loss", "closed_at": "2026-08-21T12:19:15Z", "exit_order_id": "6a884243-2bf7-4269-adf7-14ecfb4f568e", "status": "closed"}
+    {"date": "2026-08-19", "ticker": "SCHW", "direction": "CALL", "strike": 115.0, "expiry": "2026-09-04", "contracts": 1, "entry": 0.86, "entry_cost": 86.0, "exit": 0.39, "exit_value": 39.0, "pnl": -47.0, "pnl_pct": -54.6, "exit_reason": "stop_loss", "closed_at": "2026-08-21T12:19:14Z", "exit_order_id": "6a884242-e321-4a8b-8e41-b361f891557e", "status": "closed", "note": "Diagnostic test entry. Executor cut at $0.39 on Aug 21 — pre-market fill, stock was rallying at exit."},
+    {"date": "2026-08-19", "ticker": "BAC", "direction": "CALL", "strike": 66.0, "expiry": "2026-09-11", "contracts": 6, "entry": 0.24, "entry_cost": 144.0, "exit": 0.10, "exit_value": 60.0, "pnl": -84.0, "pnl_pct": -58.3, "exit_reason": "stop_loss", "closed_at": "2026-08-21T12:19:15Z", "exit_order_id": "6a884243-2bf7-4269-adf7-14ecfb4f568e", "status": "closed", "note": "Autonomous entry. Executor cut at $0.10 on Aug 21 — pre-market fill, stock was rallying at exit. Premature exit."}
   ],
   "portfolio": {
     "starting_balance": 500.0,
-    "current_balance": 500.0,
+    "current_balance": 369.0,
     "committed": 104.0,
-    "available": 396.0,
+    "available": 265.0,
     "ultimate_goal": 10000,
     "phase": 1,
     "phases": [
@@ -80,15 +45,15 @@
     ],
     "goal": 1500,
     "goal_date": "2026-06-20",
-    "total_realized_pnl": -61.08,
+    "total_realized_pnl": -192.08,
     "weekly_snapshots": [
       {"week": 1, "label": "Jun 2", "balance": 178.08, "note": "Seed capital deployed: SLB"},
       {"week": 2, "label": "Jun 9", "balance": null, "note": "HAL open (-78.7%). SLB opp identified."},
       {"week": 3, "label": "Jun 16", "balance": 132.18, "note": "HAL expired worthless Jun 18 (-100%, -$183). Net P&L: -$61.08. Regrouping."},
       {"week": 4, "label": "Jun 20", "balance": null, "note": "Phase 1 Goal: $1,500"},
-      {"week": 11, "label": "Aug 17", "balance": 500.0, "note": "Fresh $500 deposited to Agentic account (••••8728). Max/trade bumped to $150. Awaiting options level approval."},
+      {"week": 11, "label": "Aug 17", "balance": 500.0, "note": "Fresh $500 deposited to Agentic account (\u2022\u2022\u2022\u20228728). Max/trade bumped to $150. Awaiting options level approval."},
       {"week": 11, "label": "Aug 19", "balance": 500.0, "note": "3 open positions as of today: manual SCHW test (1 contract, $86) plus the first 2 fully autonomous trades placed by the fixed scheduled executor (SCHW 2 contracts $104, BAC 6 contracts $144). Committed $334, available $166."},
-      {"week": 12, "label": "Aug 21", "balance": 500.0, "note": "Stop-loss exits placed for SCHW pos1 (1c, -54.7%, -$47) and BAC pos3 (6c, -58.3%, -$84). 1 position remains: SCHW pos2 (2c, -25%). Exit orders queued GFD — fill expected Mon Aug 24."}
+      {"week": 12, "label": "Aug 21", "balance": 369.0, "note": "Executor cut SCHW pos1 at $0.39 (-54.6%, -$47) and BAC at $0.10 (-58.3%, -$84) — pre-market fills at open while stock was rallying. -$131 realized. SCHW pos2 (2c) still open at ~-25%. Fix deployed: exits now blocked before 9:45 AM ET."}
     ]
   }
 }
