@@ -1,7 +1,7 @@
 {
   "last_updated": "2026-08-21T13:30:00",
-  "last_run": "2026-08-21T12:19:15Z",
-  "last_run_summary": "Executor sold SCHW pos1 (1c) at $0.39 (-54.6%) and BAC (6c) at $0.10 (-58.3%) — both below stop levels — pre-market fills at open. Total realized: -$131. SCHW pos2 (2c) still open.",
+  "last_run": "2026-08-24T12:19:55Z",
+  "last_run_summary": "1 position checked (SCHW 2c, +75% at $0.91 close). Trailing stop activated at breakeven $0.52. BAC entries failed live premium filter ($0.04/$0.07 << $0.20 min). SCHW add-on skipped — stale screener (Aug 19) + pre-market. No trades placed.",
   "oil_price": 83.87,
   "oil_status": "warn",
   "briefing": {
@@ -23,7 +23,7 @@
     {"ticker": "BAC", "price": 64.23, "dist_pct": 1.53, "strike": 66.0, "expiry": "2026-09-11", "premium": 0.48, "contracts": 3, "cost": 144.0, "target": 0.86, "stop": 0.29, "iv_pct": 3.1}
   ],
   "positions": [
-    {"ticker": "SCHW", "strike": 115.0, "expiry": "2026-09-04", "contracts": 2, "entry": 0.52, "entry_cost": 104.0, "target": 0.94, "stop": 0.312, "status": "open", "order_id": "6a861c1e-22b2-40e3-9113-4a8b395c3bf2", "opened_at": "2026-08-19 21:11", "current_premium": 0.39, "current_value": 78.0, "pnl": -26.0, "pnl_pct": -0.25, "note": "Autonomous entry. Sibling pos1 (1c entry $0.86) was cut by executor at $0.39 on Aug 21 (pre-market fill bug). This pos2 still open."}
+    {"ticker": "SCHW", "strike": 115.0, "expiry": "2026-09-04", "contracts": 2, "entry": 0.52, "entry_cost": 104.0, "target": 0.94, "stop": 0.312, "status": "open", "order_id": "6a861c1e-22b2-40e3-9113-4a8b395c3bf2", "opened_at": "2026-08-19 21:11", "current_premium": 0.91, "current_value": 182.0, "pnl": 78.0, "pnl_pct": 0.75, "trailing_stop_active": true, "effective_stop": 0.52, "note": "Autonomous entry. Trailing stop activated 2026-08-24 (+75%). Stop moved to breakeven $0.52. Target $0.94 (+80%). Expiry week Aug 31 — must exit by Thu Sep 3."}
   ],
   "trade_history": [
     {"date": "2026-06-02", "ticker": "SLB", "direction": "CALL", "strike": 57, "expiry": "2026-06-12", "contracts": 2, "entry": 0.89, "entry_cost": 178.08, "exit": 1.5, "exit_value": 300.0, "pnl": 121.92, "pnl_pct": 68.5, "status": "closed"},
