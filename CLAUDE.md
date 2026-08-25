@@ -11,6 +11,7 @@ Before doing anything, read `web/data.json`. This is the daily screener output. 
 - `opportunities` — list of trade setups found today (may be empty)
 - `oil_price` + `oil_status` — current WTI crude level
 - `portfolio.available` — current buying power
+- `circuit_breaker.active` — if true, entries are paused (see Step 3)
 
 If `opportunities` is empty → **do not trade. Hold cash.**
 
@@ -19,7 +20,7 @@ If `opportunities` is empty → **do not trade. Hold cash.**
 ## Step 2 — Hard Rules (non-negotiable)
 
 ### Position Limits
-- Max **$150 per trade** (updated Aug 17 — account funded to $500 in Agentic account ••••8728)
+- Max **$150 per trade** (account funded to $630 in Agentic account ••••8728)
 - Max **2 open positions** at once
 - Never use more than 75% of available buying power across all positions
 
@@ -36,6 +37,21 @@ If `opportunities` is empty → **do not trade. Hold cash.**
 - **WTI crude below $84 → skip ALL energy tickers** (SLB, MPC, XOM, CVX, OXY, HAL)
 - WTI $84–$87 → proceed with caution, confirm trend before entering
 
+### Circuit Breaker
+Read `circuit_breaker` from `web/data.json` at the start of every run.
+
+**Trip conditions (either one triggers it):**
+1. Realized P&L has dropped **25%+ of `portfolio.starting_balance`** within the trailing 7 days
+2. The **3 most recently closed trades are all losses** (check `trade_history`, most recent first)
+
+**When tripped:**
+- Set `circuit_breaker.active = true`, record `reason` and `tripped_at` (current UTC timestamp)
+- **Block all new entries** for the remainder of the run and all future runs
+- **Exits always continue** — never block an exit because the circuit breaker is active
+- Note in the report: "⛔ Circuit breaker active — entries paused. Reason: [reason]"
+
+**Reset:** Only a human can reset it. Set `circuit_breaker.active = false`, `reason = null`, `tripped_at = null` manually in `web/data.json`.
+
 ### Exit Rules
 - **Market hours gate (check first before fetching any quotes):** Only evaluate exit conditions between **9:45 AM – 4:00 PM ET, Monday–Friday**. If outside this window, skip all exit logic entirely — do not fetch quotes, do not evaluate stops or take-profits. Note in the report: "Exit check skipped — outside market hours (HH:MM ET)". Pre-market and after-hours spreads are wide and will trigger false stop-outs. (Root cause of Aug 21 premature exits: -$131 combined on SCHW + BAC.)
 - Take profit at **+80–100%**
@@ -48,6 +64,11 @@ If `opportunities` is empty → **do not trade. Hold cash.**
 
 ## Step 3 — Before Placing Any Order
 
+**First: check circuit breaker.** If `circuit_breaker.active == true` → **skip all entries entirely**. Do not evaluate opportunities. Do not place any buy orders. Exits (Step 2) still run normally.
+
+If circuit breaker is not active, also evaluate whether it *should* be tripped now (see Circuit Breaker rules above). If it trips, update `web/data.json` and skip entries for this run.
+
+Then, for each opportunity:
 1. Confirm the setup still matches entry criteria (prices move — screener runs at 8am)
 2. Verify earnings date hasn't changed
 3. Check oil price if the ticker is energy
@@ -118,9 +139,9 @@ To update dashboard: `.venv/bin/python update_dashboard.py`
 
 ## Current Account Status
 - Trading account: Agentic cash account ••••8728 (agentic_allowed=true)
-- Starting capital: $500.00 (fresh deposit Aug 17, 2026)
-- Current balance: $500.00
-- Running P&L: $0 (fresh start; prior -$61.08 was on separate account ••••8518)
+- Starting capital: $630.00 ($500 Aug 17 + $130 Aug 25 deposit)
+- Current balance: $499.00
+- Running P&L: -$192.08 (realized); SCHW 2c open at +75% unrealized
 - Phase: 1 (Build Base → target $1,500)
 - ✅ Options Level 2 approved on ••••8728 (Aug 17, 2026) — fully operational
 
