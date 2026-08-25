@@ -37,8 +37,10 @@ If `opportunities` is empty → **do not trade. Hold cash.**
 - WTI $84–$87 → proceed with caution, confirm trend before entering
 
 ### Exit Rules
+- **Market hours gate (check first before fetching any quotes):** Only evaluate exit conditions between **9:45 AM – 4:00 PM ET, Monday–Friday**. If outside this window, skip all exit logic entirely — do not fetch quotes, do not evaluate stops or take-profits. Note in the report: "Exit check skipped — outside market hours (HH:MM ET)". Pre-market and after-hours spreads are wide and will trigger false stop-outs. (Root cause of Aug 21 premature exits: -$131 combined on SCHW + BAC.)
 - Take profit at **+80–100%**
 - Cut loss at **-40%** — exit immediately, no holding for recovery
+- **Trailing stop:** Once a position reaches +40%, move stop to breakeven (entry price). Never let a +40% winner become a loss.
 - Exit by **Thursday** of expiry week regardless of P&L
 - Never hold through earnings
 
@@ -81,6 +83,7 @@ Energy tickers (blocked until WTI > $84): SLB, MPC, XOM, CVX, OXY, HAL
 ## Lessons Learned (follow these)
 - **HAL Jun 2026** — entered with OI=0, oil below $84, expired worthless (-100%). Oil filter and OI filter exist because of this.
 - **SLB Jun 2026** — respected all rules, exited +68.5% before expiry week.
+- **SCHW + BAC Aug 21 2026** — both stopped out pre-market on wide spreads (-$47 and -$84). Both stocks were actually rallying. Market hours gate added to prevent this class of error.
 - Never enter cheap lottery options ($0.05–$0.10 premium). Illiquid, hard to exit.
 - When the stop (-40%) is hit, exit the same day. Do not hold hoping for recovery.
 
