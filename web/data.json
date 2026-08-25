@@ -2,6 +2,12 @@
   "last_updated": "2026-08-21T13:30:00",
   "last_run": "2026-08-24T12:19:55Z",
   "last_run_summary": "1 position checked (SCHW 2c, +75% at $0.91 close). Trailing stop activated at breakeven $0.52. BAC entries failed live premium filter ($0.04/$0.07 << $0.20 min). SCHW add-on skipped — stale screener (Aug 19) + pre-market. No trades placed.",
+  "circuit_breaker": {
+    "active": false,
+    "reason": null,
+    "tripped_at": null,
+    "rule": "Pause all new entries (exits always continue) if: (1) realized P&L drops 25%+ of starting_balance within a trailing 7 days, OR (2) the 3 most recently closed trades are all losses. Stays tripped until a human manually resets active to false."
+  },
   "oil_price": 83.87,
   "oil_status": "warn",
   "briefing": {
@@ -32,10 +38,10 @@
     {"date": "2026-08-19", "ticker": "BAC", "direction": "CALL", "strike": 66.0, "expiry": "2026-09-11", "contracts": 6, "entry": 0.24, "entry_cost": 144.0, "exit": 0.10, "exit_value": 60.0, "pnl": -84.0, "pnl_pct": -58.3, "exit_reason": "stop_loss", "closed_at": "2026-08-21T12:19:15Z", "exit_order_id": "6a884243-2bf7-4269-adf7-14ecfb4f568e", "status": "closed", "note": "Autonomous entry. Executor cut at $0.10 on Aug 21 — pre-market fill, stock was rallying at exit. Premature exit."}
   ],
   "portfolio": {
-    "starting_balance": 500.0,
-    "current_balance": 369.0,
+    "starting_balance": 630.0,
+    "current_balance": 499.0,
     "committed": 104.0,
-    "available": 265.0,
+    "available": 395.0,
     "ultimate_goal": 10000,
     "phase": 1,
     "phases": [
@@ -51,9 +57,10 @@
       {"week": 2, "label": "Jun 9", "balance": null, "note": "HAL open (-78.7%). SLB opp identified."},
       {"week": 3, "label": "Jun 16", "balance": 132.18, "note": "HAL expired worthless Jun 18 (-100%, -$183). Net P&L: -$61.08. Regrouping."},
       {"week": 4, "label": "Jun 20", "balance": null, "note": "Phase 1 Goal: $1,500"},
-      {"week": 11, "label": "Aug 17", "balance": 500.0, "note": "Fresh $500 deposited to Agentic account (\u2022\u2022\u2022\u20228728). Max/trade bumped to $150. Awaiting options level approval."},
+      {"week": 11, "label": "Aug 17", "balance": 500.0, "note": "Fresh $500 deposited to Agentic account (••••8728). Max/trade bumped to $150. Awaiting options level approval."},
       {"week": 11, "label": "Aug 19", "balance": 500.0, "note": "3 open positions as of today: manual SCHW test (1 contract, $86) plus the first 2 fully autonomous trades placed by the fixed scheduled executor (SCHW 2 contracts $104, BAC 6 contracts $144). Committed $334, available $166."},
-      {"week": 12, "label": "Aug 21", "balance": 369.0, "note": "Executor cut SCHW pos1 at $0.39 (-54.6%, -$47) and BAC at $0.10 (-58.3%, -$84) — pre-market fills at open while stock was rallying. -$131 realized. SCHW pos2 (2c) still open at ~-25%. Fix deployed: exits now blocked before 9:45 AM ET."}
+      {"week": 12, "label": "Aug 21", "balance": 369.0, "note": "Executor cut SCHW pos1 at $0.39 (-54.6%, -$47) and BAC at $0.10 (-58.3%, -$84) — pre-market fills at open while stock was rallying. -$131 realized. SCHW pos2 (2c) still open at ~-25%. Fix deployed: exits now blocked before 9:45 AM ET."},
+      {"week": 12, "label": "Aug 25", "balance": 499.0, "note": "$130 additional deposit recorded (total invested: $630). Balance corrected from $369 to $499, available from $265 to $395."}
     ]
   }
 }
