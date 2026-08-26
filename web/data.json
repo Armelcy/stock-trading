@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-26T20:00:00Z",
+  "last_updated": "2026-08-26T18:08:32",
   "last_run": "2026-08-26T13:47:40Z",
   "last_run_summary": "SCHW 115C Sep-4 closed at $0.18 (-65.4%, -$68) via trailing stop. Circuit breaker manually reset by Cyriac. Balance corrected to $431. 0 open positions. Ready for tomorrow.",
   "circuit_breaker": {
@@ -8,55 +8,292 @@
     "tripped_at": null,
     "rule": "Pause all new entries (exits always continue) if: (1) realized P&L drops 25%+ of starting_balance within a trailing 7 days, OR (2) the 3 most recently closed trades are all losses. Stays tripped until a human manually resets active to false."
   },
-  "oil_price": 83.87,
+  "oil_price": 82.53,
   "oil_status": "warn",
   "briefing": {
     "date": "Aug 26",
-    "headline": "0 open positions. Circuit breaker reset. Ready for tomorrow's screener.",
-    "body": "Exit strategy confirmed working. Screener runs 8 AM ET, executor 9:45 AM ET.",
-    "action": "WATCH",
-    "action_detail": "Awaiting tomorrow's screener picks"
+    "headline": "Market downtrend -- no entries today.",
+    "body": "SPY is below its 20-day MA. Sitting in cash until market recovers.",
+    "action": "HOLD",
+    "action_detail": "Market regime filter"
   },
   "watchlist": [
-    {"ticker": "V", "name": "Visa Inc.", "added_date": "2026-07-03", "price_at_add": 361.58, "thesis": "Hit 52-week high ($362.13) on Jul 2 — textbook breakout. Up +3% on 0.85x volume. No earnings in next 21 days. Financials sector leader. Need $300+ in account for options to be affordable (ATM calls ~$5-8/sh).", "watch_for": "Account reaches $300+ available capital. Then enter ATM $365C 2-3 weeks out. Confirm momentum holds above $360.", "status": "watching", "day_trade_plan": "Not viable at current budget ($132). Revisit when capital > $300.", "signal": "😴 QUIET — no signal today.", "last_checked": "2026-08-19 13:01", "current_price": 364.25, "price_change_pct": 1.51, "vol_ratio_today": 0.8},
-    {"ticker": "AAPL", "name": "Apple Inc.", "added_date": "2026-07-03", "price_at_add": 308.24, "thesis": "2.88% from 52w high ($317.40). Massive +4.71% move on Jul 2 on 0.87x volume. Strong breakout momentum. Options expensive for current budget ($310C = $5.65/sh). Need $300+ in account. Watch for earnings date (likely late July).", "watch_for": "Confirm earnings date — if after Aug 1, safe to trade July expiry. Account needs $300+ for ATM calls. Watch for continued momentum above $305.", "status": "watching", "day_trade_plan": "Not viable at current budget ($132). Revisit when capital > $300. Target $315C or $320C for Jul 17 expiry.", "signal": "😴 QUIET — no signal today.", "last_checked": "2026-08-19 13:01", "current_price": 310.03, "price_change_pct": 1.45, "vol_ratio_today": 1.32},
-    {"ticker": "RTX", "name": "RTX Corp (Raytheon)", "added_date": "2026-07-03", "price_at_add": 199.11, "thesis": "7.18% from 52w high ($214.50). Up +3.82% on Jul 2, vol ratio 1.0x. Defense sector surge (LMT +4.6%, NOC +5.4% same day). Earnings Jul 23 — can only trade Jul 17 expiry or earlier. ATM $200C at $3.73/sh still too expensive at $132 budget.", "watch_for": "Account reaches $400+. Enter $200C or $202.5C for Jul 17 expiry (before earnings Jul 23). Exit by Jul 16 EOD.", "status": "watching", "day_trade_plan": "Not viable at current budget. Earnings Jul 23 means Jul 17 expiry only. Need $400 to trade 1 contract safely.", "signal": "😴 QUIET — no signal today.", "last_checked": "2026-08-19 13:01", "current_price": 225.49, "price_change_pct": 1.74, "vol_ratio_today": 1.41},
-    {"ticker": "GE", "name": "GE Aerospace", "added_date": "2026-06-09", "price_at_add": 330.44, "thesis": "Industrial sector leader. Up +0.7% Jul 2. Earnings Jul 16 — blackout until Jul 17+. After earnings, reassess for Aug expiry calls if momentum holds.", "watch_for": "Earnings Jul 16. After report, check if momentum continues. Then evaluate Aug calls if account > $300.", "status": "watching", "day_trade_plan": "BLACKOUT until Jul 17 (earnings Jul 16). Reassess after.", "signal": "😴 QUIET — no signal today.", "last_checked": "2026-08-19 13:01", "current_price": 375.09, "price_change_pct": 1.53, "vol_ratio_today": 1.34}
+    {
+      "ticker": "V",
+      "name": "Visa Inc.",
+      "added_date": "2026-07-03",
+      "price_at_add": 361.58,
+      "thesis": "Hit 52-week high ($362.13) on Jul 2 \u2014 textbook breakout. Up +3% on 0.85x volume. No earnings in next 21 days. Financials sector leader. Need $300+ in account for options to be affordable (ATM calls ~$5-8/sh).",
+      "watch_for": "Account reaches $300+ available capital. Then enter ATM $365C 2-3 weeks out. Confirm momentum holds above $360.",
+      "status": "watching",
+      "day_trade_plan": "Not viable at current budget ($132). Revisit when capital > $300.",
+      "signal": "QUIET -- no signal today.",
+      "last_checked": "2026-08-26 18:08",
+      "current_price": 383.81,
+      "price_change_pct": -0.09,
+      "vol_ratio_today": 0.37
+    },
+    {
+      "ticker": "AAPL",
+      "name": "Apple Inc.",
+      "added_date": "2026-07-03",
+      "price_at_add": 308.24,
+      "thesis": "2.88% from 52w high ($317.40). Massive +4.71% move on Jul 2 on 0.87x volume. Strong breakout momentum. Options expensive for current budget ($310C = $5.65/sh). Need $300+ in account. Watch for earnings date (likely late July).",
+      "watch_for": "Confirm earnings date \u2014 if after Aug 1, safe to trade July expiry. Account needs $300+ for ATM calls. Watch for continued momentum above $305.",
+      "status": "watching",
+      "day_trade_plan": "Not viable at current budget ($132). Revisit when capital > $300. Target $315C or $320C for Jul 17 expiry.",
+      "signal": "QUIET -- no signal today.",
+      "last_checked": "2026-08-26 18:08",
+      "current_price": 313.02,
+      "price_change_pct": 1.01,
+      "vol_ratio_today": 0.46
+    },
+    {
+      "ticker": "RTX",
+      "name": "RTX Corp (Raytheon)",
+      "added_date": "2026-07-03",
+      "price_at_add": 199.11,
+      "thesis": "7.18% from 52w high ($214.50). Up +3.82% on Jul 2, vol ratio 1.0x. Defense sector surge (LMT +4.6%, NOC +5.4% same day). Earnings Jul 23 \u2014 can only trade Jul 17 expiry or earlier. ATM $200C at $3.73/sh still too expensive at $132 budget.",
+      "watch_for": "Account reaches $400+. Enter $200C or $202.5C for Jul 17 expiry (before earnings Jul 23). Exit by Jul 16 EOD.",
+      "status": "watching",
+      "day_trade_plan": "Not viable at current budget. Earnings Jul 23 means Jul 17 expiry only. Need $400 to trade 1 contract safely.",
+      "signal": "QUIET -- no signal today.",
+      "last_checked": "2026-08-26 18:08",
+      "current_price": 211.2,
+      "price_change_pct": 0.44,
+      "vol_ratio_today": 0.37
+    },
+    {
+      "ticker": "GE",
+      "name": "GE Aerospace",
+      "added_date": "2026-06-09",
+      "price_at_add": 330.44,
+      "thesis": "Industrial sector leader. Up +0.7% Jul 2. Earnings Jul 16 \u2014 blackout until Jul 17+. After earnings, reassess for Aug expiry calls if momentum holds.",
+      "watch_for": "Earnings Jul 16. After report, check if momentum continues. Then evaluate Aug calls if account > $300.",
+      "status": "watching",
+      "day_trade_plan": "BLACKOUT until Jul 17 (earnings Jul 16). Reassess after.",
+      "signal": "QUIET -- no signal today.",
+      "last_checked": "2026-08-26 18:08",
+      "current_price": 353.8,
+      "price_change_pct": 1.22,
+      "vol_ratio_today": 0.46
+    }
   ],
   "opportunities": [],
   "positions": [],
   "trade_history": [
-    {"date": "2026-06-02", "ticker": "SLB", "direction": "CALL", "strike": 57, "expiry": "2026-06-12", "contracts": 2, "entry": 0.89, "entry_cost": 178.08, "exit": 1.5, "exit_value": 300.0, "pnl": 121.92, "pnl_pct": 68.5, "status": "closed"},
-    {"date": "2026-06-04", "ticker": "HAL", "direction": "CALL", "strike": 43, "expiry": "2026-06-18", "contracts": 3, "entry": 0.61, "entry_cost": 183.0, "exit": 0, "exit_value": 0, "pnl": -183.0, "pnl_pct": -100.0, "status": "closed"},
-    {"date": "2026-08-19", "ticker": "SCHW", "direction": "CALL", "strike": 115.0, "expiry": "2026-09-04", "contracts": 1, "entry": 0.86, "entry_cost": 86.0, "exit": 0.39, "exit_value": 39.0, "pnl": -47.0, "pnl_pct": -54.6, "exit_reason": "stop_loss", "closed_at": "2026-08-21T12:19:14Z", "exit_order_id": "6a884242-e321-4a8b-8e41-b361f891557e", "status": "closed", "note": "Diagnostic test entry. Executor cut at $0.39 on Aug 21 — pre-market fill, stock was rallying at exit."},
-    {"date": "2026-08-19", "ticker": "BAC", "direction": "CALL", "strike": 66.0, "expiry": "2026-09-11", "contracts": 6, "entry": 0.24, "entry_cost": 144.0, "exit": 0.10, "exit_value": 60.0, "pnl": -84.0, "pnl_pct": -58.3, "exit_reason": "stop_loss", "closed_at": "2026-08-21T12:19:15Z", "exit_order_id": "6a884243-2bf7-4269-adf7-14ecfb4f568e", "status": "closed", "note": "Autonomous entry. Executor cut at $0.10 on Aug 21 — pre-market fill, stock was rallying at exit. Premature exit."},
-    {"date": "2026-08-26", "ticker": "SCHW", "direction": "CALL", "strike": 115.0, "expiry": "2026-09-04", "contracts": 2, "entry": 0.52, "entry_cost": 104.0, "exit": 0.18, "exit_value": 36.0, "pnl": -68.0, "pnl_pct": -65.4, "exit_reason": "trailing_stop_breakeven", "closed_at": "2026-08-26T13:47:40Z", "exit_order_id": "6a8eee7b-640c-46c9-a6e2-470596b26c2c", "status": "closed", "note": "Autonomous entry. Trailing stop at breakeven $0.52. Closed when mid $0.18 fell below breakeven stop. SCHW dropped overnight from $112 area."}
+    {
+      "date": "2026-06-02",
+      "ticker": "SLB",
+      "direction": "CALL",
+      "strike": 57,
+      "expiry": "2026-06-12",
+      "contracts": 2,
+      "entry": 0.89,
+      "entry_cost": 178.08,
+      "exit": 1.5,
+      "exit_value": 300.0,
+      "pnl": 121.92,
+      "pnl_pct": 68.5,
+      "status": "closed"
+    },
+    {
+      "date": "2026-06-04",
+      "ticker": "HAL",
+      "direction": "CALL",
+      "strike": 43,
+      "expiry": "2026-06-18",
+      "contracts": 3,
+      "entry": 0.61,
+      "entry_cost": 183.0,
+      "exit": 0,
+      "exit_value": 0,
+      "pnl": -183.0,
+      "pnl_pct": -100.0,
+      "status": "closed"
+    },
+    {
+      "date": "2026-08-19",
+      "ticker": "SCHW",
+      "direction": "CALL",
+      "strike": 115.0,
+      "expiry": "2026-09-04",
+      "contracts": 1,
+      "entry": 0.86,
+      "entry_cost": 86.0,
+      "exit": 0.39,
+      "exit_value": 39.0,
+      "pnl": -47.0,
+      "pnl_pct": -54.6,
+      "exit_reason": "stop_loss",
+      "closed_at": "2026-08-21T12:19:14Z",
+      "exit_order_id": "6a884242-e321-4a8b-8e41-b361f891557e",
+      "status": "closed",
+      "note": "Diagnostic test entry. Executor cut at $0.39 on Aug 21 \u2014 pre-market fill, stock was rallying at exit."
+    },
+    {
+      "date": "2026-08-19",
+      "ticker": "BAC",
+      "direction": "CALL",
+      "strike": 66.0,
+      "expiry": "2026-09-11",
+      "contracts": 6,
+      "entry": 0.24,
+      "entry_cost": 144.0,
+      "exit": 0.1,
+      "exit_value": 60.0,
+      "pnl": -84.0,
+      "pnl_pct": -58.3,
+      "exit_reason": "stop_loss",
+      "closed_at": "2026-08-21T12:19:15Z",
+      "exit_order_id": "6a884243-2bf7-4269-adf7-14ecfb4f568e",
+      "status": "closed",
+      "note": "Autonomous entry. Executor cut at $0.10 on Aug 21 \u2014 pre-market fill, stock was rallying at exit. Premature exit."
+    },
+    {
+      "date": "2026-08-26",
+      "ticker": "SCHW",
+      "direction": "CALL",
+      "strike": 115.0,
+      "expiry": "2026-09-04",
+      "contracts": 2,
+      "entry": 0.52,
+      "entry_cost": 104.0,
+      "exit": 0.18,
+      "exit_value": 36.0,
+      "pnl": -68.0,
+      "pnl_pct": -65.4,
+      "exit_reason": "trailing_stop_breakeven",
+      "closed_at": "2026-08-26T13:47:40Z",
+      "exit_order_id": "6a8eee7b-640c-46c9-a6e2-470596b26c2c",
+      "status": "closed",
+      "note": "Autonomous entry. Trailing stop at breakeven $0.52. Closed when mid $0.18 fell below breakeven stop. SCHW dropped overnight from $112 area."
+    }
   ],
   "portfolio": {
     "starting_balance": 630.0,
     "current_balance": 431.0,
-    "committed": 0.0,
+    "committed": 0,
     "available": 431.0,
     "ultimate_goal": 10000,
     "phase": 1,
     "phases": [
-      {"phase": 1, "label": "Build Base", "from": 178.08, "to": 1500, "target_date": "2026-06-20", "status": "active"},
-      {"phase": 2, "label": "Compound & Grow", "from": 1500, "to": 3000, "target_date": "2026-09-01", "status": "pending"},
-      {"phase": 3, "label": "Stock Portfolio", "from": 3000, "to": 10000, "target_date": "2027-03-01", "status": "pending"}
+      {
+        "phase": 1,
+        "label": "Build Base",
+        "from": 178.08,
+        "to": 1500,
+        "target_date": "2026-06-20",
+        "status": "active"
+      },
+      {
+        "phase": 2,
+        "label": "Compound & Grow",
+        "from": 1500,
+        "to": 3000,
+        "target_date": "2026-09-01",
+        "status": "pending"
+      },
+      {
+        "phase": 3,
+        "label": "Stock Portfolio",
+        "from": 3000,
+        "to": 10000,
+        "target_date": "2027-03-01",
+        "status": "pending"
+      }
     ],
     "goal": 1500,
     "goal_date": "2026-06-20",
     "total_realized_pnl": -260.08,
     "weekly_snapshots": [
-      {"week": 1, "label": "Jun 2", "balance": 178.08, "note": "Seed capital deployed: SLB"},
-      {"week": 2, "label": "Jun 9", "balance": null, "note": "HAL open (-78.7%). SLB opp identified."},
-      {"week": 3, "label": "Jun 16", "balance": 132.18, "note": "HAL expired worthless Jun 18 (-100%, -$183). Net P&L: -$61.08. Regrouping."},
-      {"week": 4, "label": "Jun 20", "balance": null, "note": "Phase 1 Goal: $1,500"},
-      {"week": 11, "label": "Aug 17", "balance": 500.0, "note": "Fresh $500 deposited to Agentic account (••••8728). Max/trade bumped to $150. Awaiting options level approval."},
-      {"week": 11, "label": "Aug 19", "balance": 500.0, "note": "3 open positions as of today: manual SCHW test (1 contract, $86) plus the first 2 fully autonomous trades placed by the fixed scheduled executor (SCHW 2 contracts $104, BAC 6 contracts $144). Committed $334, available $166."},
-      {"week": 12, "label": "Aug 21", "balance": 369.0, "note": "Executor cut SCHW pos1 at $0.39 (-54.6%, -$47) and BAC at $0.10 (-58.3%, -$84) — pre-market fills at open while stock was rallying. -$131 realized. SCHW pos2 (2c) still open at ~-25%. Fix deployed: exits now blocked before 9:45 AM ET."},
-      {"week": 12, "label": "Aug 25", "balance": 499.0, "note": "$130 additional deposit recorded (total invested: $630). Balance corrected from $369 to $499, available from $265 to $395."},
-      {"week": 13, "label": "Aug 26", "balance": 431.0, "note": "SCHW 115C pos2 (2c) closed at $0.18 (-65.4%, -$68) — trailing stop hit below breakeven. Circuit breaker manually reset by Cyriac. Balance corrected to $431. 0 open positions. Agentic account losses: -$199."}
+      {
+        "week": 1,
+        "label": "Jun 2",
+        "balance": 178.08,
+        "note": "Seed capital deployed: SLB"
+      },
+      {
+        "week": 2,
+        "label": "Jun 9",
+        "balance": null,
+        "note": "HAL open (-78.7%). SLB opp identified."
+      },
+      {
+        "week": 3,
+        "label": "Jun 16",
+        "balance": 132.18,
+        "note": "HAL expired worthless Jun 18 (-100%, -$183). Net P&L: -$61.08. Regrouping."
+      },
+      {
+        "week": 4,
+        "label": "Jun 20",
+        "balance": null,
+        "note": "Phase 1 Goal: $1,500"
+      },
+      {
+        "week": 11,
+        "label": "Aug 17",
+        "balance": 500.0,
+        "note": "Fresh $500 deposited to Agentic account (\u2022\u2022\u2022\u20228728). Max/trade bumped to $150. Awaiting options level approval."
+      },
+      {
+        "week": 11,
+        "label": "Aug 19",
+        "balance": 500.0,
+        "note": "3 open positions as of today: manual SCHW test (1 contract, $86) plus the first 2 fully autonomous trades placed by the fixed scheduled executor (SCHW 2 contracts $104, BAC 6 contracts $144). Committed $334, available $166."
+      },
+      {
+        "week": 12,
+        "label": "Aug 21",
+        "balance": 369.0,
+        "note": "Executor cut SCHW pos1 at $0.39 (-54.6%, -$47) and BAC at $0.10 (-58.3%, -$84) \u2014 pre-market fills at open while stock was rallying. -$131 realized. SCHW pos2 (2c) still open at ~-25%. Fix deployed: exits now blocked before 9:45 AM ET."
+      },
+      {
+        "week": 12,
+        "label": "Aug 25",
+        "balance": 499.0,
+        "note": "$130 additional deposit recorded (total invested: $630). Balance corrected from $369 to $499, available from $265 to $395."
+      },
+      {
+        "week": 13,
+        "label": "Aug 26",
+        "balance": 431.0,
+        "note": "SCHW 115C pos2 (2c) closed at $0.18 (-65.4%, -$68) \u2014 trailing stop hit below breakeven. Circuit breaker manually reset by Cyriac. Balance corrected to $431. 0 open positions. Agentic account losses: -$199."
+      }
     ]
+  },
+  "stats": {
+    "trades": 5,
+    "wins": 1,
+    "losses": 4,
+    "win_rate_pct": 20.0,
+    "avg_return_pct": -42.0,
+    "avg_winner_pct": 68.5,
+    "avg_loser_pct": -69.6,
+    "total_realized_pnl": -260.08,
+    "by_ticker": {
+      "SLB": {
+        "trades": 1,
+        "wins": 1,
+        "total_pnl": 121.92
+      },
+      "HAL": {
+        "trades": 1,
+        "wins": 0,
+        "total_pnl": -183.0
+      },
+      "SCHW": {
+        "trades": 2,
+        "wins": 0,
+        "total_pnl": -115.0
+      },
+      "BAC": {
+        "trades": 1,
+        "wins": 0,
+        "total_pnl": -84.0
+      }
+    },
+    "last_computed": "2026-08-26T18:08:32"
   }
 }
