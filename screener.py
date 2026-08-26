@@ -1,7 +1,10 @@
 """
-52-Week High Momentum Options Screener  v3
-Budget: $150/trade | Target premium: $0.20-$1.00/share
-Strategy: ATM or slightly OTM calls, 2-3 weeks out
+52-Week High Momentum Options Screener  v3.1
+Budget: $85/trade | Target premium: $0.20-$1.00/share
+Strategy: ATM or slightly OTM calls, 2-3 weeks out.
+          Primary filter: 52-week high momentum (price + volume + RS + sector).
+          Earnings bonus: if a passing candidate also has earnings in 15-25 days
+          with a strong beat rate, its conviction score is boosted (not required).
 
 Filters (in order):
   1. Market regime   -- SPY above 20-day MA (skip ALL trades if not)
@@ -11,11 +14,12 @@ Filters (in order):
   5. Relative strength -- stock outperforming SPY over last 10 days
   6. Sector ETF      -- sector ETF also above its 20-day MA
   7. IV ratio        -- skip options priced >1.5x realized vol (tighter in high-VIX)
-  8. Earnings        -- no earnings within 14 days of expiry
+  8. Earnings        -- skip if earnings within 14 days of expiry
   9. Oil             -- skip energy tickers if WTI < $84
 
-Conviction score weighs: 52w proximity (40%), volume (25%), RS delta (20%), OTM % (15%)
-Setups are ranked by score descending -- best quality first.
+Conviction score (v3.1):
+  34% -- 52w proximity | 21% -- volume | 17% -- RS delta | 13% -- ATM proximity
+  15% -- earnings bonus (0 if no earnings in 15-25d window or beat rate < 75%)
 """
 
 import json
@@ -28,7 +32,7 @@ import yfinance as yf
 from datetime import datetime, timedelta
 
 # -- Core config ---------------------------------------------------------------
-MAX_TRADE_BUDGET    = 150
+MAX_TRADE_BUDGET    = 85       # raise to $150 once balance > $600
 TARGET_PREMIUM_LOW  = 0.20
 TARGET_PREMIUM_HIGH = 1.00
 MAX_DIST_FROM_HIGH  = 0.05
@@ -40,15 +44,21 @@ OIL_TREND_WARN      = 87.0
 MIN_OI              = 200
 MIN_VOL_RATIO       = 0.8
 MAX_SPREAD_PCT      = 0.15
-EARNINGS_BLACKOUT   = 14
+EARNINGS_BLACKOUT   = 14      # skip if earnings within this many days of expiry
+
+# -- Earnings bonus (optional boost to conviction score) -----------------------
+EARNINGS_BONUS_MIN  = 15      # earnings must be at least this far away
+EARNINGS_BONUS_MAX  = 25      # earnings must be within this many days
+MIN_BEAT_RATE       = 0.75    # minimum beat rate to earn any bonus
+MIN_BONUS_QUARTERS  = 2       # minimum quarters of data needed
 
 # -- Filter 1: Market regime ---------------------------------------------------
 SPY_MA_PERIOD       = 20
 
 # -- Filter 2: VIX gate --------------------------------------------------------
-VIX_WARN            = 25       # tighten IV ratio limit above this level
-VIX_BLOCK           = 35       # block all new entries above this level
-VIX_IV_RATIO_TIGHT  = 1.2      # IV/HV limit when VIX is elevated (25-35)
+VIX_WARN            = 25
+VIX_BLOCK           = 35
+VIX_IV_RATIO_TIGHT  = 1.2
 
 # -- Filter 5: Relative strength -----------------------------------------------
 RS_LOOKBACK         = 10
@@ -75,32 +85,22 @@ SECTOR_ETFS = {
 }
 
 # -- Filter 7: IV ratio --------------------------------------------------------
-IV_RATIO_MAX        = 1.5      # default; overridden to VIX_IV_RATIO_TIGHT if VIX elevated
+IV_RATIO_MAX        = 1.5
 
 # -- Energy tickers ------------------------------------------------------------
 ENERGY_TICKERS = {"SLB", "MPC", "XOM", "CVX", "OXY", "HAL"}
 
 # -- Watchlist -----------------------------------------------------------------
 TICKERS = [
-    # AI / Momentum
     "SOUN", "PLTR", "CRWD", "SNOW",
-    # Mega-cap Tech
     "AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "TSLA",
-    # Software / Cloud
     "AMD", "ORCL", "ADBE", "CRM", "NOW",
-    # Communication
     "NFLX",
-    # Financials
     "V", "MA", "JPM", "AXP", "GS", "MS", "BAC", "BLK", "SCHW",
-    # Industrials
     "CAT", "DE", "HON", "GE", "ETN", "EMR", "UNP", "FDX", "MMM",
-    # Defense
     "RTX", "LMT", "NOC", "BA", "GD",
-    # Healthcare
     "LLY", "ABT", "DHR", "JNJ", "UNH", "MRK", "PFE",
-    # Consumer
     "COST", "HD", "NKE", "MCD",
-    # Energy (blocked when WTI < $84)
     "SLB", "MPC", "XOM", "CVX", "OXY", "HAL",
 ]
 
@@ -110,15 +110,15 @@ TICKERS = [
 def check_market_regime():
     """Return (is_uptrend, spy_hist). Fails open -- data error should not block all trades."""
     try:
-        spy = yf.Ticker("SPY")
+        spy  = yf.Ticker("SPY")
         hist = spy.history(period="60d")
         if hist.empty or len(hist) < SPY_MA_PERIOD + RS_LOOKBACK:
             print("  SPY data unavailable -- skipping regime filter (fail-open)")
             return True, None
-        ma20  = hist["Close"].tail(SPY_MA_PERIOD).mean()
-        price = hist["Close"].iloc[-1]
+        ma20    = hist["Close"].tail(SPY_MA_PERIOD).mean()
+        price   = hist["Close"].iloc[-1]
         uptrend = price > ma20
-        symbol = "OK" if uptrend else "DOWNTREND"
+        symbol  = "OK" if uptrend else "DOWNTREND"
         print(f"  SPY: ${price:.2f} | 20-day MA: ${ma20:.2f} | {symbol} {'-- entries allowed' if uptrend else '-- NO ENTRIES TODAY'}")
         return uptrend, hist
     except Exception as e:
@@ -129,11 +129,7 @@ def check_market_regime():
 # -- Filter 2: VIX gate --------------------------------------------------------
 
 def check_vix():
-    """Return (vix_level, entries_allowed, iv_limit).
-    entries_allowed=False if VIX > VIX_BLOCK.
-    iv_limit tightened to VIX_IV_RATIO_TIGHT if VIX > VIX_WARN.
-    Fails open on data error (don't block trades for a bad API call).
-    """
+    """Return (vix_level, entries_allowed, iv_limit). Fails open on data error."""
     try:
         hist = yf.Ticker("^VIX").history(period="5d")
         if hist.empty:
@@ -157,71 +153,133 @@ def check_vix():
 # -- Filter 5: Relative strength -----------------------------------------------
 
 def relative_strength_delta(ticker_hist, spy_hist):
-    """Return (passes, rs_delta).
-    passes: True = outperforms, False = underperforms, None = data unavailable.
-    rs_delta: stock_ret - spy_ret over RS_LOOKBACK days (positive = outperforming).
-    Fail-closed on exceptions (skip ticker); fail-open only when spy_hist is missing.
-    """
+    """Return (passes, rs_delta). Fail-closed per ticker, fail-open if spy_hist missing."""
     try:
         if spy_hist is None:
-            return None, 0.0   # SPY data missing -- can't compute, don't penalize
+            return None, 0.0
         if len(ticker_hist) < RS_LOOKBACK or len(spy_hist) < RS_LOOKBACK:
-            return False, 0.0  # insufficient data -- skip this ticker
+            return False, 0.0
         stock_ret = ticker_hist["Close"].iloc[-1] / ticker_hist["Close"].iloc[-RS_LOOKBACK] - 1
         spy_ret   = spy_hist["Close"].iloc[-1]    / spy_hist["Close"].iloc[-RS_LOOKBACK]    - 1
-        delta = round(float(stock_ret - spy_ret), 4)
+        delta     = round(float(stock_ret - spy_ret), 4)
         return stock_ret >= spy_ret, delta
     except Exception:
-        return False, 0.0  # fail-closed
+        return False, 0.0
 
 
 # -- Filter 6: Sector ETF ------------------------------------------------------
 
 def get_sector_trend(ticker, etf_cache):
-    """Return True if the ticker's sector ETF is above its 20-day MA.
-    Fail-closed on data errors -- unknown sector health = skip.
-    """
+    """Return True if the ticker's sector ETF is above its 20-day MA. Fail-closed."""
     etf = SECTOR_ETFS.get(ticker)
     if not etf:
-        return True  # no mapping -- can't filter, let through
+        return True
     if etf in etf_cache:
         return etf_cache[etf]
     try:
         hist = yf.Ticker(etf).history(period="60d")
         if hist.empty or len(hist) < SECTOR_MA_PERIOD:
-            etf_cache[etf] = False  # can't verify -- fail-closed
+            etf_cache[etf] = False
             return False
-        ma20  = hist["Close"].tail(SECTOR_MA_PERIOD).mean()
-        price = hist["Close"].iloc[-1]
+        ma20   = hist["Close"].tail(SECTOR_MA_PERIOD).mean()
+        price  = hist["Close"].iloc[-1]
         result = price > ma20
         etf_cache[etf] = result
         return result
     except Exception:
-        etf_cache[etf] = False  # fail-closed
+        etf_cache[etf] = False
         return False
 
 
-# -- Conviction score ----------------------------------------------------------
+# -- Earnings bonus (optional -- never blocks a trade) -------------------------
 
-def conviction_score(dist_pct, vol_ratio, rs_delta, otm_pct):
+def get_next_earnings(ticker):
+    """Return (earnings_date as datetime, days_until) or (None, None)."""
+    stk = yf.Ticker(ticker)
+    try:
+        ed = stk.earnings_dates
+        if ed is not None and not ed.empty:
+            now_utc = pd.Timestamp.now(tz="UTC")
+            future  = ed[ed.index > now_utc]
+            if not future.empty:
+                next_earn  = future.index[0]
+                dt         = next_earn.tz_localize(None).to_pydatetime()
+                days_until = (dt - datetime.now()).days
+                return dt, days_until
+    except Exception:
+        pass
+    try:
+        cal = stk.calendar
+        if cal:
+            dates = cal.get("Earnings Date", [])
+            if dates:
+                dt         = pd.Timestamp(dates[0]).to_pydatetime()
+                days_until = (dt - datetime.now()).days
+                return dt, days_until
+    except Exception:
+        pass
+    return None, None
+
+
+def get_earnings_beat_rate(ticker):
+    """Return (beat_rate 0.0-1.0, quarters_checked) or (None, 0) if data unavailable."""
+    stk = yf.Ticker(ticker)
+    try:
+        hist = stk.earnings_history
+        if hist is None or hist.empty:
+            return None, 0
+        cols       = {c.lower().replace(" ", "_"): c for c in hist.columns}
+        est_col    = cols.get("epsestimate") or cols.get("eps_estimate")
+        actual_col = cols.get("epsactual")   or cols.get("eps_actual") or cols.get("reported_eps")
+        if not est_col or not actual_col:
+            return None, 0
+        recent    = hist[[est_col, actual_col]].dropna().tail(4)
+        if len(recent) < MIN_BONUS_QUARTERS:
+            return None, len(recent)
+        beats     = (recent[actual_col] > recent[est_col]).sum()
+        return round(float(beats / len(recent)), 3), len(recent)
+    except Exception:
+        return None, 0
+
+
+def get_earnings_bonus(ticker):
+    """Return 0.0-1.0 conviction bonus. Non-zero only if earnings in window + beat rate >= MIN_BEAT_RATE.
+    Always returns 0.0 on any error -- never blocks or penalizes a trade."""
+    try:
+        _, days = get_next_earnings(ticker)
+        if days is None or not (EARNINGS_BONUS_MIN <= days <= EARNINGS_BONUS_MAX):
+            return 0.0
+        beat_rate, quarters = get_earnings_beat_rate(ticker)
+        if beat_rate is None or quarters < MIN_BONUS_QUARTERS or beat_rate < MIN_BEAT_RATE:
+            return 0.0
+        return round(float(beat_rate), 3)
+    except Exception:
+        return 0.0
+
+
+# -- Conviction score (v3.1) ---------------------------------------------------
+
+def conviction_score(dist_pct, vol_ratio, rs_delta, otm_pct, earnings_bonus=0.0):
     """Score a setup from 0.0 to 1.0. Higher = better quality entry.
 
-    Weights:
-      40% -- 52w proximity (0% from high = 1.0, 5% from high = 0.0)
-      25% -- volume strength (0.8x = 0.0, 3x+ = 1.0)
-      20% -- RS delta vs SPY (capped at +-10%)
-      15% -- strike closeness to ATM (0% OTM = 1.0, 3% OTM = 0.0)
+    Weights (v3.1):
+      34% -- 52w proximity (0% from high = 1.0, 5% = 0.0)
+      21% -- volume strength (0.8x = 0.0, 3x+ = 1.0)
+      17% -- RS delta vs SPY (capped at +-10%)
+      13% -- strike closeness to ATM (0% OTM = 1.0, 3% OTM = 0.0)
+      15% -- earnings bonus (0 if no earnings in 15-25d or beat rate < 75%)
     """
-    dist_score = max(0.0, 1.0 - dist_pct / MAX_DIST_FROM_HIGH / 100)
-    vol_score  = min(1.0, max(0.0, (vol_ratio - MIN_VOL_RATIO) / (3.0 - MIN_VOL_RATIO)))
-    rs_score   = min(1.0, max(0.0, (rs_delta + 0.10) / 0.20))
-    atm_score  = max(0.0, 1.0 - otm_pct / MAX_OTM_PCT)
+    dist_score  = max(0.0, 1.0 - dist_pct / (MAX_DIST_FROM_HIGH * 100))
+    vol_score   = min(1.0, max(0.0, (vol_ratio - MIN_VOL_RATIO) / (3.0 - MIN_VOL_RATIO)))
+    rs_score    = min(1.0, max(0.0, (rs_delta + 0.10) / 0.20))
+    atm_score   = max(0.0, 1.0 - otm_pct / MAX_OTM_PCT)
 
     return round(
-        0.40 * dist_score +
-        0.25 * vol_score  +
-        0.20 * rs_score   +
-        0.15 * atm_score,
+        0.34 * dist_score   +
+        0.21 * vol_score    +
+        0.17 * rs_score     +
+        0.13 * atm_score    +
+        0.15 * earnings_bonus,
         3,
     )
 
@@ -250,7 +308,7 @@ def get_expiry_window():
 # -- Filters 3+4+5: 52w high + volume + RS ------------------------------------
 
 def screen_stocks(tickers, spy_hist):
-    """Return candidates passing 52w high, volume, and RS filters, scored by conviction."""
+    """Return candidates passing 52w high, volume, and RS filters."""
     print(f"\nScanning {len(tickers)} tickers for 52-week high proximity...\n")
     candidates = []
 
@@ -268,20 +326,17 @@ def screen_stocks(tickers, spy_hist):
             if dist < 0 or dist > MAX_DIST_FROM_HIGH:
                 continue
 
-            # Filter 4: use yesterday's completed volume (index -2), not today's partial
-            vol_20d   = hist["Volume"].tail(21).iloc[:-1].mean()  # exclude today
-            vol_prev  = hist["Volume"].iloc[-2]                   # yesterday's full session
+            vol_20d   = hist["Volume"].tail(21).iloc[:-1].mean()
+            vol_prev  = hist["Volume"].iloc[-2]
             vol_ratio = vol_prev / vol_20d if vol_20d > 0 else 0.0
 
             if vol_ratio < MIN_VOL_RATIO:
                 continue
 
-            # Filter 5: Relative strength
             rs_passes, rs_delta = relative_strength_delta(hist, spy_hist)
             if rs_passes is False:
-                continue  # computed and failed -- skip; None = data unavailable, let through
+                continue
 
-            # 20-day realized vol (annualized) for IV ratio filter
             log_rets = hist["Close"].pct_change().dropna().tail(20)
             sigma    = float(log_rets.std() * math.sqrt(252)) if len(log_rets) >= 10 else 0.0
 
@@ -300,13 +355,13 @@ def screen_stocks(tickers, spy_hist):
     if not candidates:
         return pd.DataFrame()
 
-    df = pd.DataFrame(candidates)
-    return df.sort_values("dist_pct").reset_index(drop=True)
+    return pd.DataFrame(candidates).sort_values("dist_pct").reset_index(drop=True)
 
 
-# -- Earnings check ------------------------------------------------------------
+# -- Filter 8: Earnings blackout -----------------------------------------------
 
 def has_upcoming_earnings(ticker):
+    """Return True if earnings within EARNINGS_BLACKOUT days, False if not, None if unknown."""
     stk = yf.Ticker(ticker)
     try:
         ed = stk.earnings_dates
@@ -336,10 +391,7 @@ def has_upcoming_earnings(ticker):
 # -- Filter 7: Options chain + IV ratio ----------------------------------------
 
 def find_calls(ticker, stock_price, realized_vol, rs_delta, iv_limit):
-    """Find call options matching budget/expiry/IV.
-    Returns list of calls enriched with conviction_score.
-    iv_limit is passed in from the VIX gate (may be tighter than IV_RATIO_MAX).
-    """
+    """Find call options matching budget/expiry/IV constraints."""
     low_date, high_date = get_expiry_window()
     stk = yf.Ticker(ticker)
 
@@ -362,9 +414,9 @@ def find_calls(ticker, stock_price, realized_vol, rs_delta, iv_limit):
         calls = calls[calls["strike"] >= stock_price * 0.97]
         calls = calls[calls["strike"] <= stock_price * (1 + MAX_OTM_PCT)]
 
-        has_quote  = (calls["bid"] > 0) & (calls["ask"] > 0)
-        mid        = (calls["bid"] + calls["ask"]) / 2
-        calls      = calls.copy()
+        has_quote          = (calls["bid"] > 0) & (calls["ask"] > 0)
+        mid                = (calls["bid"] + calls["ask"]) / 2
+        calls              = calls.copy()
         calls["mid_price"] = mid.where(has_quote, calls["lastPrice"])
 
         calls = calls[calls["mid_price"] >= TARGET_PREMIUM_LOW]
@@ -378,15 +430,11 @@ def find_calls(ticker, stock_price, realized_vol, rs_delta, iv_limit):
 
         for _, row in calls.iterrows():
             iv = float(row.get("impliedVolatility") or 0)
-
-            # Filter 7: IV ratio -- use VIX-adjusted limit
             if iv > 0 and realized_vol > 0 and iv > realized_vol * iv_limit:
                 continue
 
             otm_pct   = max(0.0, (row["strike"] - stock_price) / stock_price)
-            dist_pct  = 0.0  # will be filled by caller
             contracts = int(MAX_TRADE_BUDGET // (row["mid_price"] * 100))
-            score     = conviction_score(dist_pct, 0.0, rs_delta, otm_pct)  # partial; caller adds dist/vol
 
             results.append({
                 "expiry":    exp_str,
@@ -505,38 +553,24 @@ def save_dashboard(opportunities, wti, vix=None, regime_blocked=False, vix_block
     today_str = datetime.now().strftime("%b %d")
 
     if regime_blocked:
-        data["briefing"] = {
-            "date":          today_str,
-            "headline":      "Market downtrend -- no entries today.",
-            "body":          "SPY is below its 20-day MA. Sitting in cash until market recovers.",
-            "action":        "HOLD",
-            "action_detail": "Market regime filter",
-        }
+        data["briefing"] = {"date": today_str, "headline": "Market downtrend -- no entries today.",
+                            "body": "SPY is below its 20-day MA. Sitting in cash until market recovers.",
+                            "action": "HOLD", "action_detail": "Market regime filter"}
     elif vix_blocked:
-        data["briefing"] = {
-            "date":          today_str,
-            "headline":      f"VIX {vix} -- too elevated for options. No entries today.",
-            "body":          f"VIX above {VIX_BLOCK}. Options are overpriced market-wide. Sitting in cash.",
-            "action":        "HOLD",
-            "action_detail": "VIX gate",
-        }
+        data["briefing"] = {"date": today_str, "headline": f"VIX {vix} -- too elevated. No entries today.",
+                            "body": f"VIX above {VIX_BLOCK}. Options overpriced. Sitting in cash.",
+                            "action": "HOLD", "action_detail": "VIX gate"}
     elif opportunities:
         top = opportunities[0]
-        data["briefing"] = {
-            "date":          today_str,
-            "headline":      f"{len(opportunities)} setup(s) found. Best: {top['ticker']} (score {top.get('score', '?')})",
-            "body":          "Setups ranked by conviction score. Verify live prices before entering.",
-            "action":        "BUY",
-            "action_detail": f"{len(opportunities)} trade idea(s) below",
-        }
+        earn_tag = f" | earnings bonus" if top.get("earnings_bonus", 0) > 0 else ""
+        data["briefing"] = {"date": today_str,
+                            "headline": f"{len(opportunities)} setup(s) found. Best: {top['ticker']} (score {top.get('score', '?')}){earn_tag}",
+                            "body": "Setups ranked by conviction score. Verify live prices before entering.",
+                            "action": "BUY", "action_detail": f"{len(opportunities)} trade idea(s) below"}
     else:
-        data["briefing"] = {
-            "date":          today_str,
-            "headline":      "No setups today.",
-            "body":          "Sitting in cash is the right move -- do not force a trade.",
-            "action":        "HOLD",
-            "action_detail": None,
-        }
+        data["briefing"] = {"date": today_str, "headline": "No setups today.",
+                            "body": "Sitting in cash is the right move -- do not force a trade.",
+                            "action": "HOLD", "action_detail": None}
 
     with open(DATA_JSON, "w") as f:
         json.dump(data, f, indent=2)
@@ -546,12 +580,12 @@ def save_dashboard(opportunities, wti, vix=None, regime_blocked=False, vix_block
 
 def main():
     print("=" * 60)
-    print("  52-WEEK HIGH MOMENTUM OPTIONS SCREENER  (v3)")
+    print("  52-WEEK HIGH MOMENTUM OPTIONS SCREENER  (v3.1)")
     print(f"  Max/trade: ${MAX_TRADE_BUDGET} | Premium: ${TARGET_PREMIUM_LOW}-${TARGET_PREMIUM_HIGH}/sh")
-    print(f"  Expiry: {MIN_EXPIRY_DAYS}-{MAX_EXPIRY_DAYS}d | Vol >=|{MIN_VOL_RATIO}x | OI >={MIN_OI}")
+    print(f"  Expiry: {MIN_EXPIRY_DAYS}-{MAX_EXPIRY_DAYS}d | Vol >={MIN_VOL_RATIO}x | OI >={MIN_OI}")
+    print(f"  Earnings bonus: active (15-25d window, >={MIN_BEAT_RATE:.0%} beat rate)")
     print("=" * 60)
 
-    # Filter 1: Market regime
     print("\n-- Filter 1: Market Regime (SPY 20-day MA) -----------------")
     uptrend, spy_hist = check_market_regime()
     if not uptrend:
@@ -561,7 +595,6 @@ def main():
         check_watchlist()
         return
 
-    # Filter 2: VIX gate
     print("\n-- Filter 2: VIX Gate --------------------------------------")
     vix, entries_ok, iv_limit = check_vix()
     if not entries_ok:
@@ -570,20 +603,18 @@ def main():
         check_watchlist()
         return
 
-    # Oil check
     print("\n-- Oil Price Check ------------------------------------------")
     wti = get_wti_price()
     if wti is None:
         print("  WTI crude: unavailable")
     else:
         if   wti >= OIL_TREND_WARN:   status = "OK"
-        elif wti >= OIL_DANGER_LEVEL: status = f"TRENDING WEAK -- caution on energy"
+        elif wti >= OIL_DANGER_LEVEL: status = "TRENDING WEAK -- caution on energy"
         else:                         status = f"BELOW ${OIL_DANGER_LEVEL} -- AVOID ENERGY"
         print(f"  WTI Crude: ${wti}  [{status}]")
 
     check_watchlist()
 
-    # Filters 3+4+5: 52w high + volume + RS
     candidates = screen_stocks(TICKERS, spy_hist)
 
     if candidates.empty:
@@ -591,7 +622,6 @@ def main():
         save_dashboard([], wti, vix=vix)
         return
 
-    # Drop energy if oil is weak
     if wti is not None and wti < OIL_DANGER_LEVEL:
         flagged = candidates[candidates["ticker"].isin(ENERGY_TICKERS)]["ticker"].tolist()
         if flagged:
@@ -601,9 +631,8 @@ def main():
     print(f"\n{len(candidates)} stocks passed 52w high + volume + RS filters:\n")
     print(candidates[["ticker", "price", "52w_high", "dist_pct", "vol_ratio", "rs_delta"]].to_string(index=False))
 
-    # Filters 6+7+8: Sector ETF + IV ratio + Earnings + Options
     print("\n" + "=" * 60)
-    print(f"  SCANNING OPTIONS (sector ETF + IV<={iv_limit}x + earnings)...")
+    print(f"  SCANNING OPTIONS (sector ETF + IV<={iv_limit}x + earnings check)...")
     print("=" * 60)
 
     etf_cache = {}
@@ -617,13 +646,11 @@ def main():
         dist_pct     = row["dist_pct"]
         vol_ratio    = row["vol_ratio"]
 
-        # Filter 6: Sector ETF trend (fail-closed)
         if not get_sector_trend(ticker, etf_cache):
             etf = SECTOR_ETFS.get(ticker, "?")
-            print(f"  {ticker}: sector ETF {etf} below 20-day MA or data unavailable -- skipping")
+            print(f"  {ticker}: sector ETF {etf} below 20-day MA -- skipping")
             continue
 
-        # Filter 8: Earnings blackout
         earnings_status = has_upcoming_earnings(ticker)
         if earnings_status is True:
             print(f"  {ticker}: earnings within {EARNINGS_BLACKOUT} days -- skipping")
@@ -632,30 +659,33 @@ def main():
             print(f"  {ticker}: earnings date unknown -- skipping")
             continue
 
-        # Filters 7+9: IV ratio + options chain (iv_limit from VIX gate)
+        # Earnings bonus (optional -- never blocks)
+        earn_bonus = get_earnings_bonus(ticker)
+
         calls = find_calls(ticker, price, realized_vol, rs_delta, iv_limit)
         if not calls:
             continue
 
         for c in calls:
-            otm_pct = c["otm_pct"] / 100  # back to fraction for scoring
-            score   = conviction_score(dist_pct, vol_ratio, rs_delta, otm_pct)
+            otm_pct = c["otm_pct"] / 100
+            score   = conviction_score(dist_pct, vol_ratio, rs_delta, otm_pct, earn_bonus)
             tradeable.append({
-                "ticker":    ticker,
-                "price":     price,
-                "dist_pct":  dist_pct,
-                "vol_ratio": vol_ratio,
-                "rs_delta":  rs_delta,
-                "expiry":    c["expiry"],
-                "strike":    c["strike"],
-                "premium":   c["premium"],
-                "cost_1x":   c["cost_1x"],
-                "contracts": c["contracts"],
-                "IV_pct":    c["IV"],
-                "OI":        c["OI"],
-                "iv_ratio":  c.get("iv_ratio"),
-                "otm_pct":   c["otm_pct"],
-                "score":     score,
+                "ticker":         ticker,
+                "price":          price,
+                "dist_pct":       dist_pct,
+                "vol_ratio":      vol_ratio,
+                "rs_delta":       rs_delta,
+                "expiry":         c["expiry"],
+                "strike":         c["strike"],
+                "premium":        c["premium"],
+                "cost_1x":        c["cost_1x"],
+                "contracts":      c["contracts"],
+                "IV_pct":         c["IV"],
+                "OI":             c["OI"],
+                "iv_ratio":       c.get("iv_ratio"),
+                "otm_pct":        c["otm_pct"],
+                "earnings_bonus": earn_bonus,
+                "score":          score,
             })
 
     if not tradeable:
@@ -663,7 +693,6 @@ def main():
         save_dashboard([], wti, vix=vix)
         return
 
-    # Sort by conviction score descending, then premium ascending as tiebreak
     df  = pd.DataFrame(tradeable).sort_values(["score", "premium"], ascending=[False, True]).reset_index(drop=True)
     top = df.head(3)
 
@@ -672,33 +701,34 @@ def main():
     for i, row in top.iterrows():
         contracts  = row["contracts"]
         total_cost = round(row["premium"] * 100 * contracts, 2)
-        target     = round(row["premium"] * 1.8, 2)
-        stop       = round(row["premium"] * 0.60, 2)
+        target     = round(row["premium"] * 1.80, 2)
+        stop       = round(row["premium"] * 0.65, 2)   # -35%
         iv_tag     = f" | IV/HV: {row['iv_ratio']}x" if row.get("iv_ratio") else ""
-        rs_tag     = f"+{row['rs_delta']*100:.1f}% vs SPY" if row["rs_delta"] != 0 else ""
+        earn_tag   = f" | EARN BONUS +{row['earnings_bonus']:.0%}" if row["earnings_bonus"] > 0 else ""
 
         print(f"""
-#{i+1}  {row['ticker']}  |  ${row['price']} stock  |  Score: {row['score']}
-    {row['dist_pct']}% from 52w high | vol {row['vol_ratio']}x | RS: {rs_tag}
+#{i+1}  {row['ticker']}  |  ${row['price']} stock  |  Score: {row['score']}{earn_tag}
+    {row['dist_pct']}% from 52w high | vol {row['vol_ratio']}x | RS: {row['rs_delta']:+.1%} vs SPY
     Strike: ${row['strike']} (+{row['otm_pct']}% OTM) | Expiry: {row['expiry']} | IV: {row['IV_pct']}%{iv_tag}
     Entry:  ${row['premium']}/sh -> {contracts} contract(s) = ${total_cost}
-    Target: ${target}/sh  (+80%)    Stop: ${stop}/sh  (-40%)
+    Target: ${target}/sh (+80%) | Stop: ${stop}/sh (-35%)
 """)
 
         opps.append({
-            "ticker":    row["ticker"],
-            "price":     row["price"],
-            "dist_pct":  row["dist_pct"],
-            "strike":    row["strike"],
-            "expiry":    row["expiry"],
-            "premium":   row["premium"],
-            "contracts": int(row["contracts"]),
-            "cost":      total_cost,
-            "target":    target,
-            "stop":      stop,
-            "iv_pct":    row["IV_pct"],
-            "score":     row["score"],
-            "rs_delta":  row["rs_delta"],
+            "ticker":         row["ticker"],
+            "price":          row["price"],
+            "dist_pct":       row["dist_pct"],
+            "strike":         row["strike"],
+            "expiry":         row["expiry"],
+            "premium":        row["premium"],
+            "contracts":      int(row["contracts"]),
+            "cost":           total_cost,
+            "target":         target,
+            "stop":           stop,
+            "iv_pct":         row["IV_pct"],
+            "score":          row["score"],
+            "rs_delta":       row["rs_delta"],
+            "earnings_bonus": row["earnings_bonus"],
         })
 
     save_dashboard(opps, wti, vix=vix)
