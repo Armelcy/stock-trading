@@ -3,9 +3,9 @@
   "last_run": "2026-08-25T12:17:00Z",
   "last_run_summary": "Exit check skipped — outside market hours (08:16 ET). Circuit breaker tripped: 3 consecutive losses (BAC -58.3%, SCHW -54.6%, HAL -100%). All new entries blocked. 1 open position (SCHW 2c) untouched.",
   "circuit_breaker": {
-    "active": true,
-    "reason": "3 most recently closed trades are all losses: BAC -58.3%, SCHW -54.6%, HAL -100%",
-    "tripped_at": "2026-08-25T12:17:00Z",
+    "active": false,
+    "reason": null,
+    "tripped_at": null,
     "rule": "Pause all new entries (exits always continue) if: (1) realized P&L drops 25%+ of starting_balance within a trailing 7 days, OR (2) the 3 most recently closed trades are all losses. Stays tripped until a human manually resets active to false."
   },
   "oil_price": 83.87,
@@ -29,7 +29,7 @@
     {"ticker": "BAC", "price": 64.23, "dist_pct": 1.53, "strike": 66.0, "expiry": "2026-09-11", "premium": 0.48, "contracts": 3, "cost": 144.0, "target": 0.86, "stop": 0.29, "iv_pct": 3.1}
   ],
   "positions": [
-    {"ticker": "SCHW", "strike": 115.0, "expiry": "2026-09-04", "contracts": 2, "entry": 0.52, "entry_cost": 104.0, "target": 0.94, "stop": 0.312, "status": "open", "order_id": "6a861c1e-22b2-40e3-9113-4a8b395c3bf2", "opened_at": "2026-08-19 21:11", "current_premium": 0.91, "current_value": 182.0, "pnl": 78.0, "pnl_pct": 0.75, "trailing_stop_active": true, "effective_stop": 0.52, "note": "Autonomous entry. Trailing stop activated 2026-08-24 (+75%). Stop moved to breakeven $0.52. Target $0.94 (+80%). Expiry week Aug 31 — must exit by Thu Sep 3."}
+    {"ticker": "SCHW", "strike": 115.0, "expiry": "2026-09-04", "contracts": 2, "entry": 0.52, "entry_cost": 104.0, "target": 0.94, "stop": 0.312, "status": "open", "order_id": "6a861c1e-22b2-40e3-9113-4a8b395c3bf2", "opened_at": "2026-08-19 21:11", "current_premium": 0.91, "current_value": 182.0, "pnl": 78.0, "pnl_pct": 0.75, "trailing_stop_active": true, "effective_stop": 0.52, "note": "Autonomous entry. Trailing stop activated 2026-08-24 (+75%). Stop moved to breakeven $0.52. Target $0.94 (+80%). Must exit by Thu Sep 3 (expiry week)."}
   ],
   "trade_history": [
     {"date": "2026-06-02", "ticker": "SLB", "direction": "CALL", "strike": 57, "expiry": "2026-06-12", "contracts": 2, "entry": 0.89, "entry_cost": 178.08, "exit": 1.5, "exit_value": 300.0, "pnl": 121.92, "pnl_pct": 68.5, "status": "closed"},
