@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-08-27T22:12:06",
-  "last_run": "2026-08-27T13:45:24Z",
-  "last_run_summary": "HOLD \u2014 market downtrend (SPY below 20d MA). 0 open positions. No exits or entries. Cash preserved at $431.",
+  "last_updated": "2026-08-28T13:45:32Z",
+  "last_run": "2026-08-28T13:45:32Z",
+  "last_run_summary": "\u26d4 Circuit breaker tripped \u2014 3 consecutive losses (SCHW -65.4%, BAC -58.3%, SCHW -54.6%). BUY signal with 3 PFE setups, entries blocked. 0 open positions.",
   "circuit_breaker": {
-    "active": false,
-    "reason": null,
-    "tripped_at": null,
+    "active": true,
+    "reason": "3 most recently closed trades are all losses: SCHW Aug 26 -65.4%, BAC Aug 21 -58.3%, SCHW Aug 21 -54.6%",
+    "tripped_at": "2026-08-28T13:45:32Z",
     "rule": "Pause all new entries (exits always continue) if: (1) realized P&L drops 25%+ of starting_balance within a trailing 7 days, OR (2) the 3 most recently closed trades are all losses. Stays tripped until a human manually resets active to false."
   },
   "oil_price": 83.6,
