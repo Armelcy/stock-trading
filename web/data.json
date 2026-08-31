@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-28T22:12:57",
+  "last_updated": "2026-08-31T19:05:30",
   "last_run": "2026-08-28T13:45:32Z",
   "last_run_summary": "\u26d4 Circuit breaker tripped \u2014 3 consecutive losses (SCHW -65.4%, BAC -58.3%, SCHW -54.6%). BUY signal with 3 PFE setups, entries blocked. 0 open positions.",
   "circuit_breaker": {
@@ -8,14 +8,14 @@
     "tripped_at": "2026-08-28T13:45:32Z",
     "rule": "Pause all new entries (exits always continue) if: (1) realized P&L drops 25%+ of starting_balance within a trailing 7 days, OR (2) the 3 most recently closed trades are all losses. Stays tripped until a human manually resets active to false."
   },
-  "oil_price": 83.44,
-  "oil_status": "warn",
+  "oil_price": 85.75,
+  "oil_status": "ok",
   "briefing": {
-    "date": "Aug 28",
-    "headline": "3 setup(s) found. Best: BAC (score 0.282)",
-    "body": "Setups ranked by conviction score. Verify live prices before entering.",
-    "action": "BUY",
-    "action_detail": "3 trade idea(s) below"
+    "date": "Aug 31",
+    "headline": "Market downtrend -- no entries today.",
+    "body": "SPY is below its 20-day MA. Sitting in cash until market recovers.",
+    "action": "HOLD",
+    "action_detail": "Market regime filter"
   },
   "watchlist": [
     {
@@ -28,10 +28,10 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget ($132). Revisit when capital > $300.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-08-28 22:12",
-      "current_price": 381.6,
-      "price_change_pct": 0.51,
-      "vol_ratio_today": 0.71
+      "last_checked": "2026-08-31 19:05",
+      "current_price": 380.43,
+      "price_change_pct": -0.31,
+      "vol_ratio_today": 0.39
     },
     {
       "ticker": "AAPL",
@@ -43,10 +43,10 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget ($132). Revisit when capital > $300. Target $315C or $320C for Jul 17 expiry.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-08-28 22:12",
-      "current_price": 319.7,
-      "price_change_pct": 1.63,
-      "vol_ratio_today": 1.16
+      "last_checked": "2026-08-31 19:05",
+      "current_price": 315.55,
+      "price_change_pct": -1.3,
+      "vol_ratio_today": 0.66
     },
     {
       "ticker": "RTX",
@@ -58,10 +58,10 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget. Earnings Jul 23 means Jul 17 expiry only. Need $400 to trade 1 contract safely.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-08-28 22:12",
-      "current_price": 211.71,
-      "price_change_pct": -0.17,
-      "vol_ratio_today": 0.62
+      "last_checked": "2026-08-31 19:05",
+      "current_price": 208.93,
+      "price_change_pct": -1.31,
+      "vol_ratio_today": 0.37
     },
     {
       "ticker": "GE",
@@ -73,62 +73,13 @@
       "status": "watching",
       "day_trade_plan": "BLACKOUT until Jul 17 (earnings Jul 16). Reassess after.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-08-28 22:12",
-      "current_price": 342.58,
-      "price_change_pct": -0.04,
-      "vol_ratio_today": 0.77
+      "last_checked": "2026-08-31 19:05",
+      "current_price": 336.34,
+      "price_change_pct": -1.82,
+      "vol_ratio_today": 0.55
     }
   ],
-  "opportunities": [
-    {
-      "ticker": "BAC",
-      "price": 62.32,
-      "dist_pct": 4.46,
-      "strike": 63.0,
-      "expiry": "2026-09-11",
-      "premium": 0.53,
-      "contracts": 1,
-      "cost": 53.0,
-      "target": 0.95,
-      "stop": 0.34,
-      "iv_pct": 16.9,
-      "score": 0.282,
-      "rs_delta": -0.0203,
-      "earnings_bonus": 0.0
-    },
-    {
-      "ticker": "BAC",
-      "price": 62.32,
-      "dist_pct": 4.46,
-      "strike": 63.0,
-      "expiry": "2026-09-18",
-      "premium": 0.79,
-      "contracts": 1,
-      "cost": 79.0,
-      "target": 1.42,
-      "stop": 0.51,
-      "iv_pct": 18.6,
-      "score": 0.282,
-      "rs_delta": -0.0203,
-      "earnings_bonus": 0.0
-    },
-    {
-      "ticker": "BAC",
-      "price": 62.32,
-      "dist_pct": 4.46,
-      "strike": 64.0,
-      "expiry": "2026-09-18",
-      "premium": 0.46,
-      "contracts": 1,
-      "cost": 46.0,
-      "target": 0.83,
-      "stop": 0.3,
-      "iv_pct": 18.2,
-      "score": 0.212,
-      "rs_delta": -0.0203,
-      "earnings_bonus": 0.0
-    }
-  ],
+  "opportunities": [],
   "positions": [],
   "trade_history": [
     {
@@ -343,7 +294,7 @@
         "total_pnl": -84.0
       }
     },
-    "last_computed": "2026-08-28T22:12:57"
+    "last_computed": "2026-08-31T19:05:30"
   },
   "vix": 14.4
 }
