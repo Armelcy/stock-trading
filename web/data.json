@@ -1,7 +1,7 @@
 {
   "last_updated": "2026-08-31T19:05:30",
-  "last_run": "2026-08-28T13:45:32Z",
-  "last_run_summary": "\u26d4 Circuit breaker tripped \u2014 3 consecutive losses (SCHW -65.4%, BAC -58.3%, SCHW -54.6%). BUY signal with 3 PFE setups, entries blocked. 0 open positions.",
+  "last_run": "2026-09-01T13:45:36Z",
+  "last_run_summary": "HOLD \u2014 market downtrend (regime filter). Circuit breaker active. 0 open positions, 0 exits, 0 entries.",
   "circuit_breaker": {
     "active": true,
     "reason": "3 most recently closed trades are all losses: SCHW Aug 26 -65.4%, BAC Aug 21 -58.3%, SCHW Aug 21 -54.6%",
