@@ -1,7 +1,7 @@
 {
   "last_updated": "2026-09-03T16:20:01",
-  "last_run": "2026-09-03T13:45:28Z",
-  "last_run_summary": "HOLD \u2014 market downtrend (regime filter). Circuit breaker active. 0 open positions, 0 exits, 0 entries.",
+  "last_run": "2026-09-04T13:45:48Z",
+  "last_run_summary": "BUY signal, circuit breaker active \u2014 entries blocked. 0 open positions. Exit check ran (9:45 AM ET), nothing to exit. 0 entries placed.",
   "circuit_breaker": {
     "active": true,
     "reason": "3 most recently closed trades are all losses: SCHW Aug 26 -65.4%, BAC Aug 21 -58.3%, SCHW Aug 21 -54.6%",
