@@ -1,7 +1,7 @@
 {
   "last_updated": "2026-09-08T21:32:35",
-  "last_run": "2026-09-08T09:00:00Z",
-  "last_run_summary": "SCHW pos2 (2c, $115C Sep4) expired worthless on Sep 4 \u2014 expiry passed, position closed. -$104 realized. Portfolio reset: 0 open positions, $265 available.",
+  "last_run": "2026-09-09T13:47:00Z",
+  "last_run_summary": "WAIT signal, no opportunities \u2014 0 positions open, nothing to exit. Circuit breaker clear. No trades placed.",
   "oil_price": 94.42,
   "oil_status": "ok",
   "briefing": {
