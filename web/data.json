@@ -1,8 +1,8 @@
 {
-  "last_updated": "2026-09-08T21:26:16",
+  "last_updated": "2026-09-08T21:32:35",
   "last_run": "2026-09-08T09:00:00Z",
   "last_run_summary": "SCHW pos2 (2c, $115C Sep4) expired worthless on Sep 4 \u2014 expiry passed, position closed. -$104 realized. Portfolio reset: 0 open positions, $265 available.",
-  "oil_price": 94.45,
+  "oil_price": 94.42,
   "oil_status": "ok",
   "briefing": {
     "date": "Sep 08",
@@ -166,9 +166,9 @@
   ],
   "portfolio": {
     "starting_balance": 630.0,
-    "current_balance": 395.0,
+    "current_balance": 430.0,
     "committed": 0,
-    "available": 395.0,
+    "available": 430.0,
     "ultimate_goal": 10000,
     "phase": 1,
     "phases": [
@@ -246,8 +246,8 @@
       {
         "week": 16,
         "label": "Sep 8",
-        "balance": 265.0,
-        "note": "SCHW pos2 (2c $115C Sep4) expired worthless on Sep 4 \u2014 held too long, missed Thursday exit rule. -$104 realized. 0 open positions. Pipeline unblocked, ready for new entries."
+        "balance": 430.0,
+        "note": "SCHW pos2 expired Sep 4. Actual Robinhood balance confirmed $430. 0 open positions. Pipeline unblocked."
       },
       {
         "week": 13,
@@ -289,7 +289,7 @@
         "total_pnl": -84.0
       }
     },
-    "last_computed": "2026-09-08T21:26:16"
+    "last_computed": "2026-09-08T21:32:35"
   },
   "circuit_breaker": {
     "active": false,
