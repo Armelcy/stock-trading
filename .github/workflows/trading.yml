@@ -31,6 +31,7 @@ jobs:
         run: python update_dashboard.py
 
       - name: Sync picks to Supabase
+        continue-on-error: true  # non-fatal: stale key won't block screener output
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_EZRA_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_EZRA_SERVICE_KEY }}
