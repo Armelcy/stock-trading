@@ -1,8 +1,8 @@
 {
-  "last_updated": "2026-09-08T20:59:44",
+  "last_updated": "2026-09-08T21:26:16",
   "last_run": "2026-09-08T09:00:00Z",
   "last_run_summary": "SCHW pos2 (2c, $115C Sep4) expired worthless on Sep 4 \u2014 expiry passed, position closed. -$104 realized. Portfolio reset: 0 open positions, $265 available.",
-  "oil_price": 94.67,
+  "oil_price": 94.45,
   "oil_status": "ok",
   "briefing": {
     "date": "Sep 08",
@@ -165,10 +165,10 @@
     }
   ],
   "portfolio": {
-    "starting_balance": 500.0,
-    "current_balance": 265.0,
+    "starting_balance": 630.0,
+    "current_balance": 395.0,
     "committed": 0,
-    "available": 265.0,
+    "available": 395.0,
     "ultimate_goal": 10000,
     "phase": 1,
     "phases": [
@@ -248,6 +248,12 @@
         "label": "Sep 8",
         "balance": 265.0,
         "note": "SCHW pos2 (2c $115C Sep4) expired worthless on Sep 4 \u2014 held too long, missed Thursday exit rule. -$104 realized. 0 open positions. Pipeline unblocked, ready for new entries."
+      },
+      {
+        "week": 13,
+        "label": "Aug 25",
+        "balance": 499.0,
+        "note": "$130 additional deposit. Balance $369 + $130 = $499 before SCHW pos2 expiry."
       }
     ]
   },
@@ -283,6 +289,13 @@
         "total_pnl": -84.0
       }
     },
-    "last_computed": "2026-09-08T20:59:44"
+    "last_computed": "2026-09-08T21:26:16"
+  },
+  "circuit_breaker": {
+    "active": false,
+    "reason": null,
+    "tripped_at": null,
+    "reset_at": "2026-09-08",
+    "reset_by": "manual"
   }
 }
