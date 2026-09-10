@@ -1,7 +1,7 @@
 {
   "last_updated": "2026-09-09T16:28:43",
-  "last_run": "2026-09-09T13:47:00Z",
-  "last_run_summary": "WAIT signal, no opportunities \u2014 0 positions open, nothing to exit. Circuit breaker clear. No trades placed.",
+  "last_run": "2026-09-10T13:46:06Z",
+  "last_run_summary": "HOLD signal (market regime filter). 0 open positions. Exits skipped \u2014 nothing to check. Entries skipped. Circuit breaker clear. No trades.",
   "oil_price": 96.39,
   "oil_status": "ok",
   "briefing": {
