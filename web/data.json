@@ -1,15 +1,15 @@
 {
-  "last_updated": "2026-09-24T17:01:24",
+  "last_updated": "2026-09-25T17:03:15",
   "last_run": "2026-09-25T13:48:00Z",
   "last_run_summary": "BUY \u2014 2 entries placed: PFE Oct 9 $29C (3c @ $0.25) + PFE Oct 16 $29C (2c @ $0.35). Exit check ran (09:46 ET) \u2014 0 open positions prior. 2 open positions now.",
-  "oil_price": 93.78,
+  "oil_price": 91.98,
   "oil_status": "ok",
   "briefing": {
-    "date": "Sep 24",
-    "headline": "2 setup(s) found. Best: PFE (score 0.343)",
+    "date": "Sep 25",
+    "headline": "3 setup(s) found. Best: PFE (score 0.361)",
     "body": "Setups ranked by conviction score. Verify live prices before entering.",
     "action": "BUY",
-    "action_detail": "2 trade idea(s) below"
+    "action_detail": "3 trade idea(s) below"
   },
   "watchlist": [
     {
@@ -22,10 +22,10 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget ($132). Revisit when capital > $300.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-09-24 17:01",
-      "current_price": 365.33,
-      "price_change_pct": 1.05,
-      "vol_ratio_today": 0.22
+      "last_checked": "2026-09-25 17:02",
+      "current_price": 367.5,
+      "price_change_pct": -0.13,
+      "vol_ratio_today": 0.35
     },
     {
       "ticker": "AAPL",
@@ -37,10 +37,10 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget ($132). Revisit when capital > $300. Target $315C or $320C for Jul 17 expiry.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-09-24 17:01",
-      "current_price": 338.45,
-      "price_change_pct": 0.42,
-      "vol_ratio_today": 0.27
+      "last_checked": "2026-09-25 17:02",
+      "current_price": 339.63,
+      "price_change_pct": 1.1,
+      "vol_ratio_today": 0.41
     },
     {
       "ticker": "RTX",
@@ -52,10 +52,10 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget. Earnings Jul 23 means Jul 17 expiry only. Need $400 to trade 1 contract properly.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-09-24 17:01",
-      "current_price": 191.46,
-      "price_change_pct": -0.38,
-      "vol_ratio_today": 0.24
+      "last_checked": "2026-09-25 17:02",
+      "current_price": 188.22,
+      "price_change_pct": -0.21,
+      "vol_ratio_today": 0.41
     },
     {
       "ticker": "GE",
@@ -67,43 +67,59 @@
       "status": "watching",
       "day_trade_plan": "BLACKOUT until Jul 17 (earnings Jul 16). Reassess after.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-09-24 17:01",
-      "current_price": 321.71,
-      "price_change_pct": 0.6,
-      "vol_ratio_today": 0.31
+      "last_checked": "2026-09-25 17:02",
+      "current_price": 326.22,
+      "price_change_pct": 2.01,
+      "vol_ratio_today": 0.63
     }
   ],
   "opportunities": [
     {
       "ticker": "PFE",
-      "price": 28.48,
-      "dist_pct": 2.5,
-      "strike": 29.0,
+      "price": 28.35,
+      "dist_pct": 2.93,
+      "strike": 28.5,
       "expiry": "2026-10-09",
-      "premium": 0.34,
-      "contracts": 2,
-      "cost": 68.0,
-      "target": 0.61,
-      "stop": 0.22,
-      "iv_pct": 23.9,
-      "score": 0.343,
-      "rs_delta": 0.0228,
+      "premium": 0.43,
+      "contracts": 1,
+      "cost": 43.0,
+      "target": 0.77,
+      "stop": 0.28,
+      "iv_pct": 22.2,
+      "score": 0.361,
+      "rs_delta": 0.007,
       "earnings_bonus": 0.0
     },
     {
       "ticker": "PFE",
-      "price": 28.48,
-      "dist_pct": 2.5,
-      "strike": 29.0,
+      "price": 28.35,
+      "dist_pct": 2.93,
+      "strike": 28.5,
       "expiry": "2026-10-16",
-      "premium": 0.45,
+      "premium": 0.54,
       "contracts": 1,
-      "cost": 45.0,
-      "target": 0.81,
-      "stop": 0.29,
-      "iv_pct": 24.4,
-      "score": 0.343,
-      "rs_delta": 0.0228,
+      "cost": 54.0,
+      "target": 0.97,
+      "stop": 0.35,
+      "iv_pct": 22.3,
+      "score": 0.361,
+      "rs_delta": 0.007,
+      "earnings_bonus": 0.0
+    },
+    {
+      "ticker": "PFE",
+      "price": 28.35,
+      "dist_pct": 2.93,
+      "strike": 29.0,
+      "expiry": "2026-10-09",
+      "premium": 0.23,
+      "contracts": 3,
+      "cost": 69.0,
+      "target": 0.41,
+      "stop": 0.15,
+      "iv_pct": 22.0,
+      "score": 0.284,
+      "rs_delta": 0.007,
       "earnings_bonus": 0.0
     }
   ],
@@ -120,10 +136,10 @@
       "status": "open",
       "order_id": "6ab67b8a-301b-4c40-8bdd-704f246368fe",
       "opened_at": "2026-09-25T13:47:54Z",
-      "current_premium": 0.25,
-      "current_value": 75.0,
-      "pnl": 0,
-      "pnl_pct": 0,
+      "current_premium": 0.23,
+      "current_value": 69.0,
+      "pnl": -6.0,
+      "pnl_pct": -8.0,
       "trailing_stop_active": false
     },
     {
@@ -138,10 +154,10 @@
       "status": "open",
       "order_id": "6ab67b8e-36b4-494e-8066-505f86898b4e",
       "opened_at": "2026-09-25T13:47:58Z",
-      "current_premium": 0.35,
-      "current_value": 70.0,
-      "pnl": 0,
-      "pnl_pct": 0,
+      "current_premium": 0.34,
+      "current_value": 68.0,
+      "pnl": -2.0,
+      "pnl_pct": -2.9,
       "trailing_stop_active": false
     }
   ],
@@ -327,7 +343,7 @@
       }
     ]
   },
-  "vix": 15.5,
+  "vix": 15.0,
   "stats": {
     "trades": 5,
     "wins": 1,
@@ -359,7 +375,7 @@
         "total_pnl": -84.0
       }
     },
-    "last_computed": "2026-09-24T17:01:24"
+    "last_computed": "2026-09-25T17:03:15"
   },
   "circuit_breaker": {
     "active": false,
