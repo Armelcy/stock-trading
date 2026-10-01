@@ -1,7 +1,7 @@
 {
-  "last_updated": "2026-09-30T17:56:54",
-  "last_run": "2026-09-30T13:46:42Z",
-  "last_run_summary": "Exit check ran (09:46 ET) \u2014 PFE $29C Oct-09 +8%, PFE $29C Oct-16 +17% \u2014 no exits triggered. Entries skipped: HOLD (market regime). 2 open positions.",
+  "last_updated": "2026-10-01T13:47:30Z",
+  "last_run": "2026-10-01T13:47:30Z",
+  "last_run_summary": "Exit check ran (09:47 ET) \u2014 PFE $29C Oct-09 -22% (mid $0.195, stop $0.163), PFE $29C Oct-16 -4.3% (mid $0.335, stop $0.228) \u2014 no exits triggered. Entries skipped: HOLD + empty opportunities. 2 open positions.",
   "oil_price": 90.86,
   "oil_status": "ok",
   "briefing": {
@@ -87,10 +87,10 @@
       "status": "open",
       "order_id": "6ab67b8a-301b-4c40-8bdd-704f246368fe",
       "opened_at": "2026-09-25T13:47:54Z",
-      "current_premium": 0.38,
-      "current_value": 114.0,
-      "pnl": 39.0,
-      "pnl_pct": 52.0,
+      "current_premium": 0.195,
+      "current_value": 58.5,
+      "pnl": -16.5,
+      "pnl_pct": -22.0,
       "trailing_stop_active": false
     },
     {
@@ -105,10 +105,10 @@
       "status": "open",
       "order_id": "6ab67b8e-36b4-494e-8066-505f86898b4e",
       "opened_at": "2026-09-25T13:47:58Z",
-      "current_premium": 0.53,
-      "current_value": 106.0,
-      "pnl": 36.0,
-      "pnl_pct": 51.4,
+      "current_premium": 0.335,
+      "current_value": 67.0,
+      "pnl": -3.0,
+      "pnl_pct": -4.3,
       "trailing_stop_active": false
     }
   ],
