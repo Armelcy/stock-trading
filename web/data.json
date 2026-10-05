@@ -1,7 +1,7 @@
 {
   "last_updated": "2026-10-02T17:48:02",
-  "last_run": "2026-10-02T13:48:10Z",
-  "last_run_summary": "Stop-loss exits placed (09:48 ET) \u2014 PFE $29C Oct-09 -72% (exit $0.07, order 6abfb617), PFE $29C Oct-16 -57.1% (exit $0.15, order 6abfb618). Both stops hit. Entries skipped: HOLD. Circuit breaker tripped: 3 consecutive losses. 0 open positions.",
+  "last_run": "2026-10-05T13:46:18Z",
+  "last_run_summary": "No open positions to exit. Briefing: HOLD. Circuit breaker active (3 consecutive losses) \u2014 entries blocked. 0 open positions.",
   "oil_price": 91.42,
   "oil_status": "ok",
   "briefing": {
