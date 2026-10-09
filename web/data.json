@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-10-08T18:47:34",
+  "last_updated": "2026-10-09T18:18:01",
   "last_run": "2026-10-09T13:46:24Z",
   "last_run_summary": "No open positions to exit. Briefing: HOLD. Circuit breaker active \u2014 entries blocked. 0 open positions.",
-  "oil_price": 91.57,
+  "oil_price": 91.85,
   "oil_status": "ok",
   "briefing": {
-    "date": "Oct 08",
+    "date": "Oct 09",
     "headline": "No setups today.",
     "body": "Sitting in cash is the right move -- do not force a trade.",
     "action": "HOLD",
@@ -22,10 +22,10 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget ($132). Revisit when capital > $300.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-10-08 18:47",
-      "current_price": 379.88,
-      "price_change_pct": 2.09,
-      "vol_ratio_today": 0.69
+      "last_checked": "2026-10-09 18:17",
+      "current_price": 384.91,
+      "price_change_pct": 2.62,
+      "vol_ratio_today": 0.72
     },
     {
       "ticker": "AAPL",
@@ -37,10 +37,10 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget ($132). Revisit when capital > $300. Target $315C or $320C for Jul 17 expiry.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-10-08 18:47",
-      "current_price": 340.6,
-      "price_change_pct": 1.17,
-      "vol_ratio_today": 0.58
+      "last_checked": "2026-10-09 18:17",
+      "current_price": 335.9,
+      "price_change_pct": -1.33,
+      "vol_ratio_today": 0.76
     },
     {
       "ticker": "RTX",
@@ -52,10 +52,10 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget. Earnings Jul 23 means Jul 17 expiry only. Need $400 to trade 1 contract properly.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-10-08 18:47",
-      "current_price": 184.35,
-      "price_change_pct": 2.27,
-      "vol_ratio_today": 0.69
+      "last_checked": "2026-10-09 18:17",
+      "current_price": 185.41,
+      "price_change_pct": 0.59,
+      "vol_ratio_today": 0.49
     },
     {
       "ticker": "GE",
@@ -67,10 +67,10 @@
       "status": "watching",
       "day_trade_plan": "BLACKOUT until Jul 17 (earnings Jul 16). Reassess after.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-10-08 18:47",
-      "current_price": 306.32,
-      "price_change_pct": 0.89,
-      "vol_ratio_today": 0.71
+      "last_checked": "2026-10-09 18:17",
+      "current_price": 307.08,
+      "price_change_pct": 0.48,
+      "vol_ratio_today": 0.36
     }
   ],
   "opportunities": [],
@@ -340,7 +340,7 @@
       }
     ]
   },
-  "vix": 15.7,
+  "vix": 14.9,
   "stats": {
     "trades": 7,
     "wins": 1,
@@ -377,7 +377,7 @@
         "total_pnl": -94.0
       }
     },
-    "last_computed": "2026-10-08T18:47:34"
+    "last_computed": "2026-10-09T18:18:01"
   },
   "circuit_breaker": {
     "active": true,
