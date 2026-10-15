@@ -55,13 +55,14 @@ def main():
                 "run_date": today,
                 "ticker":    opp["ticker"],
                 "price":     opp["price"],
-                "strike":    opp["strike"],
-                "expiry":    opp["expiry"],
-                "premium":   opp["premium"],
-                "contracts": opp["contracts"],
-                "cost":      opp["cost"],
-                "target":    opp["target"],
-                "stop":      opp["stop"],
+                # option columns stay null for the shares strategy (v4)
+                "strike":    opp.get("strike"),
+                "expiry":    opp.get("expiry"),
+                "premium":   opp.get("premium"),
+                "contracts": opp.get("contracts"),
+                "cost":      opp.get("cost"),
+                "target":    opp.get("target"),
+                "stop":      opp.get("stop"),
                 "briefing":  headline,
             })
 

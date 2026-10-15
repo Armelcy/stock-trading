@@ -5,6 +5,7 @@ Fetches live position values + writes web/data.json + git pushes.
 
 import yfinance as yf
 import json
+import os
 import subprocess
 from datetime import datetime
 from pathlib import Path
@@ -23,33 +24,25 @@ def save_data(data):
 
 
 def update_positions(data):
-    """Refresh current_premium and P&L for all open positions."""
+    """Mark open share positions at the latest close (display only — the executor
+    uses live Robinhood prices for exits)."""
     for pos in data.get("positions", []):
-        if pos["status"] != "open":
+        if pos.get("status") != "open":
             continue
         try:
-            ticker = yf.Ticker(pos["ticker"])
-            exp = pos["expiry"]
-            strike = float(pos["strike"])
-            chain = ticker.option_chain(exp)
-            calls = chain.calls
-            row = calls[calls["strike"] == strike]
-            if row.empty:
+            hist = yf.Ticker(pos["ticker"]).history(period="5d")
+            if hist.empty:
                 continue
-            current = float(row.iloc[0]["lastPrice"])
-            contracts = pos["contracts"]
-            entry_cost = pos["entry_cost"]
-            current_value = round(current * contracts * 100, 2)
-            pnl = round(current_value - entry_cost, 2)
-            pnl_pct = round((pnl / entry_cost) * 100, 1)
-
-            pos["current_premium"] = current
-            pos["current_value"] = current_value
+            last = round(float(hist["Close"].iloc[-1]), 2)
+            value = round(last * float(pos["quantity"]), 2)
+            pnl = round(value - pos["entry_cost"], 2)
+            pos["last_price"] = last
+            pos["current_value"] = value
             pos["pnl"] = pnl
-            pos["pnl_pct"] = pnl_pct
-            print(f"  {pos['ticker']} ${pos['strike']}C: ${current:.2f}/sh | P&L: ${pnl:+.2f} ({pnl_pct:+.1f}%)")
+            pos["pnl_pct"] = round(pnl / pos["entry_cost"] * 100, 1)
+            print(f"  {pos['ticker']} x{pos['quantity']}: ${last} | P&L: ${pnl:+.2f} ({pos['pnl_pct']:+.1f}%)")
         except Exception as e:
-            print(f"  Warning: could not update {pos['ticker']} — {e}")
+            print(f"  Warning: could not update {pos.get('ticker')} — {e}")
 
     return data
 
@@ -126,6 +119,9 @@ def set_timestamp(data):
 
 def git_push():
     """Commit and push data.json to GitHub so Vercel redeploys."""
+    if os.environ.get("GITHUB_ACTIONS"):
+        print("  CI run — the workflow's commit step pushes (with rebase retry).")
+        return
     try:
         subprocess.run(["git", "add", "web/data.json"], check=True)
         result = subprocess.run(["git", "diff", "--cached", "--quiet"])

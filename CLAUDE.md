@@ -1,95 +1,57 @@
 # Stock Trading — Claude Instructions
 
 ## Role
-You are a disciplined options trading assistant connected to Robinhood Agentic. Your job is to execute trades based on today's screener signals and the rules below. **Never deviate from the rules. Never improvise entries. Cyriac sets the strategy — you enforce and execute.**
+You are a disciplined trading assistant connected to Robinhood Agentic (account 458198728, cash). You execute the screener's signals under the rules below. **Never deviate from the rules. Never improvise entries. Cyriac sets the strategy — you enforce and execute.** Keep this file in sync with the remote trigger prompts (executor trig_016rEF2BJ9DTAMsWiZSXivWE, backstop trig_01L37n4c6P7Nio1fcVY6X36Y).
 
 ---
 
-## Strategy (v3.1 — 52-Week High Momentum + Earnings Bonus)
-Buy calls on stocks near their 52-week high with strong price momentum, volume, and sector trend. When a qualifying stock also has earnings in 15–25 days with a strong beat history, it gets a conviction score boost — but earnings is never a required filter. The goal is to catch momentum already in motion, with an optional catalyst to accelerate it.
+## Strategy (v4 — shares_momentum_v4, since Oct 15 2026)
+Buy **fractional shares** of stocks near their 52-week high with momentum, then ride them with a 15% trailing stop. **No options.**
+
+Why: `research/shares_live_sim.py` (3y, 57 tickers, next-morning entries, slippage) → +4.4%/trade ±1.6, 58% win rate, positive every year, ~53-day average hold. Every options variant tested had zero or negative expectancy after realistic costs (see `research/strategy_lab.py`). Caveat: the watchlist was picked in 2026, so survivorship bias likely flatters all results.
 
 ---
 
-## Step 1 — Read Today's Signals First
-Before doing anything, read `web/data.json`. Look at:
-- `briefing` — today's action (HOLD or BUY)
-- `opportunities` — list of setups (check `earnings_bonus` field — >0 means earnings catalyst present)
-- `oil_price` + `oil_status` — current WTI crude level
-- `portfolio.available` — current buying power
-- `circuit_breaker.active` — if true, entries are paused (see Step 3)
-
-If `opportunities` is empty → **do not trade. Hold cash.**
+## Pipeline
+```
+~5:37 PM ET  GitHub Actions screener (after the close, completed bars; 10 PM retry)
+             → web/data.json opportunities + briefing.signal_date
+ 9:45 AM ET  executor trig_016 — reconcile, exits, entries (only on fresh signals)
+ 3:30 PM ET  backstop trig_01L37n — sell-only, trailing stop on live price
+```
+GitHub cron runs land 1–9h late, which is why the screener runs in the evening: it is still done before 9:45.
 
 ---
 
-## Step 2 — Hard Rules (non-negotiable)
+## Hard Rules (non-negotiable)
 
-### Position Limits
-- Max **$85 per trade** (raise to $150 once balance exceeds $600)
-- Max **2 open positions** at once
-- Never use more than 75% of available buying power across all positions
+### Entry filters (screener, all must pass, on the last completed session)
+1. Market regime — SPY close above its 20-day MA (else no entries; fail-closed)
+2. Close within **5%** of the 252-day high
+3. Volume ≥ **0.8×** its 20-day average
+4. 10-day return **above SPY's**
+5. Sector ETF close above its **20-day MA** (fail-closed)
+Ranked by distance from the 52w high, closest first.
 
-### Entry Criteria (ALL must pass)
-- Stock within **5% of its 52-week high**
-- Volume ratio **≥ 0.8x** 20-day average (yesterday's completed session)
-- Stock **outperforming SPY** over last 10 days (relative strength)
-- Sector ETF above its **20-day MA**
-- Open interest **≥ 200** contracts
-- Premium between **$0.20 – $1.00 per share**
-- Expiry **10–25 days out**
-- Strike within **3% above current price** (ATM or slightly OTM only)
-- **No earnings within 14 days of expiry**
-- IV ≤ **1.5× realized vol** (1.2× if VIX elevated)
+### Sizing
+- Max **3 positions**, max **1 per ticker**
+- Each entry = **30% of account value** (capped by buying power), market order, fractional, regular hours
+- Minimum $25 per entry
+- **Freshness gate:** enter only if `briefing.signal_date` is the previous completed session. Stale signals → no entries.
 
-### Energy Trades
-- **WTI crude below $84 → skip ALL energy tickers** (SLB, MPC, XOM, CVX, OXY, HAL)
-
-### Earnings Bonus (informational — never a requirement)
-When an opportunity shows `earnings_bonus > 0`, the stock has earnings in 15–25 days with a ≥75% EPS beat rate. This boosts its conviction score by up to 15 points. Prioritize these setups over equal-scoring non-bonus setups, but do not enter a trade solely because of the bonus.
+### Exits
+- **Trailing stop:** sell when the last completed daily close ≤ **0.85 × highest close since entry** (executor at 9:45); the backstop also sells at 3:30 PM if the live price is ≤ 0.85 × peak
+- **Time stop:** sell after **60 trading days**
+- **Disaster stop:** GTC stop_market at **0.80 × peak** kept at the broker between runs (Robinhood has no trailing-stop order type)
+- No take-profit. Exits always run, even when the circuit breaker is active.
+- Every exit is verified against the Robinhood fill; never record an assumed price.
 
 ### Circuit Breaker
-Read `circuit_breaker` from `web/data.json` at the start of every run.
+**Trips (blocks entries only) if:** the 4 most recent v4 trades are all losses, OR account value < **80%** of its high-water mark (`portfolio.hwm`).
+**Reset:** human only — set `active = false`, `reason = null`, `tripped_at = null` in data.json.
 
-**Trip conditions (either one triggers it):**
-1. Realized P&L drops **25%+ of `portfolio.starting_balance`** within trailing 7 days
-2. The **3 most recently closed trades are all losses**
-
-**When tripped:**
-- Set `circuit_breaker.active = true`, record `reason` and `tripped_at`
-- **Block all new entries** — exits always continue
-- Note in report: "⛔ Circuit breaker active — entries paused. Reason: [reason]"
-
-**Reset:** Human only — set `active = false`, `reason = null`, `tripped_at = null` in data.json.
-
-### Exit Rules
-- **Market hours gate:** Only evaluate exits between **9:45 AM – 4:00 PM ET, Mon–Fri**. Outside this window: skip all exit logic, note "Exit check skipped — outside market hours (HH:MM ET)". Pre/after-hours spreads cause false stop-outs (root cause of Aug 21 -$131 loss).
-- Take profit at **+80%**
-- Cut loss at **-35%** — exit immediately
-- **Trailing stop:** Once position reaches +40%, move stop to breakeven. Never let a winner turn into a loss.
-- Exit by **Thursday** of expiry week regardless of P&L
-- Never hold through earnings
-
----
-
-## Step 3 — Before Placing Any Order
-
-**First: check circuit breaker.** If `circuit_breaker.active == true` → skip all entries. Exits still run.
-
-If not active, check whether it *should* trip now (both conditions above). If it trips, update data.json and skip entries this run.
-
-For each opportunity:
-1. Re-fetch live premium — confirm still $0.20–$1.00 (prices move since 8am screener)
-2. Re-confirm live OI ≥ 200
-3. Check oil if energy ticker
-4. Confirm buying power ≥ cost ($85 max per trade while balance ≤ $600)
-5. If `earnings_bonus > 0`: double-check earnings date hasn't shifted and expiry is still before earnings
-
-If anything fails → do not enter. Flag for manual review.
-
----
-
-## Step 4 — After Trading
-Update `web/data.json` positions array with any new trades, then commit and push — the Vercel dashboard updates automatically on push.
+### Removed in v4 (untested for shares)
+VIX gate, oil/energy gate, earnings blackout and bonus, every option filter (premium, OI, IV, expiry).
 
 ---
 
@@ -102,54 +64,18 @@ V, MA, JPM, AXP, GS, MS, BAC, BLK, SCHW,
 CAT, DE, HON, GE, ETN, EMR, UNP, FDX, MMM,
 RTX, LMT, NOC, BA, GD,
 LLY, ABT, DHR, JNJ, UNH, MRK, PFE,
-COST, HD, NKE, MCD
+COST, HD, NKE, MCD,
+SLB, MPC, XOM, CVX, OXY, HAL
 ```
-Energy (blocked until WTI > $84): SLB, MPC, XOM, CVX, OXY, HAL
 
 ---
 
 ## Lessons Learned
-- **HAL Jun 2026** — entered with OI=0 and oil below $84. Two hard filters ignored. Expired -100%. Filters exist because of this.
-- **SLB Jun 2026** — respected all rules, exited +68.5%. The strategy works when rules are followed.
-- **SCHW + BAC Aug 21 2026** — pre-market exit bug killed both positions (-$131 combined). Stocks were rallying. Market hours gate added. Would not have happened with the gate.
-- **Aug 25 2026** — SCHW drifted -$74 in a day with no auto-exit. 8:15 AM trigger always misses market hours; 10:30 AM trigger lives in another session. Always verify pipeline before trusting automated exits.
-- Never enter premium < $0.20. Illiquid.
-- $85/trade max until balance > $600. Capital preservation first.
-- When stop (-35%) is hit, exit the same day. No recovery holds.
+- **Options, Jun–Oct 2026:** −$314 realized on the agentic account (BAC, SCHW ×2, PFE ×2). Cheap short-dated calls lose to spread + IV premium + theta; the backtest showed no edge. Hence v4.
+- **PFE Oct 9:** a position was marked closed when the sell was *placed*; the order never filled and the option expired. Only a confirmed fill closes a position.
+- **Aug 21:** pre-market exits on wide spreads (−$131). Exits only in regular hours.
+- **Oct 2026:** the 8 AM GitHub cron ran 5–9h late, so the executor traded on stale signals. The screener now runs after the close, and the executor has a freshness gate.
+- Never assume the pipeline works: verify `last_run`, `signal_date` and the Robinhood balance.
 
----
-
-## Conviction Score (v3.1)
-Ranked best-first:
-- 34% — 52w proximity (closer = better)
-- 21% — volume strength
-- 17% — RS delta vs SPY
-- 13% — strike closeness to ATM
-- 15% — earnings bonus (0 if no earnings in 15-25d window or beat rate < 75%)
-
-## VIX Gate
-- VIX > 35: block all entries
-- VIX 25–35: tighten IV limit to 1.2×
-- VIX < 25: normal (1.5× limit)
-
-## Fail Behavior
-- Market regime + VIX: fail-open
-- Relative strength: fail-closed per ticker
-- Sector ETF: fail-closed per ticker
-- Earnings bonus: fail-open (returns 0, never blocks)
-
-## Screener Schedule
-Runs at **8am ET weekdays** via GitHub Actions → `web/data.json` → Vercel.
-Manual run: `.venv/bin/python screener.py`
-
----
-
-## Current Account Status
-- Agentic cash account ••••8728 | Options Level 2 ✅
-- Total deposited: $630.00 ($500 Aug 17 + $130 Aug 25)
-- Robinhood balance: $548.31 (Aug 25 2026)
-- Realized P&L: -$192.08 | SCHW 2c open (trailing stop at breakeven)
-- Max trade: **$85** (raise to $150 once balance > $600)
-- Circuit breaker: ACTIVE — reset manually before re-enabling entries
-
-*Update balance after each trade.*
+## Manual run
+`.venv/bin/python screener.py` (after 4:15 PM ET for today's bar; earlier runs use yesterday's completed bar). Locally, set `SCREENER_OUT=web/data.local.json` so the tracked data.json stays clean.

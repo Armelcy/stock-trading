@@ -1,16 +1,27 @@
 name: Daily Screener
 
+# Runs AFTER the close on completed daily bars. GitHub's scheduled runs land
+# 1-9h late (Oct 2026: a 12:00 UTC cron fired 17:00-21:13 UTC), so the morning
+# run handed the 9:45 ET executor stale or missing signals. Evening runs can be
+# 9h late and still finish before the executor. Off-the-hour minutes avoid
+# GitHub's top-of-hour queue. The second cron is a retry; re-runs are idempotent.
+#   21:37 UTC = 5:37 PM EDT / 4:37 PM EST (both after the 4 PM close)
+#   02:07 UTC = 10:07 PM EDT / 9:07 PM EST, previous ET day (Tue-Sat UTC)
 on:
   schedule:
-    # 8:00 AM ET = 12:00 UTC (summer/EDT). In winter (EST) this is 7:00 AM — still fine for pre-market.
-    - cron: '0 12 * * 1-5'
-  workflow_dispatch:  # allow manual run from GitHub Actions UI
+    - cron: '37 21 * * 1-5'
+    - cron: '7 2 * * 2-6'
+  workflow_dispatch:
+
+concurrency:
+  group: screener
+  cancel-in-progress: false
 
 jobs:
   screen:
     runs-on: ubuntu-latest
     permissions:
-      contents: write   # needed to push data.json back to repo
+      contents: write
 
     steps:
       - name: Checkout repo
@@ -27,11 +38,11 @@ jobs:
       - name: Run screener
         run: python screener.py
 
-      - name: Update dashboard (P&L + oil refresh)
+      - name: Update dashboard (position marks)
         run: python update_dashboard.py
 
       - name: Sync picks to Supabase
-        continue-on-error: true  # non-fatal: stale key won't block screener output
+        continue-on-error: true
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_EZRA_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_EZRA_SERVICE_KEY }}
@@ -42,5 +53,12 @@ jobs:
           git config user.name  "trading-bot"
           git config user.email "bot@users.noreply.github.com"
           git add web/data.json
-          git diff --cached --quiet || git commit -m "screener $(date +'%Y-%m-%d %H:%M UTC')"
-          git push
+          git diff --cached --quiet && exit 0
+          git commit -m "screener $(date -u +'%Y-%m-%d %H:%M UTC')"
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push origin HEAD:main && exit 0
+            git rebase --abort 2>/dev/null || true
+            sleep 20
+          done
+          echo "::error::push failed after 3 attempts (data.json conflict with executor?)"
+          exit 1

@@ -5,11 +5,12 @@
   "oil_price": 95.84,
   "oil_status": "ok",
   "briefing": {
-    "date": "Oct 14",
-    "headline": "Market downtrend -- no entries today.",
-    "body": "SPY is below its 20-day MA. Sitting in cash until market recovers.",
+    "date": "Oct 15",
+    "signal_date": null,
+    "headline": "Switched to shares momentum v4 -- first signals after tonight's close.",
+    "body": "No entries until the evening screener publishes fresh signals.",
     "action": "HOLD",
-    "action_detail": "Market regime filter"
+    "action_detail": "strategy switch"
   },
   "watchlist": [
     {
@@ -346,7 +347,8 @@
         "balance": 314.92,
         "note": "Verified Robinhood: $314.92 cash, 0 open. Agentic realized -$314 (BAC -84, SCHW -47, SCHW2 -68, PFE -40, PFE -75). PFE Oct-09 exit order never filled."
       }
-    ]
+    ],
+    "hwm": 314.92
   },
   "vix": 15.5,
   "stats": {
@@ -388,10 +390,20 @@
     "last_computed": "2026-10-14T17:00:37"
   },
   "circuit_breaker": {
-    "active": true,
-    "reason": "3 consecutive losses: SCHW2 -65%, PFE Oct-16 -57%, PFE Oct-09 -100%",
-    "tripped_at": "2026-10-02T13:48:10Z",
-    "reset_at": "2026-09-08",
-    "reset_by": "manual"
+    "active": false,
+    "reason": null,
+    "tripped_at": null,
+    "reset_at": "2026-10-15",
+    "reset_by": "manual (Cyriac, switch to shares_momentum_v4)",
+    "rule": "trips if the 4 most recent shares_momentum_v4 trades are all losses OR current_balance < 0.80 x hwm"
+  },
+  "strategy": {
+    "name": "shares_momentum_v4",
+    "max_positions": 3,
+    "position_frac": 0.3,
+    "trail_pct": 0.15,
+    "max_hold_days": 60,
+    "disaster_stop_pct": 0.2,
+    "started": "2026-10-15"
   }
 }
