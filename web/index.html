@@ -126,6 +126,17 @@
     .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
 
+    /* Watchlist */
+    .wl-meta { font-size: 11px; color: var(--muted); margin-top: 10px; line-height: 1.5; }
+    .wl-meta .green { color: var(--green); }
+    .wl-meta .red { color: var(--red); }
+    .wl-signal { margin-top: 10px; padding: 8px 10px; border-radius: 8px; font-size: 12px; background: var(--green-dim); color: var(--green); }
+    .wl-signal.quiet { background: var(--surface2); color: var(--muted); }
+    .wl-notes { margin-top: 10px; font-size: 12px; }
+    .wl-notes summary { cursor: pointer; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .wl-note { margin-top: 8px; color: #ccc; line-height: 1.45; overflow-wrap: anywhere; }
+    .wl-note span { display: block; font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
+
     .stat { background: var(--surface2); border-radius: 8px; padding: 10px 12px; }
     .stat .label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
     .stat .value { font-size: 16px; font-weight: 700; }
@@ -560,22 +571,53 @@
       el.innerHTML = '<div class="empty"><div class="icon">👁</div>No stocks on watchlist.</div>';
       return;
     }
-    el.innerHTML = list.map(w => `
-      <div class="pos-card">
-        <div class="pos-header">
-          <div>
-            <span class="ticker">${w.ticker}</span>
-            <span class="expiry">${w.name}</span>
+    const signed = (n, d = 1) => (n >= 0 ? '+' : '') + Number(n).toFixed(d) + '%';
+    const cls = n => n >= 0 ? 'green' : 'red';
+    el.innerHTML = list.map(w => {
+      const hasPrice = w.current_price != null;
+      const sinceAdd = hasPrice && w.price_at_add ? (w.current_price / w.price_at_add - 1) * 100 : null;
+      const quiet = !w.signal || /^QUIET/i.test(w.signal);
+      return `
+      <div class="card">
+        <div class="card-header">
+          <div style="min-width:0">
+            <div class="ticker">${w.ticker}</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:2px">${w.name || ''}</div>
           </div>
-          <span class="badge ${w.status === 'watching' ? 'badge-hold' : 'badge-buy'}">${w.status.toUpperCase()}</span>
+          <div class="badge ${w.status === 'watching' ? 'skip' : 'buy'}">${(w.status || '').toUpperCase()}</div>
         </div>
-        <div class="pos-row"><span class="label">Added</span><span>${w.added_date} @ $${w.price_at_add}</span></div>
-        ${w.current_price != null ? `<div class="pos-row"><span class="label">Price</span><span>$${w.current_price} <span style="color:${w.price_change_pct >= 0 ? '#7ec8a0' : '#f87171'}">${w.price_change_pct >= 0 ? '+' : ''}${w.price_change_pct}%</span> &nbsp; Vol ${w.vol_ratio_today}x avg</span></div>` : ''}
-        ${w.signal ? `<div class="pos-row"><span class="label">Signal</span><span style="font-size:12px">${w.signal}</span></div>` : ''}
-        <div class="pos-row"><span class="label">Thesis</span><span style="font-size:11px;color:#ccc">${w.thesis}</span></div>
-        <div class="pos-row"><span class="label">Watch for</span><span style="font-size:11px;color:#f0c040">${w.watch_for}</span></div>
-        ${w.day_trade_plan ? `<div class="pos-row"><span class="label">Day trade plan</span><span style="font-size:11px;color:#7ec8a0">${w.day_trade_plan}</span></div>` : ''}
-      </div>`).join('');
+
+        ${hasPrice ? `
+        <div class="grid3">
+          <div class="stat">
+            <div class="label">Price</div>
+            <div class="value">${fmt(w.current_price)}</div>
+          </div>
+          <div class="stat">
+            <div class="label">Today</div>
+            <div class="value ${cls(w.price_change_pct)}">${signed(w.price_change_pct, 2)}</div>
+          </div>
+          <div class="stat">
+            <div class="label">Volume</div>
+            <div class="value ${w.vol_ratio_today >= 0.8 ? '' : 'yellow'}">${Number(w.vol_ratio_today).toFixed(2)}×</div>
+          </div>
+        </div>` : ''}
+
+        <div class="wl-meta">
+          Added ${w.added_date} at ${fmt(w.price_at_add)}${sinceAdd != null ? ` · <span class="${cls(sinceAdd)}">${signed(sinceAdd)}</span> since` : ''}${w.last_checked ? ` · checked ${w.last_checked}` : ''}
+        </div>
+
+        ${w.signal ? `<div class="wl-signal ${quiet ? 'quiet' : ''}">${w.signal}</div>` : ''}
+
+        ${(w.thesis || w.watch_for || w.day_trade_plan) ? `
+        <details class="wl-notes">
+          <summary>Notes</summary>
+          ${w.thesis ? `<div class="wl-note"><span>Thesis</span>${w.thesis}</div>` : ''}
+          ${w.watch_for ? `<div class="wl-note"><span>Watch for</span>${w.watch_for}</div>` : ''}
+          ${w.day_trade_plan ? `<div class="wl-note"><span>Day trade plan</span>${w.day_trade_plan}</div>` : ''}
+        </details>` : ''}
+      </div>`;
+    }).join('');
   }
 
   function renderHistory() {
