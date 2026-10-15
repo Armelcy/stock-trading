@@ -406,5 +406,6 @@
     "max_hold_days": 60,
     "disaster_stop_pct": 0.2
   },
-  "alerts": []
+  "alerts": [],
+  "backstop_last_run": "2026-10-15T19:32:19Z"
 }
