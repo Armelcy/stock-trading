@@ -379,7 +379,7 @@
 
     el.innerHTML = `
       <div class="briefing ${typeClass}">
-        <div class="briefing-date">${b.date} · AI Morning Briefing</div>
+        <div class="briefing-date">${b.date} · ${b.signal_date ? 'Signals from ' + b.signal_date + ' close' : 'Screener briefing'}</div>
         <div class="briefing-headline">${b.headline}</div>
         <div class="briefing-body">${b.body}</div>
         <div>
@@ -398,33 +398,39 @@
         <div class="no-trade">
           <div class="big">⏳</div>
           <strong>No Trade Today</strong>
-          Screener found no affordable setups. Hold cash and wait.
+          Screener found no setups. Hold cash and wait.
         </div>`;
       return;
     }
 
-    el.innerHTML = opps.map(o => `
+    const s = data.strategy || {};
+    const frac = s.position_frac || 0.30;
+    const trail = s.trail_pct || 0.15;
+    const alloc = (data.portfolio?.current_balance || 0) * frac;
+    const sigDate = data.briefing?.signal_date;
+
+    el.innerHTML = opps.map((o, i) => `
       <div class="card">
         <div class="card-header">
           <div>
             <div class="ticker">${o.ticker}</div>
-            <div style="font-size:12px;color:var(--muted);margin-top:2px">$${o.stock_price} stock · ${o.dist_pct}% from 52w high</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:2px">#${i + 1} · closed ${fmt(o.price)}${sigDate ? ' on ' + sigDate : ''}</div>
           </div>
-          <div class="badge ${o.action === 'BUY' ? 'buy' : 'skip'}">${o.action}</div>
+          <div class="badge buy">SHARES</div>
         </div>
 
         <div class="grid3">
           <div class="stat">
-            <div class="label">Strike</div>
-            <div class="value">$${o.strike}</div>
+            <div class="label">From 52w high</div>
+            <div class="value">${o.dist_pct}%</div>
           </div>
           <div class="stat">
-            <div class="label">Expiry</div>
-            <div class="value" style="font-size:13px">${o.expiry}</div>
+            <div class="label">Volume</div>
+            <div class="value">${o.vol_ratio}x</div>
           </div>
           <div class="stat">
-            <div class="label">Contracts</div>
-            <div class="value">${o.contracts}x</div>
+            <div class="label">vs SPY (10d)</div>
+            <div class="value green">${fmtPct((o.rs_delta || 0) * 100)}</div>
           </div>
         </div>
 
@@ -432,32 +438,36 @@
 
         <div class="grid2">
           <div class="stat">
-            <div class="label">Entry Premium</div>
-            <div class="value">${fmt(o.premium)}/sh</div>
+            <div class="label">Planned size (${Math.round(frac * 100)}%)</div>
+            <div class="value yellow">${fmt(alloc)}</div>
           </div>
           <div class="stat">
-            <div class="label">Total Cost</div>
-            <div class="value yellow">${fmt(o.total_cost)}</div>
-          </div>
-          <div class="stat">
-            <div class="label">Target Exit</div>
-            <div class="value green">${fmt(o.target_premium)}/sh</div>
-          </div>
-          <div class="stat">
-            <div class="label">Stop Loss</div>
-            <div class="value red">${fmt(o.stop_premium)}/sh</div>
+            <div class="label">Initial trail (−${Math.round(trail * 100)}%)</div>
+            <div class="value red">${fmt(o.stop ?? o.price * (1 - trail))}</div>
           </div>
         </div>
 
         <div class="action-row">
           <div>
-            <div class="action-text">Open Robinhood → ${o.ticker} → $${o.strike}C ${o.expiry}</div>
-            <div class="action-sub">Buy ${o.contracts} contract${o.contracts>1?'s':''} · Limit at $${o.premium}</div>
+            <div class="action-text">Executor buys at 9:45 ET if a slot is free</div>
+            <div class="action-sub">Fractional market order · trail moves up with each new high close</div>
           </div>
           <div style="font-size:22px">→</div>
         </div>
       </div>
     `).join('');
+  }
+
+  // Share position fields come from the executor; tolerate older/missing names.
+  function posPrice(p) {
+    return p.last_price ?? p.live_price ?? p.current_price ?? p.last_close ?? p.entry_price;
+  }
+
+  function posPnl(p) {
+    const value = (p.quantity || 0) * posPrice(p);
+    const pnl = p.pnl ?? (value - (p.entry_cost || 0));
+    const pct = p.pnl_pct ?? (p.entry_cost ? pnl / p.entry_cost * 100 : 0);
+    return { value, pnl, pct };
   }
 
   function renderPositions() {
@@ -469,60 +479,75 @@
       return;
     }
 
+    const s = data.strategy || {};
+    const trailPct = s.trail_pct || 0.15;
+    const maxHold = s.max_hold_days || 60;
+
     el.innerHTML = positions.map(p => {
-      const pnlClass = p.pnl >= 0 ? 'green' : 'red';
-      const pnlSign = p.pnl >= 0 ? '+' : '';
-      const progress = Math.min(100, Math.max(0, ((p.current_premium - p.entry_premium) / (p.target_premium - p.entry_premium)) * 100));
+      const price = posPrice(p);
+      const { value, pnl, pct } = posPnl(p);
+      const pnlClass = pnl >= 0 ? 'green' : 'red';
+      const pnlSign = pnl >= 0 ? '+' : '';
+      const peak = Math.max(p.peak_close || 0, p.entry_price || 0);
+      const trail = p.trail ?? peak * (1 - trailPct);
+      const cushion = price ? (price / trail - 1) * 100 : 0;
+      const days = p.days_held || 0;
+      const holdProgress = Math.min(100, Math.max(2, days / maxHold * 100));
+      const qty = Number(p.quantity || 0);
 
       return `
       <div class="card">
         <div class="card-header">
           <div>
-            <div class="ticker">${p.ticker} <span style="font-size:14px;font-weight:500">$${p.strike}C</span></div>
-            <div style="font-size:12px;color:var(--muted);margin-top:2px">${p.contracts} contracts · Expires ${p.expiry}</div>
+            <div class="ticker">${p.ticker} <span style="font-size:14px;font-weight:500">shares</span></div>
+            <div style="font-size:12px;color:var(--muted);margin-top:2px">${qty.toFixed(qty < 1 ? 4 : 3)} sh · bought ${p.entry_date || '—'} · ${fmt(value)} now</div>
           </div>
-          <div class="badge open">OPEN</div>
+          <div class="badge open">${p.status === 'closing' ? 'CLOSING' : 'OPEN'}</div>
         </div>
 
         <div class="grid2">
           <div class="stat">
             <div class="label">Entry</div>
-            <div class="value">${fmt(p.entry_premium)}/sh</div>
+            <div class="value">${fmt(p.entry_price)}</div>
           </div>
           <div class="stat">
             <div class="label">Current</div>
-            <div class="value ${pnlClass}">${fmt(p.current_premium)}/sh</div>
+            <div class="value ${pnlClass}">${fmt(price)}</div>
           </div>
           <div class="stat">
             <div class="label">P&L</div>
-            <div class="value ${pnlClass}">${pnlSign}${fmt(p.pnl)}</div>
+            <div class="value ${pnlClass}">${pnlSign}${fmt(pnl)}</div>
           </div>
           <div class="stat">
             <div class="label">Return</div>
-            <div class="value ${pnlClass}">${pnlSign}${p.pnl_pct?.toFixed(1)}%</div>
+            <div class="value ${pnlClass}">${pnlSign}${pct.toFixed(1)}%</div>
           </div>
         </div>
 
         <hr class="divider">
 
-        <div style="font-size:11px;color:var(--muted);margin-bottom:6px">Progress to target (${fmt(p.target_premium)}/sh)</div>
+        <div class="grid2">
+          <div class="stat">
+            <div class="label">📈 Peak close</div>
+            <div class="value">${fmt(peak)}</div>
+          </div>
+          <div class="stat">
+            <div class="label">🛑 Trailing stop (−${Math.round(trailPct * 100)}%)</div>
+            <div class="value red">${fmt(trail)}</div>
+          </div>
+          <div class="stat">
+            <div class="label">Cushion to stop</div>
+            <div class="value ${cushion > 5 ? 'green' : 'yellow'}">${cushion.toFixed(1)}%</div>
+          </div>
+          <div class="stat">
+            <div class="label">🛡 Broker stop</div>
+            <div class="value" style="font-size:13px">${p.stop_order_id ? fmt(p.stop_price) : '<span class="red">none</span>'}</div>
+          </div>
+        </div>
+
+        <div style="font-size:11px;color:var(--muted);margin:12px 0 6px">Time stop: day ${days} of ${maxHold}</div>
         <div class="progress-wrap">
-          <div class="progress-bar"><div class="progress-fill" style="width:${progress}%"></div></div>
-        </div>
-
-        <div class="grid2" style="margin-top:10px">
-          <div class="stat">
-            <div class="label">🎯 Sell at</div>
-            <div class="value green">${fmt(p.target_premium)}/sh</div>
-          </div>
-          <div class="stat">
-            <div class="label">🛑 Stop at</div>
-            <div class="value red">${fmt(p.stop_premium)}/sh</div>
-          </div>
-        </div>
-
-        <div style="margin-top:10px;font-size:11px;color:var(--muted);text-align:center">
-          Exit deadline: <strong style="color:var(--yellow)">${p.exit_deadline}</strong>
+          <div class="progress-bar"><div class="progress-fill" style="width:${holdProgress}%"></div></div>
         </div>
       </div>`;
     }).join('');
@@ -592,7 +617,7 @@
 
     html += `<div class="table-wrap"><table>
       <thead><tr>
-        <th>Date</th><th>Ticker</th><th>Strike</th><th>Entry</th><th>Exit</th><th>P&L</th>
+        <th>Date</th><th>Ticker</th><th>Type</th><th>Entry</th><th>Exit</th><th>P&L</th>
       </tr></thead>
       <tbody>`;
 
@@ -601,11 +626,11 @@
       const pnlClass = isOpen ? 'open-trade' : (t.pnl >= 0 ? 'win' : 'loss');
       const pnlText = isOpen ? 'Open' : (t.pnl >= 0 ? '+$' + t.pnl?.toFixed(2) : '-$' + Math.abs(t.pnl)?.toFixed(2));
       html += `<tr>
-        <td>${t.date}</td>
+        <td>${t.date ?? t.entry_date ?? '—'}</td>
         <td><strong>${t.ticker}</strong></td>
-        <td>$${t.strike}C</td>
-        <td>$${t.entry?.toFixed(2)}</td>
-        <td>${t.exit ? '$' + t.exit.toFixed(2) : '—'}</td>
+        <td>${t.strike ? '$' + t.strike + 'C' : 'Shares'}</td>
+        <td>$${Number(t.entry ?? t.entry_price ?? 0).toFixed(2)}</td>
+        <td>${t.exit != null ? '$' + Number(t.exit).toFixed(2) : '—'}</td>
         <td class="${pnlClass}">${pnlText}</td>
       </tr>`;
     });
@@ -617,8 +642,12 @@
   function renderPortfolio() {
     const el = document.getElementById('port-content');
     const p = data.portfolio;
-    const unrealized = (data.positions || []).filter(pos => pos.status === 'open').reduce((s, pos) => s + pos.pnl, 0);
-    const totalValue = p.current_balance + p.committed + unrealized;
+    const open = (data.positions || []).filter(pos => pos.status === 'open');
+    const unrealized = open.reduce((s, pos) => s + posPnl(pos).pnl, 0);
+    // v4: current_balance is Robinhood total_value (cash + positions), so don't add positions again.
+    const totalValue = data.strategy
+      ? p.current_balance
+      : p.current_balance + p.committed + unrealized;
 
     // Phase progress
     const currentPhase = p.phases.find(ph => ph.status === 'active') || p.phases[0];
@@ -679,11 +708,11 @@
         </div>
         <div class="stat">
           <div class="label">Realized P&L</div>
-          <div class="value green">+${fmt(p.total_realized_pnl)}</div>
+          <div class="value ${p.total_realized_pnl >= 0 ? 'green' : 'red'}">${p.total_realized_pnl >= 0 ? '+' : '−'}${fmt(Math.abs(p.total_realized_pnl || 0))}</div>
         </div>
         <div class="stat">
           <div class="label">Unrealized</div>
-          <div class="value green">+${fmt(unrealized)}</div>
+          <div class="value ${unrealized >= 0 ? 'green' : 'red'}">${unrealized >= 0 ? '+' : '−'}${fmt(Math.abs(unrealized))}</div>
         </div>
       </div>
 
