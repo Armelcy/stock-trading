@@ -1,7 +1,7 @@
 {
-  "last_updated": "2026-10-15T04:11:36",
-  "last_run": "2026-10-14T13:45:56Z",
-  "last_run_summary": "No open positions to exit. Briefing: HOLD. Circuit breaker active \u2014 entries blocked. 0 open positions.",
+  "last_updated": "2026-10-15T13:46:31Z",
+  "last_run": "2026-10-15T13:46:31Z",
+  "last_run_summary": "Briefing: HOLD (market regime). 0 positions. Circuit breaker OFF. Entries skipped.",
   "oil_price": 94.07,
   "oil_status": "ok",
   "briefing": {
@@ -255,6 +255,7 @@
     "current_balance": 314.92,
     "committed": 0,
     "available": 314.92,
+    "hwm": 314.92,
     "ultimate_goal": 10000,
     "phase": 1,
     "phases": [
@@ -404,5 +405,6 @@
     "trail_pct": 0.15,
     "max_hold_days": 60,
     "disaster_stop_pct": 0.2
-  }
+  },
+  "alerts": []
 }
