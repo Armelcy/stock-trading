@@ -455,6 +455,24 @@ def find_calls(ticker, stock_price, realized_vol, rs_delta, iv_limit):
 # -- Watchlist monitor ---------------------------------------------------------
 
 DATA_JSON = os.path.join(os.path.dirname(__file__), "web", "data.json")
+# SCREENER_OUT redirects output (e.g. the desktop routine writes web/data.local.json)
+# so local runs never dirty the git-tracked data.json. Input is still read from
+# data.json until this run has written its own output.
+OUT_JSON = os.environ.get("SCREENER_OUT") or DATA_JSON
+_out_written = False
+
+
+def load_data():
+    with open(OUT_JSON if _out_written else DATA_JSON) as f:
+        return json.load(f)
+
+
+def write_data(data):
+    global _out_written
+    with open(OUT_JSON, "w") as f:
+        json.dump(data, f, indent=2)
+    _out_written = True
+
 
 def fetch_quote(ticker, timeout=8):
     import requests
@@ -476,8 +494,7 @@ def fetch_quote(ticker, timeout=8):
 
 def check_watchlist():
     try:
-        with open(DATA_JSON) as f:
-            data = json.load(f)
+        data = load_data()
     except Exception:
         return
 
@@ -528,8 +545,7 @@ def check_watchlist():
 
     if updated:
         data["watchlist"] = watchlist
-        with open(DATA_JSON, "w") as f:
-            json.dump(data, f, indent=2)
+        write_data(data)
     print()
 
 
@@ -537,8 +553,7 @@ def check_watchlist():
 
 def save_dashboard(opportunities, wti, vix=None, regime_blocked=False, vix_blocked=False):
     try:
-        with open(DATA_JSON) as f:
-            data = json.load(f)
+        data = load_data()
     except Exception:
         data = {}
 
@@ -572,8 +587,7 @@ def save_dashboard(opportunities, wti, vix=None, regime_blocked=False, vix_block
                             "body": "Sitting in cash is the right move -- do not force a trade.",
                             "action": "HOLD", "action_detail": None}
 
-    with open(DATA_JSON, "w") as f:
-        json.dump(data, f, indent=2)
+    write_data(data)
 
 
 # -- Main ----------------------------------------------------------------------
