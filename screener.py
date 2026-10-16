@@ -319,6 +319,49 @@ def save_dashboard(opportunities, signal_date, regime_blocked=False):
     write_data(data)
 
 
+# -- Reference call (display only) ---------------------------------------------
+# The ~90-DTE ITM call was the only option variant with a positive average in
+# research/strategy_lab.py (+4.8%/trade, but +/-4.7 -- not distinguishable from
+# zero). Shown on the dashboard so Cyriac can track it; never traded.
+CALL_REF_DTE        = 90
+CALL_REF_DTE_RANGE  = (70, 130)
+CALL_REF_ITM        = 0.90   # strike ~10% below spot
+
+def call_reference(ticker, price):
+    try:
+        tk = yf.Ticker(ticker)
+        today = datetime.now(ET).date()
+        expiries = []
+        for e in tk.options:
+            dte = (datetime.strptime(e, "%Y-%m-%d").date() - today).days
+            if CALL_REF_DTE_RANGE[0] <= dte <= CALL_REF_DTE_RANGE[1]:
+                expiries.append((abs(dte - CALL_REF_DTE), dte, e))
+        if not expiries:
+            return None
+        _, dte, expiry = min(expiries)
+        calls = tk.option_chain(expiry).calls
+        itm = calls[calls["strike"] <= price * CALL_REF_ITM]
+        if itm.empty:
+            return None
+        c = itm.iloc[(itm["strike"] - price * CALL_REF_ITM).abs().argmin()]
+        bid, ask = float(c.get("bid") or 0), float(c.get("ask") or 0)
+        mid = (bid + ask) / 2 if bid > 0 and ask > 0 else float(c.get("lastPrice") or 0)
+        if mid <= 0:
+            return None
+        return {
+            "expiry":    expiry,
+            "dte":       dte,
+            "strike":    float(c["strike"]),
+            "mid":       round(mid, 2),
+            "cost":      round(mid * 100, 2),
+            "spread_pct": round((ask - bid) / mid * 100, 1) if bid > 0 and ask > 0 else None,
+            "breakeven": round(float(c["strike"]) + mid, 2),
+        }
+    except Exception as e:
+        print(f"  {ticker}: call reference unavailable ({e})")
+        return None
+
+
 # -- Main ----------------------------------------------------------------------
 
 def main():
@@ -347,6 +390,7 @@ def main():
 
     opps = []
     for _, row in candidates.head(MAX_OPPORTUNITIES).iterrows():
+        call_ref = call_reference(row["ticker"], row["price"])
         opps.append({
             "ticker":    row["ticker"],
             "price":     row["price"],
@@ -356,6 +400,7 @@ def main():
             "rs_delta":  row["rs_delta"],
             "score":     row["score"],
             "stop":      round(row["price"] * (1 - TRAIL_PCT), 2),  # initial trail level
+            "call_ref":  call_ref,  # display only -- the executor never trades options
         })
     save_dashboard(opps, signal_date)
     print("Not financial advice.\n")
