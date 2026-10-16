@@ -586,7 +586,15 @@
     {
       "timestamp": "2026-10-16T13:48:00Z",
       "message": "PFE disaster stop placed for 3 whole shares (order 6ad22b09) at $23.56. Fractional remainder 0.208160 shares unprotected by broker stop."
+    },
+    {
+      "timestamp": "2026-10-16T19:41:38Z",
+      "message": "Dead-man check: MA has no disaster stop (fractional qty 0.152692 < 1 share, GTC stop not supported by broker). Backstop runs are the protection."
+    },
+    {
+      "timestamp": "2026-10-16T19:41:38Z",
+      "message": "Dead-man check: V has no disaster stop (fractional qty 0.235194 < 1 share, GTC stop not supported by broker). Backstop runs are the protection."
     }
   ],
-  "backstop_last_run": "2026-10-15T19:32:19Z"
+  "backstop_last_run": "2026-10-16T19:41:38Z"
 }
