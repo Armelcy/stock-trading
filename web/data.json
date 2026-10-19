@@ -493,5 +493,5 @@
       "message": "Dead-man check: V has no disaster stop (fractional qty 0.235194 < 1 share, GTC stop not supported by broker). Backstop runs are the protection."
     }
   ],
-  "backstop_last_run": "2026-10-16T19:41:38Z"
+  "backstop_last_run": "2026-10-19T19:42:23Z"
 }
