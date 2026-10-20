@@ -1,12 +1,12 @@
 {
-  "last_updated": "2026-10-19T13:46:00",
+  "last_updated": "2026-10-20T00:37:17",
   "last_run": "2026-10-19T13:46:00Z",
   "last_run_summary": "HOLD signal. 3 positions held (MA/V/PFE), 0 exits, 0 entries. PFE GTC stop#6ad22b09@$23.56 confirmed. MA/V fractional stops unprotected.",
-  "oil_price": 101.41,
+  "oil_price": 98.56,
   "oil_status": "ok",
   "briefing": {
-    "date": "Oct 16",
-    "signal_date": "2026-10-16",
+    "date": "Oct 19",
+    "signal_date": "2026-10-19",
     "headline": "Market downtrend -- no entries.",
     "body": "SPY closed below its 20-day MA. Open positions keep their trailing stops.",
     "action": "HOLD",
@@ -23,10 +23,10 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget ($132). Revisit when capital > $300.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-10-17 06:52",
+      "last_checked": "2026-10-20 00:37",
       "current_price": 402.61,
       "price_change_pct": 0.72,
-      "vol_ratio_today": 0.95
+      "vol_ratio_today": 0.8
     },
     {
       "ticker": "AAPL",
@@ -38,10 +38,10 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget ($132). Revisit when capital > $300. Target $315C or $320C for Jul 17 expiry.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-10-17 06:52",
+      "last_checked": "2026-10-20 00:37",
       "current_price": 343.46,
       "price_change_pct": 0.43,
-      "vol_ratio_today": 1.4
+      "vol_ratio_today": 0.77
     },
     {
       "ticker": "RTX",
@@ -53,10 +53,10 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget. Earnings Jul 23 means Jul 17 expiry only. Need $400 to trade 1 contract properly.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-10-17 06:52",
+      "last_checked": "2026-10-20 00:37",
       "current_price": 193.92,
       "price_change_pct": 3.73,
-      "vol_ratio_today": 1.55
+      "vol_ratio_today": 1.22
     },
     {
       "ticker": "GE",
@@ -68,10 +68,10 @@
       "status": "watching",
       "day_trade_plan": "BLACKOUT until Jul 17 (earnings Jul 16). Reassess after.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-10-17 06:52",
+      "last_checked": "2026-10-20 00:37",
       "current_price": 313.83,
       "price_change_pct": 0.59,
-      "vol_ratio_today": 1.15
+      "vol_ratio_today": 1.21
     }
   ],
   "opportunities": [],
@@ -137,10 +137,10 @@
       "stop_order_id": null,
       "stop_price": null,
       "note": "Disaster stop rejected: fractional qty 0.152692 < 1 share, GTC stop_market not supported. Executor/backstop are the stop.",
-      "last_price": 614.99,
-      "current_value": 93.90,
-      "pnl": -0.58,
-      "pnl_pct": -0.61
+      "last_price": NaN,
+      "current_value": NaN,
+      "pnl": NaN,
+      "pnl_pct": NaN
     },
     {
       "ticker": "V",
@@ -157,10 +157,10 @@
       "stop_order_id": null,
       "stop_price": null,
       "note": "Disaster stop rejected: fractional qty 0.235194 < 1 share, GTC stop_market not supported. Executor/backstop are the stop.",
-      "last_price": 401.54,
-      "current_value": 94.44,
-      "pnl": -0.04,
-      "pnl_pct": -0.04
+      "last_price": NaN,
+      "current_value": NaN,
+      "pnl": NaN,
+      "pnl_pct": NaN
     },
     {
       "ticker": "PFE",
@@ -177,10 +177,10 @@
       "stop_order_id": "6ad22b09-55c8-412e-8688-2ed76c816c9b",
       "stop_price": 23.56,
       "note": "Disaster stop placed for 3 whole shares; 0.208160 fractional remainder unprotected.",
-      "last_price": 29.52,
-      "current_value": 94.71,
-      "pnl": 0.23,
-      "pnl_pct": 0.24
+      "last_price": NaN,
+      "current_value": NaN,
+      "pnl": NaN,
+      "pnl_pct": NaN
     }
   ],
   "trade_history": [
@@ -453,7 +453,7 @@
         "total_pnl": -115.0
       }
     },
-    "last_computed": "2026-10-17T06:52:59"
+    "last_computed": "2026-10-20T00:37:17"
   },
   "circuit_breaker": {
     "active": false,
