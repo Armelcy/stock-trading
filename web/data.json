@@ -506,7 +506,15 @@
     {
       "timestamp": "2026-10-21T13:47:30Z",
       "message": "PFE disaster stop updated: cancelled 6ad22b09 ($23.56), placed 6ad8c256 ($24.09) for 3 shares. Peak moved $29.45→$30.11. Fractional remainder 0.208160 still unprotected by broker stop."
+    },
+    {
+      "timestamp": "2026-10-21T19:44:24Z",
+      "message": "Dead-man check: MA has no disaster stop (fractional qty 0.152692 < 1 share, GTC stop not supported by broker). Backstop runs are the protection."
+    },
+    {
+      "timestamp": "2026-10-21T19:44:24Z",
+      "message": "Dead-man check: V has no disaster stop (fractional qty 0.235194 < 1 share, GTC stop not supported by broker). Backstop runs are the protection."
     }
   ],
-  "backstop_last_run": "2026-10-20T19:44:00Z"
+  "backstop_last_run": "2026-10-21T19:44:24Z"
 }
