@@ -1,8 +1,8 @@
 {
-  "last_updated": "2026-10-23T00:08:19",
+  "last_updated": "2026-10-23T07:24:38",
   "last_run": "2026-10-22T13:46:00Z",
   "last_run_summary": "HOLD. 3/3 slots held (MA/V/PFE), 0 exits, 0 entries (slots=0). Days=3. Trails: MA $529.23, V $346.67, PFE $25.59. PFE GTC stop OK 6ad8c256 @$24.09.",
-  "oil_price": 99.31,
+  "oil_price": 100.71,
   "oil_status": "ok",
   "briefing": {
     "date": "Oct 22",
@@ -23,9 +23,9 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget ($132). Revisit when capital > $300.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-10-23 00:08",
-      "current_price": 407.85,
-      "price_change_pct": 0.31,
+      "last_checked": "2026-10-23 07:24",
+      "current_price": 414.34,
+      "price_change_pct": 1.59,
       "vol_ratio_today": 1.11
     },
     {
@@ -38,9 +38,9 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget ($132). Revisit when capital > $300. Target $315C or $320C for Jul 17 expiry.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-10-23 00:08",
-      "current_price": 343.99,
-      "price_change_pct": 1.32,
+      "last_checked": "2026-10-23 07:24",
+      "current_price": 348.22,
+      "price_change_pct": 1.23,
       "vol_ratio_today": 1.1
     },
     {
@@ -53,9 +53,9 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget. Earnings Jul 23 means Jul 17 expiry only. Need $400 to trade 1 contract properly.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-10-23 00:08",
-      "current_price": 191.6,
-      "price_change_pct": -0.9,
+      "last_checked": "2026-10-23 07:24",
+      "current_price": 194.71,
+      "price_change_pct": 1.62,
       "vol_ratio_today": 0.76
     },
     {
@@ -68,9 +68,9 @@
       "status": "watching",
       "day_trade_plan": "BLACKOUT until Jul 17 (earnings Jul 16). Reassess after.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-10-23 00:08",
-      "current_price": 295.88,
-      "price_change_pct": -1.33,
+      "last_checked": "2026-10-23 07:24",
+      "current_price": 293.54,
+      "price_change_pct": -0.79,
       "vol_ratio_today": 0.99
     }
   ],
@@ -138,10 +138,10 @@
       "stop_order_id": null,
       "stop_price": null,
       "note": "Disaster stop rejected: fractional qty 0.152692 < 1 share, GTC stop_market not supported. Executor/backstop are the stop.",
-      "last_price": NaN,
-      "current_value": NaN,
-      "pnl": NaN,
-      "pnl_pct": NaN
+      "last_price": 633.21,
+      "current_value": 96.69,
+      "pnl": 2.21,
+      "pnl_pct": 2.3
     },
     {
       "ticker": "V",
@@ -159,10 +159,10 @@
       "stop_order_id": null,
       "stop_price": null,
       "note": "Disaster stop rejected: fractional qty 0.235194 < 1 share, GTC stop_market not supported. Executor/backstop are the stop.",
-      "last_price": NaN,
-      "current_value": NaN,
-      "pnl": NaN,
-      "pnl_pct": NaN
+      "last_price": 414.34,
+      "current_value": 97.45,
+      "pnl": 2.97,
+      "pnl_pct": 3.1
     },
     {
       "ticker": "PFE",
@@ -180,10 +180,10 @@
       "stop_order_id": "6ad8c256-d4a7-4b4e-83e3-8a5cd16d2855",
       "stop_price": 24.09,
       "note": "Disaster stop placed for 3 whole shares; 0.208160 fractional remainder unprotected.",
-      "last_price": NaN,
-      "current_value": NaN,
-      "pnl": NaN,
-      "pnl_pct": NaN
+      "last_price": 30.42,
+      "current_value": 97.59,
+      "pnl": 3.11,
+      "pnl_pct": 3.3
     }
   ],
   "trade_history": [
@@ -456,7 +456,7 @@
         "total_pnl": -115.0
       }
     },
-    "last_computed": "2026-10-23T00:08:19"
+    "last_computed": "2026-10-23T07:24:38"
   },
   "circuit_breaker": {
     "active": false,
