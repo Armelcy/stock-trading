@@ -1,12 +1,12 @@
 {
-  "last_updated": "2026-10-23T13:48:05Z",
+  "last_updated": "2026-10-23T23:58:21",
   "last_run": "2026-10-23T13:48:05Z",
   "last_run_summary": "HOLD. 3/3 slots held (MA/V/PFE), 0 exits, 0 entries (action=HOLD). Days=4. New peaks: MA $633.21, V $414.34, PFE $30.42. Trails: MA $538.23, V $352.19, PFE $25.86. PFE GTC stop updated 6adb657e @$24.34.",
-  "oil_price": 100.71,
+  "oil_price": 103.44,
   "oil_status": "ok",
   "briefing": {
-    "date": "Oct 22",
-    "signal_date": "2026-10-22",
+    "date": "Oct 23",
+    "signal_date": "2026-10-23",
     "headline": "Market downtrend -- no entries.",
     "body": "SPY closed below its 20-day MA. Open positions keep their trailing stops.",
     "action": "HOLD",
@@ -23,10 +23,10 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget ($132). Revisit when capital > $300.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-10-23 07:24",
-      "current_price": 414.34,
-      "price_change_pct": 1.59,
-      "vol_ratio_today": 1.11
+      "last_checked": "2026-10-23 23:58",
+      "current_price": 407.92,
+      "price_change_pct": -1.55,
+      "vol_ratio_today": 0.84
     },
     {
       "ticker": "AAPL",
@@ -38,10 +38,10 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget ($132). Revisit when capital > $300. Target $315C or $320C for Jul 17 expiry.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-10-23 07:24",
-      "current_price": 348.22,
-      "price_change_pct": 1.23,
-      "vol_ratio_today": 1.1
+      "last_checked": "2026-10-23 23:58",
+      "current_price": 347.73,
+      "price_change_pct": -0.14,
+      "vol_ratio_today": 1.03
     },
     {
       "ticker": "RTX",
@@ -53,10 +53,10 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget. Earnings Jul 23 means Jul 17 expiry only. Need $400 to trade 1 contract properly.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-10-23 07:24",
-      "current_price": 194.71,
-      "price_change_pct": 1.62,
-      "vol_ratio_today": 0.76
+      "last_checked": "2026-10-23 23:58",
+      "current_price": 191.01,
+      "price_change_pct": -1.9,
+      "vol_ratio_today": 0.75
     },
     {
       "ticker": "GE",
@@ -68,10 +68,10 @@
       "status": "watching",
       "day_trade_plan": "BLACKOUT until Jul 17 (earnings Jul 16). Reassess after.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-10-23 07:24",
-      "current_price": 293.54,
-      "price_change_pct": -0.79,
-      "vol_ratio_today": 0.99
+      "last_checked": "2026-10-23 23:58",
+      "current_price": 285.64,
+      "price_change_pct": -2.69,
+      "vol_ratio_today": 0.94
     }
   ],
   "opportunities": [],
@@ -138,10 +138,10 @@
       "stop_order_id": null,
       "stop_price": null,
       "note": "Disaster stop rejected: fractional qty 0.152692 < 1 share, GTC stop_market not supported. Executor/backstop are the stop.",
-      "last_price": 625.31,
-      "current_value": 95.44,
-      "pnl": 0.96,
-      "pnl_pct": 1.0
+      "last_price": 623.6,
+      "current_value": 95.22,
+      "pnl": 0.74,
+      "pnl_pct": 0.8
     },
     {
       "ticker": "V",
@@ -159,10 +159,10 @@
       "stop_order_id": null,
       "stop_price": null,
       "note": "Disaster stop rejected: fractional qty 0.235194 < 1 share, GTC stop_market not supported. Executor/backstop are the stop.",
-      "last_price": 409.58,
-      "current_value": 96.34,
-      "pnl": 1.86,
-      "pnl_pct": 2.0
+      "last_price": 407.92,
+      "current_value": 95.94,
+      "pnl": 1.46,
+      "pnl_pct": 1.5
     },
     {
       "ticker": "PFE",
@@ -180,10 +180,10 @@
       "stop_order_id": "6adb657e-e3f9-4007-b6c2-d827876a3078",
       "stop_price": 24.34,
       "note": "Disaster stop placed for 3 whole shares; 0.208160 fractional remainder unprotected.",
-      "last_price": 30.15,
-      "current_value": 96.73,
-      "pnl": 2.25,
-      "pnl_pct": 2.4
+      "last_price": 30.03,
+      "current_value": 96.34,
+      "pnl": 1.86,
+      "pnl_pct": 2.0
     }
   ],
   "trade_history": [
@@ -456,7 +456,7 @@
         "total_pnl": -115.0
       }
     },
-    "last_computed": "2026-10-23T07:24:38"
+    "last_computed": "2026-10-23T23:58:21"
   },
   "circuit_breaker": {
     "active": false,
@@ -541,7 +541,7 @@
     },
     {
       "timestamp": "2026-10-23T13:48:05Z",
-      "message": "PFE disaster stop updated: cancelled 6ad8c256 ($24.09), placed 6adb657e ($24.34) for 3 shares. Peak moved $30.11→$30.42. Fractional remainder 0.208160 still unprotected by broker stop."
+      "message": "PFE disaster stop updated: cancelled 6ad8c256 ($24.09), placed 6adb657e ($24.34) for 3 shares. Peak moved $30.11\u2192$30.42. Fractional remainder 0.208160 still unprotected by broker stop."
     },
     {
       "timestamp": "2026-10-23T19:45:04Z",
