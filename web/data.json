@@ -1,16 +1,16 @@
 {
-  "last_updated": "2026-10-22T13:46:00",
+  "last_updated": "2026-10-23T00:08:19",
   "last_run": "2026-10-22T13:46:00Z",
   "last_run_summary": "HOLD. 3/3 slots held (MA/V/PFE), 0 exits, 0 entries (slots=0). Days=3. Trails: MA $529.23, V $346.67, PFE $25.59. PFE GTC stop OK 6ad8c256 @$24.09.",
-  "oil_price": 99.55,
+  "oil_price": 99.31,
   "oil_status": "ok",
   "briefing": {
-    "date": "Oct 21",
-    "signal_date": "2026-10-21",
-    "headline": "6 setup(s). Best: MA (0.33% from 52w high)",
-    "body": "Executor buys at the next 9:45 ET run: fractional shares, 30% of equity each, max 3.",
-    "action": "BUY",
-    "action_detail": "6 share setup(s)"
+    "date": "Oct 22",
+    "signal_date": "2026-10-22",
+    "headline": "Market downtrend -- no entries.",
+    "body": "SPY closed below its 20-day MA. Open positions keep their trailing stops.",
+    "action": "HOLD",
+    "action_detail": "Market regime filter"
   },
   "watchlist": [
     {
@@ -23,10 +23,10 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget ($132). Revisit when capital > $300.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-10-22 07:29",
+      "last_checked": "2026-10-23 00:08",
       "current_price": 407.85,
       "price_change_pct": 0.31,
-      "vol_ratio_today": 0.81
+      "vol_ratio_today": 1.11
     },
     {
       "ticker": "AAPL",
@@ -38,10 +38,10 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget ($132). Revisit when capital > $300. Target $315C or $320C for Jul 17 expiry.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-10-22 07:29",
+      "last_checked": "2026-10-23 00:08",
       "current_price": 343.99,
       "price_change_pct": 1.32,
-      "vol_ratio_today": 0.86
+      "vol_ratio_today": 1.1
     },
     {
       "ticker": "RTX",
@@ -53,10 +53,10 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget. Earnings Jul 23 means Jul 17 expiry only. Need $400 to trade 1 contract properly.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-10-22 07:29",
+      "last_checked": "2026-10-23 00:08",
       "current_price": 191.6,
       "price_change_pct": -0.9,
-      "vol_ratio_today": 0.98
+      "vol_ratio_today": 0.76
     },
     {
       "ticker": "GE",
@@ -68,128 +68,13 @@
       "status": "watching",
       "day_trade_plan": "BLACKOUT until Jul 17 (earnings Jul 16). Reassess after.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-10-22 07:29",
+      "last_checked": "2026-10-23 00:08",
       "current_price": 295.88,
       "price_change_pct": -1.33,
-      "vol_ratio_today": 1.25
+      "vol_ratio_today": 0.99
     }
   ],
-  "opportunities": [
-    {
-      "ticker": "MA",
-      "price": 622.62,
-      "52w_high": 624.66,
-      "dist_pct": 0.33,
-      "vol_ratio": 0.92,
-      "rs_delta": 0.0992,
-      "score": 93.5,
-      "stop": 529.23,
-      "call_ref": {
-        "expiry": "2027-01-15",
-        "dte": 85,
-        "strike": 560.0,
-        "mid": 74.4,
-        "cost": 7440.0,
-        "spread_pct": null,
-        "breakeven": 634.4
-      }
-    },
-    {
-      "ticker": "V",
-      "price": 407.85,
-      "52w_high": 409.53,
-      "dist_pct": 0.41,
-      "vol_ratio": 0.93,
-      "rs_delta": 0.1014,
-      "score": 91.8,
-      "stop": 346.67,
-      "call_ref": {
-        "expiry": "2027-01-15",
-        "dte": 85,
-        "strike": 365.0,
-        "mid": 47.54,
-        "cost": 4754.0,
-        "spread_pct": null,
-        "breakeven": 412.54
-      }
-    },
-    {
-      "ticker": "CVX",
-      "price": 226.78,
-      "52w_high": 228.48,
-      "dist_pct": 0.74,
-      "vol_ratio": 1.1,
-      "rs_delta": 0.1107,
-      "score": 85.1,
-      "stop": 192.76,
-      "call_ref": {
-        "expiry": "2027-01-15",
-        "dte": 85,
-        "strike": 200.0,
-        "mid": 30.47,
-        "cost": 3047.0,
-        "spread_pct": null,
-        "breakeven": 230.47
-      }
-    },
-    {
-      "ticker": "XOM",
-      "price": 178.09,
-      "52w_high": 180.26,
-      "dist_pct": 1.2,
-      "vol_ratio": 0.98,
-      "rs_delta": 0.0909,
-      "score": 75.9,
-      "stop": 151.38,
-      "call_ref": {
-        "expiry": "2027-01-15",
-        "dte": 85,
-        "strike": 160.0,
-        "mid": 20.75,
-        "cost": 2075.0,
-        "spread_pct": null,
-        "breakeven": 180.75
-      }
-    },
-    {
-      "ticker": "BLK",
-      "price": 1149.6,
-      "52w_high": 1181.11,
-      "dist_pct": 2.67,
-      "vol_ratio": 1.18,
-      "rs_delta": 0.0801,
-      "score": 46.6,
-      "stop": 977.16,
-      "call_ref": {
-        "expiry": "2027-01-15",
-        "dte": 85,
-        "strike": 1030.0,
-        "mid": 95.0,
-        "cost": 9500.0,
-        "spread_pct": null,
-        "breakeven": 1125.0
-      }
-    },
-    {
-      "ticker": "DHR",
-      "price": 233.86,
-      "52w_high": 241.35,
-      "dist_pct": 3.11,
-      "vol_ratio": 1.83,
-      "rs_delta": 0.0757,
-      "score": 37.9,
-      "stop": 198.78,
-      "call_ref": {
-        "expiry": "2027-01-15",
-        "dte": 85,
-        "strike": 210.0,
-        "mid": 27.1,
-        "cost": 2710.0,
-        "spread_pct": null,
-        "breakeven": 237.1
-      }
-    }
-  ],
+  "opportunities": [],
   "positions": [
     {
       "ticker": "PFE",
@@ -253,10 +138,10 @@
       "stop_order_id": null,
       "stop_price": null,
       "note": "Disaster stop rejected: fractional qty 0.152692 < 1 share, GTC stop_market not supported. Executor/backstop are the stop.",
-      "last_price": 627.01,
-      "current_value": 95.74,
-      "pnl": 1.26,
-      "pnl_pct": 1.3
+      "last_price": NaN,
+      "current_value": NaN,
+      "pnl": NaN,
+      "pnl_pct": NaN
     },
     {
       "ticker": "V",
@@ -274,10 +159,10 @@
       "stop_order_id": null,
       "stop_price": null,
       "note": "Disaster stop rejected: fractional qty 0.235194 < 1 share, GTC stop_market not supported. Executor/backstop are the stop.",
-      "last_price": 411.26,
-      "current_value": 96.73,
-      "pnl": 2.25,
-      "pnl_pct": 2.4
+      "last_price": NaN,
+      "current_value": NaN,
+      "pnl": NaN,
+      "pnl_pct": NaN
     },
     {
       "ticker": "PFE",
@@ -295,10 +180,10 @@
       "stop_order_id": "6ad8c256-d4a7-4b4e-83e3-8a5cd16d2855",
       "stop_price": 24.09,
       "note": "Disaster stop placed for 3 whole shares; 0.208160 fractional remainder unprotected.",
-      "last_price": 30.025,
-      "current_value": 96.32,
-      "pnl": 1.84,
-      "pnl_pct": 1.9
+      "last_price": NaN,
+      "current_value": NaN,
+      "pnl": NaN,
+      "pnl_pct": NaN
     }
   ],
   "trade_history": [
@@ -571,7 +456,7 @@
         "total_pnl": -115.0
       }
     },
-    "last_computed": "2026-10-22T07:30:14"
+    "last_computed": "2026-10-23T00:08:19"
   },
   "circuit_breaker": {
     "active": false,
