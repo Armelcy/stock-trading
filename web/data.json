@@ -669,7 +669,15 @@
     {
       "timestamp": "2026-10-29T13:53:00Z",
       "message": "Dead-man check: V has no disaster stop (fractional qty 0.235194 < 1 share, GTC stop not supported by broker). Backstop runs are the protection."
+    },
+    {
+      "timestamp": "2026-10-29T19:44:00Z",
+      "message": "Dead-man check: MA has no disaster stop (fractional qty 0.152692 < 1 share, GTC stop not supported by broker). Backstop runs are the protection."
+    },
+    {
+      "timestamp": "2026-10-29T19:44:00Z",
+      "message": "Dead-man check: V has no disaster stop (fractional qty 0.235194 < 1 share, GTC stop not supported by broker). Backstop runs are the protection."
     }
   ],
-  "backstop_last_run": "2026-10-28T19:46:31Z"
+  "backstop_last_run": "2026-10-29T19:44:00Z"
 }
