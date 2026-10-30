@@ -1,7 +1,7 @@
 {
-  "last_updated": "2026-10-30T08:32:49",
-  "last_run": "2026-10-29T13:53:00Z",
-  "last_run_summary": "HOLD. 3/3 held (MA/V/PFE). No exits, no entries (full 3/3). Days=8. Peaks: MA $633.21, V $414.34, PFE $30.42. Trails: MA $538.23, V $352.19, PFE $25.86. PFE GTC stop 6adb657e@$24.34 confirmed.",
+  "last_updated": "2026-10-30T13:47:00",
+  "last_run": "2026-10-30T13:47:00Z",
+  "last_run_summary": "HOLD. 3/3 held (MA/V/PFE). No exits. Days=9. Peaks: MA $635.70 (new high), V $414.34, PFE $30.42. Trails: MA $540.35, V $352.19, PFE $25.86. PFE GTC stop 6adb657e@$24.34 confirmed. HWM→$324.30.",
   "oil_price": 103.68,
   "oil_status": "ok",
   "briefing": {
@@ -18,7 +18,7 @@
       "name": "Visa Inc.",
       "added_date": "2026-07-03",
       "price_at_add": 361.58,
-      "thesis": "Hit 52-week high ($362.13) on Jul 2 \u2014 textbook breakout. Up +3% on 0.85x volume. No earnings in next 21 days. Financials sector leader. Need $300+ in account for options to be affordable (ATM calls ~$5-8/sh).",
+      "thesis": "Hit 52-week high ($362.13) on Jul 2 — textbook breakout. Up +3% on 0.85x volume. No earnings in next 21 days. Financials sector leader. Need $300+ in account for options to be affordable (ATM calls ~$5-8/sh).",
       "watch_for": "Account reaches $300+ available capital. Then enter ATM $365C 2-3 weeks out. Confirm momentum holds above $360.",
       "status": "watching",
       "day_trade_plan": "Not viable at current budget ($132). Revisit when capital > $300.",
@@ -34,7 +34,7 @@
       "added_date": "2026-07-03",
       "price_at_add": 308.24,
       "thesis": "2.88% from 52w high ($317.40). Massive +4.71% move on Jul 2 on 0.87x volume. Strong breakout momentum. Options expensive for current budget ($310C = $5.65/sh). Need $300+ in account. Watch for earnings date (likely late July).",
-      "watch_for": "Confirm earnings date \u2014 if after Aug 1, safe to trade July expiry. Account needs $300+ for ATM calls. Watch for continued momentum above $305.",
+      "watch_for": "Confirm earnings date — if after Aug 1, safe to trade July expiry. Account needs $300+ for ATM calls. Watch for continued momentum above $305.",
       "status": "watching",
       "day_trade_plan": "Not viable at current budget ($132). Revisit when capital > $300. Target $315C or $320C for Jul 17 expiry.",
       "signal": "QUIET -- no signal today.",
@@ -48,7 +48,7 @@
       "name": "RTX Corp (Raytheon)",
       "added_date": "2026-07-03",
       "price_at_add": 199.11,
-      "thesis": "7.18% from 52w high ($214.50). Up +3.82% on Jul 2, vol ratio 1.0x. Defense sector surge (LMT +4.6%, NOC +5.4% same day). Earnings Jul 23 \u2014 can only trade Jul 17 expiry or earlier. ATM $200C at $3.73/sh still too expensive at $132 budget.",
+      "thesis": "7.18% from 52w high ($214.50). Up +3.82% on Jul 2, vol ratio 1.0x. Defense sector surge (LMT +4.6%, NOC +5.4% same day). Earnings Jul 23 — can only trade Jul 17 expiry or earlier. ATM $200C at $3.73/sh still too expensive at $132 budget.",
       "watch_for": "Account reaches $400+. Enter $200C or $202.5C for Jul 17 expiry (before earnings Jul 23). Exit by Jul 16 EOD.",
       "status": "watching",
       "day_trade_plan": "Not viable at current budget. Earnings Jul 23 means Jul 17 expiry only. Need $400 to trade 1 contract properly.",
@@ -63,7 +63,7 @@
       "name": "GE Aerospace",
       "added_date": "2026-06-09",
       "price_at_add": 330.44,
-      "thesis": "Industrial sector leader. Up +0.7% Jul 2. Earnings Jul 16 \u2014 blackout until Jul 17+. After earnings, reassess for Aug expiry calls if momentum holds.",
+      "thesis": "Industrial sector leader. Up +0.7% Jul 2. Earnings Jul 16 — blackout until Jul 17+. After earnings, reassess for Aug expiry calls if momentum holds.",
       "watch_for": "Earnings Jul 16. After report, check if momentum continues. Then evaluate Aug calls if account > $300.",
       "status": "watching",
       "day_trade_plan": "BLACKOUT until Jul 17 (earnings Jul 16). Reassess after.",
@@ -128,20 +128,20 @@
       "entry_price": 618.7599,
       "entry_cost": 94.48,
       "entry_date": "2026-10-16",
-      "peak_close": 633.21,
-      "trail": 538.23,
-      "days_held": 8,
-      "last_close": 610.31,
+      "peak_close": 635.70,
+      "trail": 540.35,
+      "days_held": 9,
+      "last_close": 635.70,
       "status": "open",
       "order_id": "6ad22ad4-6cd0-40f6-a5bd-2f874ea1196e",
       "strategy": "shares_momentum_v4",
       "stop_order_id": null,
       "stop_price": null,
       "note": "Disaster stop rejected: fractional qty 0.152692 < 1 share, GTC stop_market not supported. Executor/backstop are the stop.",
-      "last_price": 635.7,
-      "current_value": 97.07,
-      "pnl": 2.59,
-      "pnl_pct": 2.7
+      "last_price": 639.70,
+      "current_value": 97.68,
+      "pnl": 3.20,
+      "pnl_pct": 3.4
     },
     {
       "ticker": "V",
@@ -151,18 +151,18 @@
       "entry_date": "2026-10-16",
       "peak_close": 414.34,
       "trail": 352.19,
-      "days_held": 8,
-      "last_close": 400.6,
+      "days_held": 9,
+      "last_close": 410.54,
       "status": "open",
       "order_id": "6ad22ad6-4782-40fd-8beb-b8271f0580c5",
       "strategy": "shares_momentum_v4",
       "stop_order_id": null,
       "stop_price": null,
       "note": "Disaster stop rejected: fractional qty 0.235194 < 1 share, GTC stop_market not supported. Executor/backstop are the stop.",
-      "last_price": 410.54,
-      "current_value": 96.56,
-      "pnl": 2.08,
-      "pnl_pct": 2.2
+      "last_price": 413.82,
+      "current_value": 97.33,
+      "pnl": 2.85,
+      "pnl_pct": 3.0
     },
     {
       "ticker": "PFE",
@@ -172,18 +172,18 @@
       "entry_date": "2026-10-16",
       "peak_close": 30.42,
       "trail": 25.86,
-      "days_held": 8,
-      "last_close": 29.45,
+      "days_held": 9,
+      "last_close": 29.95,
       "status": "open",
       "order_id": "6ad22ad7-12ed-4d23-a251-22f28c34d1ce",
       "strategy": "shares_momentum_v4",
       "stop_order_id": "6adb657e-e3f9-4007-b6c2-d827876a3078",
       "stop_price": 24.34,
       "note": "Disaster stop placed for 3 whole shares; 0.208160 fractional remainder unprotected.",
-      "last_price": 29.95,
-      "current_value": 96.08,
-      "pnl": 1.6,
-      "pnl_pct": 1.7
+      "last_price": 30.49,
+      "current_value": 97.82,
+      "pnl": 3.34,
+      "pnl_pct": 3.5
     }
   ],
   "trade_history": [
@@ -234,7 +234,7 @@
       "closed_at": "2026-08-21T12:19:14Z",
       "exit_order_id": "6a884242-e321-4a8b-8e41-b361f891557e",
       "status": "closed",
-      "note": "Diagnostic test entry. Executor cut at $0.39 on Aug 21 \u2014 pre-market fill, stock was rallying at exit."
+      "note": "Diagnostic test entry. Executor cut at $0.39 on Aug 21 — pre-market fill, stock was rallying at exit."
     },
     {
       "date": "2026-08-19",
@@ -253,7 +253,7 @@
       "closed_at": "2026-08-21T12:19:15Z",
       "exit_order_id": "6a884243-2bf7-4269-adf7-14ecfb4f568e",
       "status": "closed",
-      "note": "Autonomous entry. Executor cut at $0.10 on Aug 21 \u2014 pre-market fill, stock was rallying at exit. Premature exit."
+      "note": "Autonomous entry. Executor cut at $0.10 on Aug 21 — pre-market fill, stock was rallying at exit. Premature exit."
     },
     {
       "date": "2026-08-19",
@@ -315,10 +315,10 @@
   ],
   "portfolio": {
     "starting_balance": 630.0,
-    "current_balance": 321.55,
+    "current_balance": 324.30,
     "committed": 283.44,
     "available": 31.48,
-    "hwm": 321.55,
+    "hwm": 324.30,
     "ultimate_goal": 10000,
     "phase": 1,
     "phases": [
@@ -379,7 +379,7 @@
         "week": 11,
         "label": "Aug 17",
         "balance": 500.0,
-        "note": "Fresh $500 deposited to Agentic account (\u2022\u2022\u2022\u20228728). Max/trade bumped to $150. Awaiting options level approval."
+        "note": "Fresh $500 deposited to Agentic account (••••8728). Max/trade bumped to $150. Awaiting options level approval."
       },
       {
         "week": 11,
@@ -391,7 +391,7 @@
         "week": 12,
         "label": "Aug 21",
         "balance": 369.0,
-        "note": "Executor cut SCHW pos1 at $0.39 (-54.6%, -$47) and BAC at $0.10 (-58.3%, -$84) \u2014 pre-market fills at open while stock was rallying. -$131 realized. SCHW pos2 (2c) still open at ~-25%. Fix deployed: exits now blocked before 9:45 AM ET."
+        "note": "Executor cut SCHW pos1 at $0.39 (-54.6%, -$47) and BAC at $0.10 (-58.3%, -$84) — pre-market fills at open while stock was rallying. -$131 realized. SCHW pos2 (2c) still open at ~-25%. Fix deployed: exits now blocked before 9:45 AM ET."
       },
       {
         "week": 16,
@@ -476,22 +476,6 @@
   },
   "alerts": [
     {
-      "timestamp": "2026-10-22T19:45:01Z",
-      "message": "Dead-man check: V has no disaster stop (fractional qty 0.235194 < 1 share, GTC stop not supported by broker). Backstop runs are the protection."
-    },
-    {
-      "timestamp": "2026-10-23T13:48:05Z",
-      "message": "Dead-man check: MA has no disaster stop (fractional qty 0.152692 < 1 share, GTC stop not supported by broker). Backstop runs are the protection."
-    },
-    {
-      "timestamp": "2026-10-23T13:48:05Z",
-      "message": "Dead-man check: V has no disaster stop (fractional qty 0.235194 < 1 share, GTC stop not supported by broker). Backstop runs are the protection."
-    },
-    {
-      "timestamp": "2026-10-23T13:48:05Z",
-      "message": "PFE disaster stop updated: cancelled 6ad8c256 ($24.09), placed 6adb657e ($24.34) for 3 shares. Peak moved $30.11\u2192$30.42. Fractional remainder 0.208160 still unprotected by broker stop."
-    },
-    {
       "timestamp": "2026-10-23T19:45:04Z",
       "message": "Dead-man check: MA has no disaster stop (fractional qty 0.152692 < 1 share, GTC stop not supported by broker). Backstop runs are the protection."
     },
@@ -561,6 +545,14 @@
     },
     {
       "timestamp": "2026-10-29T19:44:00Z",
+      "message": "Dead-man check: V has no disaster stop (fractional qty 0.235194 < 1 share, GTC stop not supported by broker). Backstop runs are the protection."
+    },
+    {
+      "timestamp": "2026-10-30T13:47:00Z",
+      "message": "Dead-man check: MA has no disaster stop (fractional qty 0.152692 < 1 share, GTC stop not supported by broker). Backstop runs are the protection."
+    },
+    {
+      "timestamp": "2026-10-30T13:47:00Z",
       "message": "Dead-man check: V has no disaster stop (fractional qty 0.235194 < 1 share, GTC stop not supported by broker). Backstop runs are the protection."
     }
   ],
