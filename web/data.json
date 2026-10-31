@@ -1,8 +1,8 @@
 {
-  "last_updated": "2026-10-31T01:00:27",
+  "last_updated": "2026-10-31T08:22:21",
   "last_run": "2026-10-30T13:47:00Z",
   "last_run_summary": "HOLD. 3/3 held (MA/V/PFE). No exits. Days=9. Peaks: MA $635.70 (new high), V $414.34, PFE $30.42. Trails: MA $540.35, V $352.19, PFE $25.86. PFE GTC stop 6adb657e@$24.34 confirmed. HWM\u2192$324.30.",
-  "oil_price": 102.95,
+  "oil_price": 104.12,
   "oil_status": "ok",
   "briefing": {
     "date": "Oct 30",
@@ -23,9 +23,9 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget ($132). Revisit when capital > $300.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-10-31 01:00",
-      "current_price": 410.54,
-      "price_change_pct": 2.48,
+      "last_checked": "2026-10-31 08:22",
+      "current_price": 413.59,
+      "price_change_pct": 0.74,
       "vol_ratio_today": 1.0
     },
     {
@@ -38,9 +38,9 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget ($132). Revisit when capital > $300. Target $315C or $320C for Jul 17 expiry.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-10-31 01:00",
-      "current_price": 348.91,
-      "price_change_pct": 1.48,
+      "last_checked": "2026-10-31 08:22",
+      "current_price": 344.63,
+      "price_change_pct": -1.23,
       "vol_ratio_today": 1.48
     },
     {
@@ -53,9 +53,9 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget. Earnings Jul 23 means Jul 17 expiry only. Need $400 to trade 1 contract properly.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-10-31 01:00",
-      "current_price": 199.4,
-      "price_change_pct": 1.82,
+      "last_checked": "2026-10-31 08:22",
+      "current_price": 199.8,
+      "price_change_pct": 0.2,
       "vol_ratio_today": 0.96
     },
     {
@@ -67,10 +67,10 @@
       "watch_for": "Earnings Jul 16. After report, check if momentum continues. Then evaluate Aug calls if account > $300.",
       "status": "watching",
       "day_trade_plan": "BLACKOUT until Jul 17 (earnings Jul 16). Reassess after.",
-      "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-10-31 01:00",
-      "current_price": 313.05,
-      "price_change_pct": 3.96,
+      "signal": "WATCH -- mild dip. Wait for volume confirmation.",
+      "last_checked": "2026-10-31 08:22",
+      "current_price": 301.8,
+      "price_change_pct": -3.59,
       "vol_ratio_today": 0.84
     }
   ],
@@ -138,10 +138,10 @@
       "stop_order_id": null,
       "stop_price": null,
       "note": "Disaster stop rejected: fractional qty 0.152692 < 1 share, GTC stop_market not supported. Executor/backstop are the stop.",
-      "last_price": NaN,
-      "current_value": NaN,
-      "pnl": NaN,
-      "pnl_pct": NaN
+      "last_price": 638.01,
+      "current_value": 97.42,
+      "pnl": 2.94,
+      "pnl_pct": 3.1
     },
     {
       "ticker": "V",
@@ -159,10 +159,10 @@
       "stop_order_id": null,
       "stop_price": null,
       "note": "Disaster stop rejected: fractional qty 0.235194 < 1 share, GTC stop_market not supported. Executor/backstop are the stop.",
-      "last_price": NaN,
-      "current_value": NaN,
-      "pnl": NaN,
-      "pnl_pct": NaN
+      "last_price": 413.59,
+      "current_value": 97.27,
+      "pnl": 2.79,
+      "pnl_pct": 3.0
     },
     {
       "ticker": "PFE",
@@ -180,10 +180,10 @@
       "stop_order_id": "6adb657e-e3f9-4007-b6c2-d827876a3078",
       "stop_price": 24.34,
       "note": "Disaster stop placed for 3 whole shares; 0.208160 fractional remainder unprotected.",
-      "last_price": NaN,
-      "current_value": NaN,
-      "pnl": NaN,
-      "pnl_pct": NaN
+      "last_price": 30.52,
+      "current_value": 97.91,
+      "pnl": 3.43,
+      "pnl_pct": 3.6
     }
   ],
   "trade_history": [
@@ -456,7 +456,7 @@
         "total_pnl": -115.0
       }
     },
-    "last_computed": "2026-10-31T01:00:27"
+    "last_computed": "2026-10-31T08:22:21"
   },
   "circuit_breaker": {
     "active": false,
