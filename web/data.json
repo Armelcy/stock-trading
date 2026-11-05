@@ -1,7 +1,7 @@
 {
-  "last_updated": "2026-11-05T09:23:58",
-  "last_run": "2026-11-04T14:48:00Z",
-  "last_run_summary": "HOLD (briefing). 3/3 held (MA/V/PFE). No exits. Days=12. PFE GTC 6ae9f3f4@$24.54 ok. MA trail $559.39, V trail $361.68, PFE trail $26.07. HWM $330.44 (new).",
+  "last_updated": "2026-11-05T14:48:00Z",
+  "last_run": "2026-11-05T14:48:00Z",
+  "last_run_summary": "HOLD (briefing). 3/3 held (MA/V/PFE). No exits. Days=13. MA peak↑$672.68 trail $571.78, V peak↑$436.57 trail $371.08, PFE peak↑$30.79 trail $26.17. PFE GTC 6aec970d@$24.63. HWM $337.67 (new).",
   "oil_price": 88.09,
   "oil_status": "ok",
   "briefing": {
@@ -128,20 +128,20 @@
       "entry_price": 618.7599,
       "entry_cost": 94.48,
       "entry_date": "2026-10-16",
-      "peak_close": 658.1,
-      "trail": 559.39,
-      "days_held": 12,
-      "last_close": 647.18,
+      "peak_close": 672.68,
+      "trail": 571.78,
+      "days_held": 13,
+      "last_close": 672.68,
       "status": "open",
       "order_id": "6ad22ad4-6cd0-40f6-a5bd-2f874ea1196e",
       "strategy": "shares_momentum_v4",
       "stop_order_id": null,
       "stop_price": null,
       "note": "Disaster stop rejected: fractional qty 0.152692 < 1 share, GTC stop_market not supported. Executor/backstop are the stop.",
-      "last_price": 672.68,
-      "current_value": 102.71,
-      "pnl": 8.23,
-      "pnl_pct": 8.7
+      "last_price": 676.40,
+      "current_value": 103.28,
+      "pnl": 8.80,
+      "pnl_pct": 9.3
     },
     {
       "ticker": "V",
@@ -149,20 +149,20 @@
       "entry_price": 401.7099,
       "entry_cost": 94.48,
       "entry_date": "2026-10-16",
-      "peak_close": 425.51,
-      "trail": 361.68,
-      "days_held": 12,
-      "last_close": 420.42,
+      "peak_close": 436.57,
+      "trail": 371.08,
+      "days_held": 13,
+      "last_close": 436.57,
       "status": "open",
       "order_id": "6ad22ad6-4782-40fd-8beb-b8271f0580c5",
       "strategy": "shares_momentum_v4",
       "stop_order_id": null,
       "stop_price": null,
       "note": "Disaster stop rejected: fractional qty 0.235194 < 1 share, GTC stop_market not supported. Executor/backstop are the stop.",
-      "last_price": 436.57,
-      "current_value": 102.68,
-      "pnl": 8.2,
-      "pnl_pct": 8.7
+      "last_price": 437.95,
+      "current_value": 103.00,
+      "pnl": 8.52,
+      "pnl_pct": 9.0
     },
     {
       "ticker": "PFE",
@@ -170,20 +170,20 @@
       "entry_price": 29.4499,
       "entry_cost": 94.48,
       "entry_date": "2026-10-16",
-      "peak_close": 30.67,
-      "trail": 26.07,
-      "days_held": 12,
-      "last_close": 30.0,
+      "peak_close": 30.79,
+      "trail": 26.17,
+      "days_held": 13,
+      "last_close": 30.79,
       "status": "open",
       "order_id": "6ad22ad7-12ed-4d23-a251-22f28c34d1ce",
       "strategy": "shares_momentum_v4",
-      "stop_order_id": "6ae9f3f4-e918-478e-a1e6-ae2226cfceea",
-      "stop_price": 24.54,
+      "stop_order_id": "6aec970d-51f8-4034-9007-0ba369ef5f7f",
+      "stop_price": 24.63,
       "note": "Disaster stop placed for 3 whole shares; 0.208160 fractional remainder unprotected.",
-      "last_price": 30.79,
-      "current_value": 98.78,
-      "pnl": 4.3,
-      "pnl_pct": 4.6
+      "last_price": 31.195,
+      "current_value": 100.08,
+      "pnl": 5.60,
+      "pnl_pct": 5.9
     }
   ],
   "trade_history": [
@@ -315,10 +315,10 @@
   ],
   "portfolio": {
     "starting_balance": 630.0,
-    "current_balance": 330.44,
+    "current_balance": 337.67,
     "committed": 283.44,
     "available": 31.48,
-    "hwm": 330.44,
+    "hwm": 337.67,
     "ultimate_goal": 10000,
     "phase": 1,
     "phases": [
@@ -476,26 +476,6 @@
   },
   "alerts": [
     {
-      "timestamp": "2026-10-29T13:53:00Z",
-      "message": "Dead-man check: MA has no disaster stop (fractional qty 0.152692 < 1 share, GTC stop not supported by broker). Backstop runs are the protection."
-    },
-    {
-      "timestamp": "2026-10-29T13:53:00Z",
-      "message": "Dead-man check: V has no disaster stop (fractional qty 0.235194 < 1 share, GTC stop not supported by broker). Backstop runs are the protection."
-    },
-    {
-      "timestamp": "2026-10-29T19:44:00Z",
-      "message": "Dead-man check: MA has no disaster stop (fractional qty 0.152692 < 1 share, GTC stop not supported by broker). Backstop runs are the protection."
-    },
-    {
-      "timestamp": "2026-10-29T19:44:00Z",
-      "message": "Dead-man check: V has no disaster stop (fractional qty 0.235194 < 1 share, GTC stop not supported by broker). Backstop runs are the protection."
-    },
-    {
-      "timestamp": "2026-10-30T13:47:00Z",
-      "message": "Dead-man check: MA has no disaster stop (fractional qty 0.152692 < 1 share, GTC stop not supported by broker). Backstop runs are the protection."
-    },
-    {
       "timestamp": "2026-10-30T13:47:00Z",
       "message": "Dead-man check: V has no disaster stop (fractional qty 0.235194 < 1 share, GTC stop not supported by broker). Backstop runs are the protection."
     },
@@ -561,6 +541,18 @@
     },
     {
       "timestamp": "2026-11-04T20:44:25Z",
+      "message": "Dead-man check: V has no disaster stop (fractional qty 0.235194 < 1 share, GTC stop not supported by broker). Backstop runs are the protection."
+    },
+    {
+      "timestamp": "2026-11-05T14:48:00Z",
+      "message": "PFE disaster stop replaced: old 6ae9f3f4 cancelled, new 6aec970d@$24.63 placed (peak_close $30.67→$30.79)."
+    },
+    {
+      "timestamp": "2026-11-05T14:48:00Z",
+      "message": "Dead-man check: MA has no disaster stop (fractional qty 0.152692 < 1 share, GTC stop not supported by broker). Backstop runs are the protection."
+    },
+    {
+      "timestamp": "2026-11-05T14:48:00Z",
       "message": "Dead-man check: V has no disaster stop (fractional qty 0.235194 < 1 share, GTC stop not supported by broker). Backstop runs are the protection."
     }
   ],
