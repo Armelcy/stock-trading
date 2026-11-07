@@ -1,8 +1,8 @@
 {
-  "last_updated": "2026-11-07T01:10:07",
+  "last_updated": "2026-11-07T08:41:17",
   "last_run": "2026-11-06T14:46:00Z",
   "last_run_summary": "HOLD (briefing). 3/3 held (MA/V/PFE). No exits. Days=14. MA peak=$672.68 trail $571.78 last $655.92. V peak=$436.57 trail $371.08 last $422.59. PFE peak=$30.79 trail $26.17 last $29.88, GTC 6aec970d@$24.63.",
-  "oil_price": 90.34,
+  "oil_price": 90.83,
   "oil_status": "ok",
   "briefing": {
     "date": "Nov 06",
@@ -22,10 +22,10 @@
       "watch_for": "Account reaches $300+ available capital. Then enter ATM $365C 2-3 weeks out. Confirm momentum holds above $360.",
       "status": "watching",
       "day_trade_plan": "Not viable at current budget ($132). Revisit when capital > $300.",
-      "signal": "WATCH -- mild dip. Wait for volume confirmation.",
-      "last_checked": "2026-11-07 01:10",
-      "current_price": 422.59,
-      "price_change_pct": -3.2,
+      "signal": "QUIET -- no signal today.",
+      "last_checked": "2026-11-07 08:41",
+      "current_price": 422.65,
+      "price_change_pct": 0.01,
       "vol_ratio_today": 0.98
     },
     {
@@ -38,10 +38,10 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget ($132). Revisit when capital > $300. Target $315C or $320C for Jul 17 expiry.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-11-07 01:10",
-      "current_price": 344.17,
-      "price_change_pct": -1.53,
-      "vol_ratio_today": 0.65
+      "last_checked": "2026-11-07 08:41",
+      "current_price": 342.37,
+      "price_change_pct": -0.52,
+      "vol_ratio_today": 0.66
     },
     {
       "ticker": "RTX",
@@ -52,10 +52,10 @@
       "watch_for": "Account reaches $400+. Enter $200C or $202.5C for Jul 17 expiry (before earnings Jul 23). Exit by Jul 16 EOD.",
       "status": "watching",
       "day_trade_plan": "Not viable at current budget. Earnings Jul 23 means Jul 17 expiry only. Need $400 to trade 1 contract properly.",
-      "signal": "WATCH -- mild dip. Wait for volume confirmation.",
-      "last_checked": "2026-11-07 01:10",
-      "current_price": 191.88,
-      "price_change_pct": -3.3,
+      "signal": "QUIET -- no signal today.",
+      "last_checked": "2026-11-07 08:41",
+      "current_price": 189.53,
+      "price_change_pct": -1.22,
       "vol_ratio_today": 0.89
     },
     {
@@ -67,10 +67,10 @@
       "watch_for": "Earnings Jul 16. After report, check if momentum continues. Then evaluate Aug calls if account > $300.",
       "status": "watching",
       "day_trade_plan": "BLACKOUT until Jul 17 (earnings Jul 16). Reassess after.",
-      "signal": "WATCH -- mild dip. Wait for volume confirmation.",
-      "last_checked": "2026-11-07 01:10",
-      "current_price": 314.73,
-      "price_change_pct": -4.47,
+      "signal": "QUIET -- no signal today.",
+      "last_checked": "2026-11-07 08:41",
+      "current_price": 323.24,
+      "price_change_pct": 2.7,
       "vol_ratio_today": 0.93
     }
   ],
@@ -138,10 +138,10 @@
       "stop_order_id": null,
       "stop_price": null,
       "note": "Disaster stop rejected: fractional qty 0.152692 < 1 share, GTC stop_market not supported. Executor/backstop are the stop.",
-      "last_price": NaN,
-      "current_value": NaN,
-      "pnl": NaN,
-      "pnl_pct": NaN
+      "last_price": 652.7,
+      "current_value": 99.66,
+      "pnl": 5.18,
+      "pnl_pct": 5.5
     },
     {
       "ticker": "V",
@@ -159,10 +159,10 @@
       "stop_order_id": null,
       "stop_price": null,
       "note": "Disaster stop rejected: fractional qty 0.235194 < 1 share, GTC stop_market not supported. Executor/backstop are the stop.",
-      "last_price": NaN,
-      "current_value": NaN,
-      "pnl": NaN,
-      "pnl_pct": NaN
+      "last_price": 422.65,
+      "current_value": 99.4,
+      "pnl": 4.92,
+      "pnl_pct": 5.2
     },
     {
       "ticker": "PFE",
@@ -180,10 +180,10 @@
       "stop_order_id": "6aec970d-51f8-4034-9007-0ba369ef5f7f",
       "stop_price": 24.63,
       "note": "Disaster stop placed for 3 whole shares; 0.208160 fractional remainder unprotected.",
-      "last_price": NaN,
-      "current_value": NaN,
-      "pnl": NaN,
-      "pnl_pct": NaN
+      "last_price": 29.39,
+      "current_value": 94.29,
+      "pnl": -0.19,
+      "pnl_pct": -0.2
     }
   ],
   "trade_history": [
@@ -456,7 +456,7 @@
         "total_pnl": -115.0
       }
     },
-    "last_computed": "2026-11-07T01:10:07"
+    "last_computed": "2026-11-07T08:41:17"
   },
   "circuit_breaker": {
     "active": false,
