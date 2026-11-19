@@ -1,8 +1,8 @@
 {
-  "last_updated": "2026-11-19T02:47:05",
+  "last_updated": "2026-11-19T10:13:37",
   "last_run": "2026-11-18T14:47:00Z",
   "last_run_summary": "HOLD (SPY below 20d MA). No exits. 3/3 held. MA d22 peak=$672.68 trail=$571.78 last=$645.73. V d22 peak=$436.57 trail=$371.08 last=$416.77. PFE d22 peak=$30.79 trail=$26.17 last=$28.47 GTC@$24.63 OK.",
-  "oil_price": 82.36,
+  "oil_price": 82.81,
   "oil_status": "warn",
   "briefing": {
     "date": "Nov 18",
@@ -23,7 +23,7 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget ($132). Revisit when capital > $300.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-11-19 02:47",
+      "last_checked": "2026-11-19 10:13",
       "current_price": 415.22,
       "price_change_pct": -0.37,
       "vol_ratio_today": 1.17
@@ -38,7 +38,7 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget ($132). Revisit when capital > $300. Target $315C or $320C for Jul 17 expiry.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-11-19 02:47",
+      "last_checked": "2026-11-19 10:13",
       "current_price": 352.45,
       "price_change_pct": 0.15,
       "vol_ratio_today": 0.88
@@ -53,7 +53,7 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget. Earnings Jul 23 means Jul 17 expiry only. Need $400 to trade 1 contract properly.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-11-19 02:47",
+      "last_checked": "2026-11-19 10:13",
       "current_price": 197.45,
       "price_change_pct": -0.28,
       "vol_ratio_today": 1.15
@@ -68,7 +68,7 @@
       "status": "watching",
       "day_trade_plan": "BLACKOUT until Jul 17 (earnings Jul 16). Reassess after.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-11-19 02:47",
+      "last_checked": "2026-11-19 10:13",
       "current_price": 328.1,
       "price_change_pct": 0.52,
       "vol_ratio_today": 0.94
@@ -456,7 +456,7 @@
         "total_pnl": -115.0
       }
     },
-    "last_computed": "2026-11-19T02:47:05"
+    "last_computed": "2026-11-19T10:13:37"
   },
   "circuit_breaker": {
     "active": false,
