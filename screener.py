@@ -13,7 +13,7 @@ Ranked by distance from the 52w high (closest first).
 
 Exits (enforced by the executor, not here): 15% trailing stop off the highest
 close since entry, or 60 trading days, whichever comes first.
-Sizing: max 3 positions x 30% of equity, fractional shares.
+Sizing: max 5 positions x 20% of equity, fractional shares.
 
 Not tested, so removed from v3.1: VIX gate, oil gate, earnings blackout/bonus,
 all option filters (premium, OI, IV, expiry).
@@ -38,8 +38,8 @@ SECTOR_MA_PERIOD    = 20
 HIGH_LOOKBACK       = 252
 MAX_OPPORTUNITIES   = 6      # executor needs spares when a top pick is already held
 # Rules the executor enforces (published in data.json so both sides agree)
-MAX_POSITIONS       = 3
-POSITION_FRAC       = 0.30
+MAX_POSITIONS       = 5
+POSITION_FRAC       = 0.20
 TRAIL_PCT           = 0.15
 MAX_HOLD_DAYS       = 60
 DISASTER_STOP_PCT   = 0.20   # broker-side GTC stop, below the 15% software trail
@@ -308,7 +308,7 @@ def save_dashboard(opportunities, signal_date, regime_blocked=False):
         top = opportunities[0]
         data["briefing"] = {"date": today_str, "signal_date": sd,
                             "headline": f"{len(opportunities)} setup(s). Best: {top['ticker']} ({top['dist_pct']}% from 52w high)",
-                            "body": "Executor buys at the next 9:45 ET run: fractional shares, 30% of equity each, max 3.",
+                            "body": "Executor buys at the next 9:45 ET run: fractional shares, 20% of equity each, max 5.",
                             "action": "BUY", "action_detail": f"{len(opportunities)} share setup(s)"}
     else:
         data["briefing"] = {"date": today_str, "signal_date": sd,

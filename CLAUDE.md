@@ -34,15 +34,21 @@ GitHub cron runs land 1–9h late, which is why the screener runs in the evening
 Ranked by distance from the 52w high, closest first.
 
 ### Sizing
-- Max **3 positions**, max **1 per ticker**
-- Each entry = **30% of account value** (capped by buying power), market order, fractional, regular hours
+- Max **5 positions**, max **1 per ticker** (was 3 until Nov 26 2026)
+- Each entry = **20% of account value** (was 30%; capped by buying power), market order, fractional, regular hours
 - Minimum $25 per entry
 - **Freshness gate:** enter only if `briefing.signal_date` is the previous completed session. Stale signals → no entries.
+
+- Open positions are never resized when the rules change; only new entries use the current size.
+
+### Deposits
+- A deposit is not a gain. When Robinhood shows a new deposit (cash up with no matching sell), add it to `portfolio.starting_balance` and `portfolio.hwm`, and append a `weekly_snapshots` note. Never count it in P&L.
+- Unsettled deposits are not buying power: size entries on Robinhood `buying_power`, not on `total_value`, until the funds are available.
 
 ### Exits
 - **Trailing stop:** sell when the last completed daily close ≤ **0.85 × highest close since entry** (executor at 9:45); the backstop also sells at 3:30 PM if the live price is ≤ 0.85 × peak
 - **Time stop:** sell after **60 trading days**
-- **Disaster stop:** GTC stop_market at **0.80 × peak** kept at the broker between runs (Robinhood has no trailing-stop order type)
+- **Disaster stop:** GTC stop_market at **0.80 × peak** kept at the broker between runs (Robinhood has no trailing-stop order type). Robinhood has not accepted fractional sell stops here, so only the whole-share part of a position can carry one; fractional-only positions (e.g. MA, V) rely on the 9:45 and 3:30 software checks.
 - No take-profit. Exits always run, even when the circuit breaker is active.
 - Every exit is verified against the Robinhood fill; never record an assumed price.
 
