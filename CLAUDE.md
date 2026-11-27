@@ -56,6 +56,9 @@ Ranked by distance from the 52w high, closest first.
 **Trips (blocks entries only) if:** the 4 most recent v4 trades are all losses, OR account value < **80%** of its high-water mark (`portfolio.hwm`).
 **Reset:** human only — set `active = false`, `reason = null`, `tripped_at = null` in data.json.
 
+### Paper options (Nov 27 2026)
+`data.json.paper_options` is written by `paper_options.py` (GitHub Actions, after the screener). It holds **pretend** 90-DTE ~10%-ITM call trades on picks under $60, to test `research/cheap_calls.py` out of sample. **Executor and backstop must never trade, reconcile, or count it.** Review in Feb 2027 (~$1,700 account): adopt one real call slot only if the paper trades hold up.
+
 ### Removed in v4 (untested for shares)
 VIX gate, oil/energy gate, earnings blackout and bonus, every option filter (premium, OI, IV, expiry).
 

@@ -318,6 +318,7 @@
 <div id="history" class="section">
   <div class="section-title">Trade History</div>
   <div id="hist-content"></div>
+  <div id="paper-content" style="margin-top:20px"></div>
 </div>
 
 <!-- PORTFOLIO -->
@@ -376,6 +377,7 @@
     renderPositions();
     renderWatchlist();
     renderHistory();
+    renderPaperOptions();
     renderPortfolio();
   }
 
@@ -690,6 +692,38 @@
     });
 
     html += '</tbody></table></div>';
+    el.innerHTML = html;
+  }
+
+  function renderPaperOptions() {
+    const el = document.getElementById('paper-content');
+    const b = data.paper_options;
+    if (!b) { el.innerHTML = ''; return; }
+    const s = b.summary || {};
+    const o = b.open;
+    let html = `<div class="card">
+      <div class="card-header"><strong>📝 Paper options</strong>
+        <span class="call-ref-sub">pretend trades, no money · since ${b.started}</span></div>
+      <div class="call-ref-sub" style="margin:6px 0 10px">90-day call ~10% in the money, stocks under $60. Decide in Feb 2027.</div>
+      <div class="grid3">
+        <div class="stat"><div class="label">Closed</div><div class="value">${s.trades || 0}</div></div>
+        <div class="stat"><div class="label">Wins</div><div class="value">${s.wins || 0}</div></div>
+        <div class="stat"><div class="label">Pretend P&L</div>
+          <div class="value ${(s.total_pnl || 0) >= 0 ? 'green' : 'red'}">${(s.total_pnl || 0) >= 0 ? '+' : '-'}$${Math.abs(s.total_pnl || 0).toFixed(2)}</div></div>
+      </div>
+      ${o ? `<div style="margin-top:10px">Open: <strong>${o.ticker} $${o.strike}C</strong> · ${o.expiry} · cost ${fmt(o.cost)}
+        · now <span class="${o.ret_pct >= 0 ? 'green' : 'red'}">${fmtPct(o.ret_pct)}</span></div>` :
+        '<div class="call-ref-sub" style="margin-top:10px">No open paper trade. Waiting for a setup under $60.</div>'}
+    </div>`;
+    if ((b.closed || []).length) {
+      html += `<div class="table-wrap"><table><thead><tr><th>Opened</th><th>Call</th><th>Entry</th><th>Exit</th><th>P&L</th><th>Why</th></tr></thead><tbody>`;
+      [...b.closed].reverse().forEach(t => {
+        html += `<tr><td>${t.opened}</td><td><strong>${t.ticker}</strong> $${t.strike}C</td>
+          <td>$${t.entry.toFixed(2)}</td><td>$${t.exit.toFixed(2)}</td>
+          <td class="${t.pnl >= 0 ? 'win' : 'loss'}">${t.pnl >= 0 ? '+' : '-'}$${Math.abs(t.pnl).toFixed(2)}</td><td>${t.reason}</td></tr>`;
+      });
+      html += '</tbody></table></div>';
+    }
     el.innerHTML = html;
   }
 

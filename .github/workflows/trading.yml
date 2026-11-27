@@ -38,6 +38,10 @@ jobs:
       - name: Run screener
         run: python screener.py
 
+      - name: Paper options tracker (pretend trades, never placed)
+        continue-on-error: true
+        run: python paper_options.py
+
       - name: Update dashboard (position marks)
         run: python update_dashboard.py
 
