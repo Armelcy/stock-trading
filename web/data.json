@@ -1,7 +1,7 @@
 {
   "last_updated": "2026-11-27T12:17:08",
-  "last_run": "2026-11-26T14:46:12Z",
-  "last_run_summary": "Thanksgiving holiday \u2014 market closed. No exits. 3/3 held d28. MA $659.97/trail$571.78 live=$659.97. V $424.39/trail$371.08 live=$426.25. PFE $28.46/trail$26.17 live=$28.47, GTC@$24.63 OK.",
+  "last_run": "2026-11-27T14:46:35Z",
+  "last_run_summary": "Black Friday short session. 3/3 held d28. MA $659.97/trail$571.78 live=$661.31. V $424.39/trail$371.08 live=$426.12. PFE $28.46/trail$26.17 live=$28.49, GTC@$24.63 OK. No exits. Action=HOLD.",
   "oil_price": 85.15,
   "oil_status": "ok",
   "briefing": {
@@ -138,10 +138,10 @@
       "stop_order_id": null,
       "stop_price": null,
       "note": "Disaster stop rejected: fractional qty 0.152692 < 1 share, GTC stop_market not supported. Executor/backstop are the stop.",
-      "last_price": 659.97,
-      "current_value": 100.77,
-      "pnl": 6.29,
-      "pnl_pct": 6.7
+      "last_price": 661.31,
+      "current_value": 100.98,
+      "pnl": 6.50,
+      "pnl_pct": 6.9
     },
     {
       "ticker": "V",
@@ -159,10 +159,10 @@
       "stop_order_id": null,
       "stop_price": null,
       "note": "Disaster stop rejected: fractional qty 0.235618 < 1 share, GTC stop_market not supported. Executor/backstop are the stop.",
-      "last_price": 424.39,
-      "current_value": 99.99,
-      "pnl": 5.51,
-      "pnl_pct": 5.8
+      "last_price": 426.12,
+      "current_value": 100.40,
+      "pnl": 5.92,
+      "pnl_pct": 6.3
     },
     {
       "ticker": "PFE",
@@ -180,10 +180,10 @@
       "stop_order_id": "6aec970d-51f8-4034-9007-0ba369ef5f7f",
       "stop_price": 24.63,
       "note": "Disaster stop placed for 3 whole shares; 0.255493 fractional remainder unprotected. Qty updated 3.20816\u21923.255493 to match RH.",
-      "last_price": 28.46,
-      "current_value": 92.65,
-      "pnl": -1.83,
-      "pnl_pct": -1.9
+      "last_price": 28.49,
+      "current_value": 92.75,
+      "pnl": -1.73,
+      "pnl_pct": -1.8
     }
   ],
   "trade_history": [
@@ -315,7 +315,7 @@
   ],
   "portfolio": {
     "starting_balance": 630.0,
-    "current_balance": 325.37,
+    "current_balance": 325.83,
     "committed": 283.44,
     "available": 31.48,
     "hwm": 337.67,
@@ -476,22 +476,6 @@
   },
   "alerts": [
     {
-      "timestamp": "2026-11-19T14:46:00Z",
-      "message": "Dead-man check: MA has no disaster stop (fractional qty 0.152692 < 1 share, GTC stop_market not supported by broker). Backstop runs are the protection."
-    },
-    {
-      "timestamp": "2026-11-19T14:46:00Z",
-      "message": "Dead-man check: V has no disaster stop (fractional qty 0.235618 < 1 share, GTC stop_market not supported by broker). Backstop runs are the protection."
-    },
-    {
-      "timestamp": "2026-11-19T20:44:00Z",
-      "message": "Dead-man check: MA has no disaster stop (fractional qty 0.152692 < 1 share, GTC stop_market not supported by broker). Backstop runs are the protection."
-    },
-    {
-      "timestamp": "2026-11-19T20:44:00Z",
-      "message": "Dead-man check: V has no disaster stop (fractional qty 0.235618 < 1 share, GTC stop_market not supported by broker). Backstop runs are the protection."
-    },
-    {
       "timestamp": "2026-11-20T14:46:00Z",
       "message": "Dead-man check: MA has no disaster stop (fractional qty 0.152692 < 1 share, GTC stop_market not supported by broker). Backstop runs are the protection."
     },
@@ -561,6 +545,14 @@
     },
     {
       "timestamp": "2026-11-26T20:45:52Z",
+      "message": "Dead-man check: V has no disaster stop (fractional qty 0.235618 < 1 share, GTC stop_market not supported by broker). Backstop runs are the protection."
+    },
+    {
+      "timestamp": "2026-11-27T14:46:35Z",
+      "message": "Dead-man check: MA has no disaster stop (fractional qty 0.152692 < 1 share, GTC stop_market not supported by broker). Backstop runs are the protection."
+    },
+    {
+      "timestamp": "2026-11-27T14:46:35Z",
       "message": "Dead-man check: V has no disaster stop (fractional qty 0.235618 < 1 share, GTC stop_market not supported by broker). Backstop runs are the protection."
     }
   ],
