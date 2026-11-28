@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-28T03:30:20",
+  "last_updated": "2026-11-28T10:16:14",
   "last_run": "2026-11-27T14:46:35Z",
   "last_run_summary": "Black Friday short session. 3/3 held d28. MA $659.97/trail$571.78 live=$661.31. V $424.39/trail$371.08 live=$426.12. PFE $28.46/trail$26.17 live=$28.49, GTC@$24.63 OK. No exits. Action=HOLD.",
   "oil_price": 83.08,
@@ -23,7 +23,7 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget ($132). Revisit when capital > $300.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-11-28 03:30",
+      "last_checked": "2026-11-28 10:16",
       "current_price": 429.56,
       "price_change_pct": 1.22,
       "vol_ratio_today": 0.55
@@ -38,7 +38,7 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget ($132). Revisit when capital > $300. Target $315C or $320C for Jul 17 expiry.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-11-28 03:30",
+      "last_checked": "2026-11-28 10:16",
       "current_price": 358.54,
       "price_change_pct": 0.83,
       "vol_ratio_today": 0.44
@@ -53,7 +53,7 @@
       "status": "watching",
       "day_trade_plan": "Not viable at current budget. Earnings Jul 23 means Jul 17 expiry only. Need $400 to trade 1 contract properly.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-11-28 03:30",
+      "last_checked": "2026-11-28 10:16",
       "current_price": 198.48,
       "price_change_pct": 1.17,
       "vol_ratio_today": 0.39
@@ -68,7 +68,7 @@
       "status": "watching",
       "day_trade_plan": "BLACKOUT until Jul 17 (earnings Jul 16). Reassess after.",
       "signal": "QUIET -- no signal today.",
-      "last_checked": "2026-11-28 03:30",
+      "last_checked": "2026-11-28 10:16",
       "current_price": 323.94,
       "price_change_pct": 2.2,
       "vol_ratio_today": 0.39
@@ -456,7 +456,7 @@
         "total_pnl": -115.0
       }
     },
-    "last_computed": "2026-11-28T03:30:20"
+    "last_computed": "2026-11-28T10:16:14"
   },
   "circuit_breaker": {
     "active": false,
